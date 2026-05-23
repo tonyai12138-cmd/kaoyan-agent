@@ -1,0 +1,51 @@
+{
+  "isDemo": true,
+  "disclaimer": "演示数据，正式信息以研招网和目标院校官网为准",
+  "schools": [
+    {
+      "id": "east-business",
+      "name": "华东示例大学",
+      "program": "市场营销管理（学硕）",
+      "region": "上海",
+      "tag": "挑战目标",
+      "fit": "匹配市场营销背景，重视研究分析能力",
+      "subjects": ["思想政治理论", "英语（一）", "数学（三）", "管理学综合"],
+      "scoreLine": "示例分数线：365 分",
+      "plannedEnrollment": "示例招生人数：18 人",
+      "referenceBooks": "示例参考书：管理学基础与营销研究方法",
+      "risk": "需投入较多数学强化时间，目标竞争度偏高",
+      "isDemo": true,
+      "disclaimer": "演示数据，正式信息以研招网和目标院校官网为准"
+    },
+    {
+      "id": "south-finance",
+      "name": "南方示例财经大学",
+      "program": "工商管理（营销方向）",
+      "region": "广州",
+      "tag": "平衡目标",
+      "fit": "科目结构与经管基础衔接较顺畅，适合稳步推进",
+      "subjects": ["思想政治理论", "英语（一）", "数学（三）", "工商管理基础"],
+      "scoreLine": "示例分数线：348 分",
+      "plannedEnrollment": "示例招生人数：26 人",
+      "referenceBooks": "示例参考书：工商管理概论",
+      "risk": "仍需关注当年度招生方向和专业课范围变化",
+      "isDemo": true,
+      "disclaimer": "演示数据，正式信息以研招网和目标院校官网为准"
+    },
+    {
+      "id": "river-commerce",
+      "name": "江城示例商学院",
+      "program": "数字营销（专硕）",
+      "region": "武汉",
+      "tag": "稳健探索",
+      "fit": "案例分析比重较高，适合希望强化应用实践的学生",
+      "subjects": ["思想政治理论", "英语（二）", "经济类综合能力", "营销案例分析"],
+      "scoreLine": "示例分数线：335 分",
+      "plannedEnrollment": "示例招生人数：35 人",
+      "referenceBooks": "示例参考书：数字营销案例选读",
+      "risk": "专业设置与考试范围需以正式目录为准",
+      "isDemo": true,
+      "disclaimer": "演示数据，正式信息以研招网和目标院校官网为准"
+    }
+  ]
+}
