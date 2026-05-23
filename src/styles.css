@@ -224,6 +224,94 @@ button:disabled {
     @apply flex items-start gap-3 rounded-2xl border border-slate-100 bg-slate-50/70 p-4;
   }
 
+  .report-hero {
+    @apply overflow-hidden rounded-[2rem] border border-indigo-100 bg-gradient-to-br from-white via-white to-indigo-50 shadow-[0_22px_65px_-40px_rgba(79,70,229,0.4)];
+  }
+
+  .report-status-pill {
+    @apply inline-flex rounded-full border border-indigo-100 bg-indigo-50 px-4 py-2 text-xs font-bold tracking-[0.14em] text-indigo-700;
+  }
+
+  .report-metric-card {
+    @apply rounded-2xl border border-white bg-white/90 p-5 shadow-sm shadow-indigo-100/60;
+  }
+
+  .report-profile-fact {
+    @apply rounded-2xl border border-slate-100 bg-slate-50/70 px-4 py-4;
+  }
+
+  .report-recommendation-card {
+    @apply rounded-[1.75rem] border border-white/90 bg-white/90 shadow-[0_18px_50px_-28px_rgba(15,23,42,0.32)] transition;
+  }
+
+  .report-recommendation-highlight {
+    @apply border-indigo-200 shadow-[0_22px_55px_-32px_rgba(79,70,229,0.4)];
+  }
+
+  .report-recommendation-selected {
+    @apply ring-2 ring-indigo-500;
+  }
+
+  .report-risk-card {
+    @apply rounded-2xl border border-slate-100 bg-slate-50/65 p-5;
+  }
+
+  .risk-pill {
+    @apply inline-flex rounded-full px-3 py-1 text-xs font-semibold;
+  }
+
+  .risk-pill-低风险 {
+    @apply bg-emerald-50 text-emerald-700;
+  }
+
+  .risk-pill-中风险 {
+    @apply bg-amber-50 text-amber-700;
+  }
+
+  .risk-pill-较高风险 {
+    @apply bg-rose-50 text-rose-700;
+  }
+
+  .risk-track {
+    @apply h-1.5 overflow-hidden rounded-full bg-slate-200;
+  }
+
+  .risk-value {
+    @apply block h-full rounded-full;
+  }
+
+  .risk-value-低风险 {
+    @apply w-1/3 bg-emerald-400;
+  }
+
+  .risk-value-中风险 {
+    @apply w-2/3 bg-amber-400;
+  }
+
+  .risk-value-较高风险 {
+    @apply w-full bg-rose-500;
+  }
+
+  .report-day-item {
+    @apply flex gap-4 rounded-2xl border border-slate-100 bg-slate-50/65 p-4;
+  }
+
+  .report-day-item span {
+    @apply inline-flex h-8 min-w-16 items-center justify-center rounded-xl bg-indigo-50 px-2 text-xs font-bold text-indigo-700;
+  }
+
+  .report-day-item p {
+    @apply text-sm leading-7 text-slate-600;
+  }
+
+  .report-empty-state {
+    @apply rounded-[2rem] border border-indigo-100 bg-gradient-to-br from-white via-white to-indigo-50 shadow-[0_22px_65px_-40px_rgba(79,70,229,0.4)];
+  }
+
+  .report-preview-item {
+    @apply flex items-center gap-3 rounded-2xl bg-slate-50 p-4 text-sm font-medium text-slate-700;
+  }
+
   .field-label {
     @apply block text-sm font-semibold leading-7 text-slate-700;
   }
