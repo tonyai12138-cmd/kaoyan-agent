@@ -7,25 +7,67 @@ const urgentTerms = ["自杀", "自伤", "不想活", "结束生命"];
 
 export function createDiagnosis(profile) {
   const weeklyHours = Number(profile.weeklyHours) || 0;
-  const timeAssessment =
-    weeklyHours >= 24
-      ? "可投入时间较充足，适合建立稳定的多科推进节奏。"
-      : "可投入时间较紧，需要优先保证核心科目任务可持续完成。";
+  const monthsRemaining = Number(profile.monthsRemaining) || 0;
+  const isCrossExam = profile.isCrossExam === "是";
+  const needsMath = profile.targetDirection?.includes("示例含数学");
+  const mathIsWeak = profile.mathLevel === "基础薄弱";
+  const stage =
+    monthsRemaining > 0 && monthsRemaining < 3
+      ? "冲刺调整期"
+      : monthsRemaining > 0 && monthsRemaining <= 6
+        ? "强化推进期"
+        : "定位规划期";
+  const risks = [];
 
-  const riskAssessment =
-    profile.riskPreference === "冲刺名校"
-      ? "你倾向挑战型目标，建议同时保留可核验的备选方向。"
-      : "你的目标取向较稳健，适合先运行两周计划再细化定位。";
+  if (needsMath && mathIsWeak) {
+    risks.push(
+      "数学基础风险：你选择的演示方向包含数学要求，当前基础较弱，需优先核验目标科目并安排基础补强。",
+    );
+  }
+
+  if (isCrossExam) {
+    risks.push(
+      "专业课信息差：跨考需要提前核验考试范围、参考资料和专业课答题方式。",
+    );
+  }
+
+  if (weeklyHours > 0 && weeklyHours < 15) {
+    risks.push(
+      "时间投入不足：当前每周可用学习时间偏低，建议压缩目标范围并保障高优先级任务。",
+    );
+  }
+
+  if (monthsRemaining > 0 && monthsRemaining < 3) {
+    risks.push(
+      "冲刺调整期：距离考试不足 3 个月，应以真题复盘、薄弱项修补和稳定执行为主。",
+    );
+  }
+
+  const strategy =
+    profile.riskPreference === "上岸优先"
+      ? "推荐策略：你选择了上岸优先，建议优先核验稳妥型目标，并保留接受调剂的可行方案。"
+      : profile.riskPreference === "冲刺优先" || profile.riskPreference === "冲刺名校"
+        ? "推荐策略：你选择了冲刺优先，可以积极比较挑战目标，但必须同步设置稳妥备选并持续复核风险。"
+        : "推荐策略：建议比较主目标与备选方向，在可执行的计划基础上逐步收敛选择。";
+
+  if (risks.length === 0) {
+    risks.push(
+      weeklyHours >= 24
+        ? "当前时间投入较充足，仍需通过阶段任务检验计划可持续性。"
+        : "当前风险需结合目标院校正式科目和后续执行表现持续复核。",
+    );
+  }
 
   return {
-    summary: `你目前以${profile.major}背景准备${profile.degreePreference}方向，意向区域为${profile.region}。`,
+    summary: `你目前为${profile.grade || "本科阶段"}、${profile.universityTier || "待补充院校背景"}的${profile.major}学生，意向方向为${profile.targetDirection || profile.degreePreference}，目标地区为${profile.region}。当前诊断状态：${stage}。`,
     strengths: [
-      "专业背景与经管类备考方向具有衔接基础",
-      `${weeklyHours || "待确认"} 小时/周的时间信息可用于生成任务`,
+      `当前最大困扰：${profile.biggestConcern || "待进一步确认"}`,
+      `${weeklyHours || "待确认"} 小时/周、剩余 ${monthsRemaining || "待确认"} 个月的信息可用于调整行动节奏`,
     ],
-    risks: [timeAssessment, riskAssessment],
-    suggestion:
-      "建议先比较 2 至 3 个演示目标，并根据初试科目匹配情况选择一项主目标。",
+    risks,
+    suggestion: `${strategy} 建议先比较 2 至 3 个演示目标，再依据正式信息选择主目标。`,
+    stage,
+    recommendationStyle: profile.riskPreference || "待确认",
     isDemo: true,
     disclaimer: demoDisclaimer,
   };

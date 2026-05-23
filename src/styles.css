@@ -188,6 +188,42 @@ button:disabled {
     @apply inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-indigo-50 text-sm font-bold text-indigo-600;
   }
 
+  .diagnosis-hero {
+    @apply overflow-hidden rounded-[2rem] border border-indigo-100 bg-gradient-to-br from-white via-white to-indigo-50 shadow-[0_22px_65px_-40px_rgba(79,70,229,0.38)];
+  }
+
+  .diagnosis-tag {
+    @apply inline-flex items-center gap-2 rounded-full border border-indigo-100 bg-white px-4 py-2 text-sm font-medium text-slate-700 shadow-sm;
+  }
+
+  .diagnosis-tag span {
+    @apply text-xs font-bold text-indigo-500;
+  }
+
+  .diagnosis-ai-card {
+    @apply rounded-[1.5rem] border border-white bg-white/85 p-6 shadow-[0_20px_50px_-34px_rgba(79,70,229,0.4)];
+  }
+
+  .diagnosis-ai-step {
+    @apply flex items-center gap-3 rounded-xl bg-slate-50 px-4 py-3 text-sm font-medium text-slate-600;
+  }
+
+  .profile-section {
+    @apply rounded-[1.65rem] border border-white/90 bg-white/90 p-6 shadow-[0_18px_52px_-36px_rgba(15,23,42,0.36)] md:p-7;
+  }
+
+  .profile-section-header {
+    @apply flex items-start gap-4 border-b border-slate-100 pb-5;
+  }
+
+  .profile-section-number {
+    @apply inline-flex h-8 min-w-8 shrink-0 items-center justify-center rounded-xl bg-indigo-50 px-2 text-xs font-bold text-indigo-600;
+  }
+
+  .report-output-item {
+    @apply flex items-start gap-3 rounded-2xl border border-slate-100 bg-slate-50/70 p-4;
+  }
+
   .field-label {
     @apply block text-sm font-semibold leading-7 text-slate-700;
   }
@@ -196,8 +232,36 @@ button:disabled {
     @apply mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-normal text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100;
   }
 
+  .field-input[aria-invalid="true"] {
+    @apply border-rose-300 bg-rose-50/30 focus:border-rose-400 focus:ring-rose-100;
+  }
+
+  .required-mark {
+    @apply ml-1 text-rose-500;
+  }
+
+  .field-error {
+    @apply mt-2 text-xs font-medium leading-5 text-rose-600;
+  }
+
+  .field-suffix-wrap {
+    @apply relative block;
+  }
+
+  .field-suffix {
+    @apply pointer-events-none absolute right-4 top-[1.1rem] text-sm font-normal text-slate-400;
+  }
+
   .choice-card {
     @apply flex items-center gap-3 rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-700 transition hover:border-indigo-300 has-[:checked]:border-indigo-500 has-[:checked]:bg-indigo-50 has-[:checked]:text-indigo-700;
+  }
+
+  .concern-pill {
+    @apply cursor-pointer rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sm font-medium text-slate-600 transition hover:border-indigo-300 hover:text-indigo-700 has-[:checked]:border-indigo-500 has-[:checked]:bg-indigo-50 has-[:checked]:text-indigo-700;
+  }
+
+  .form-alert {
+    @apply rounded-2xl border border-rose-100 bg-rose-50 px-5 py-4 text-sm font-medium text-rose-700;
   }
 
   .phase-card {
