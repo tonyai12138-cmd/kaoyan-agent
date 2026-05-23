@@ -1,0 +1,24 @@
+{
+  "isDemo": true,
+  "disclaimer": "演示数据，正式信息以研招网和目标院校官网为准",
+  "templates": [
+    {
+      "id": "subjects",
+      "label": "查询目标专业初试科目",
+      "message": "我选择的目标专业初试科目是什么？",
+      "isDemo": true
+    },
+    {
+      "id": "score",
+      "label": "如何理解示例分数线",
+      "message": "这所学校的分数线应该怎样参考？",
+      "isDemo": true
+    },
+    {
+      "id": "planning",
+      "label": "安排下周学习节奏",
+      "message": "结合我的计划，下周应该先做什么？",
+      "isDemo": true
+    }
+  ]
+}
