@@ -1,24 +1,141 @@
 {
   "isDemo": true,
   "disclaimer": "演示数据，正式信息以研招网和目标院校官网为准",
-  "templates": [
+  "modes": [
     {
-      "id": "subjects",
-      "label": "查询目标专业初试科目",
-      "message": "我选择的目标专业初试科目是什么？",
-      "isDemo": true
+      "id": "school",
+      "label": "择校咨询",
+      "templates": [
+        {
+          "id": "school-strategy",
+          "label": "冲刺还是稳妥",
+          "message": "我现在适合冲刺还是稳妥？",
+          "keywords": ["冲刺", "稳妥", "策略"],
+          "isDemo": true
+        },
+        {
+          "id": "school-fit",
+          "label": "判断适配",
+          "message": "如何判断一所学校适不适合我？",
+          "keywords": ["学校", "适合", "核验"],
+          "isDemo": true
+        },
+        {
+          "id": "school-cross",
+          "label": "跨考注意事项",
+          "message": "跨考经管类需要注意什么？",
+          "keywords": ["跨考", "经管", "专业课"],
+          "isDemo": true
+        }
+      ]
     },
     {
-      "id": "score",
-      "label": "如何理解示例分数线",
-      "message": "这所学校的分数线应该怎样参考？",
-      "isDemo": true
+      "id": "plan",
+      "label": "计划解释",
+      "templates": [
+        {
+          "id": "plan-compact",
+          "label": "压缩任务",
+          "message": "今天任务太多了，怎么压缩？",
+          "keywords": ["今天", "任务", "压缩"],
+          "isDemo": true
+        },
+        {
+          "id": "plan-math",
+          "label": "数学调整",
+          "message": "我数学很弱，计划应该怎么调整？",
+          "keywords": ["数学", "计划", "调整"],
+          "isDemo": true
+        },
+        {
+          "id": "plan-week",
+          "label": "安排本周",
+          "message": "本周计划怎么安排更合理？",
+          "keywords": ["本周", "计划", "安排"],
+          "isDemo": true
+        }
+      ]
     },
     {
-      "id": "planning",
-      "label": "安排下周学习节奏",
-      "message": "结合我的计划，下周应该先做什么？",
-      "isDemo": true
+      "id": "exam",
+      "label": "真题拆解",
+      "templates": [
+        {
+          "id": "exam-community",
+          "label": "品牌社群论述",
+          "message": "请分析品牌社群如何影响消费者忠诚度。",
+          "keywords": ["分析", "品牌社群", "消费者忠诚度"],
+          "isDemo": true
+        },
+        {
+          "id": "exam-case",
+          "label": "数字营销案例",
+          "message": "请拆解一道数字营销案例分析题。",
+          "keywords": ["拆解", "数字营销", "案例", "分析"],
+          "isDemo": true
+        },
+        {
+          "id": "exam-writing",
+          "label": "论述题写法",
+          "message": "专业课论述题怎么写才不像流水账？",
+          "keywords": ["专业课", "论述题", "写"],
+          "isDemo": true
+        }
+      ]
+    },
+    {
+      "id": "verify",
+      "label": "资料核验",
+      "templates": [
+        {
+          "id": "verify-source",
+          "label": "资料可靠性",
+          "message": "如何判断考研资料靠不靠谱？",
+          "keywords": ["资料", "靠谱", "判断"],
+          "isDemo": true
+        },
+        {
+          "id": "verify-books",
+          "label": "参考书来源",
+          "message": "参考书到底以哪里为准？",
+          "keywords": ["参考书", "哪里", "为准"],
+          "isDemo": true
+        },
+        {
+          "id": "verify-post",
+          "label": "经验帖边界",
+          "message": "经验帖能不能直接相信？",
+          "keywords": ["经验帖", "相信"],
+          "isDemo": true
+        }
+      ]
+    },
+    {
+      "id": "support",
+      "label": "情绪陪伴",
+      "templates": [
+        {
+          "id": "support-anxiety",
+          "label": "缓解焦虑",
+          "message": "我最近很焦虑，学不进去怎么办？",
+          "keywords": ["焦虑", "学不进去"],
+          "isDemo": true
+        },
+        {
+          "id": "support-missed",
+          "label": "任务没完成",
+          "message": "今天计划又没完成，怎么调整？",
+          "keywords": ["计划", "没完成", "调整"],
+          "isDemo": true
+        },
+        {
+          "id": "support-review",
+          "label": "压力复盘",
+          "message": "考研压力很大，我应该怎么复盘？",
+          "keywords": ["压力", "复盘"],
+          "isDemo": true
+        }
+      ]
     }
   ]
 }

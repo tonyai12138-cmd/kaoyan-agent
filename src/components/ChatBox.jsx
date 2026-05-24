@@ -1,8 +1,30 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import DisclaimerBanner from "./DisclaimerBanner";
 
-export default function ChatBox({ messages, templates, onSend, pending }) {
+const sourceLabels = {
+  faq: "FAQ",
+  school: "策略样例",
+  template: "快捷问题",
+  prompt: "场景规则",
+};
+
+export default function ChatBox({
+  activeMode,
+  messages,
+  templates,
+  onClear,
+  onSend,
+  pending,
+  placeholder,
+}) {
   const [input, setInput] = useState("");
+  const threadRef = useRef(null);
+
+  useEffect(() => {
+    if (threadRef.current) {
+      threadRef.current.scrollTop = threadRef.current.scrollHeight;
+    }
+  }, [messages, pending]);
 
   function submitMessage(message) {
     if (!message.trim() || pending) {
@@ -19,9 +41,26 @@ export default function ChatBox({ messages, templates, onSend, pending }) {
   }
 
   return (
-    <section className="surface-card overflow-hidden">
+    <section className="chat-window">
+      <div className="chat-toolbar">
+        <div>
+          <span className="chat-mode-pill">{activeMode.label}</span>
+          <p className="mt-3 text-sm leading-7 text-slate-600">
+            {activeMode.description}
+          </p>
+        </div>
+        <button
+          className="text-sm font-medium text-slate-500 transition hover:text-indigo-700"
+          onClick={onClear}
+          type="button"
+        >
+          清空聊天记录
+        </button>
+      </div>
       <div className="border-b border-slate-100 px-5 py-4 md:px-7">
-        <p className="text-sm font-medium text-slate-900">快捷体验问题</p>
+        <p className="text-xs font-semibold tracking-[0.16em] text-slate-400">
+          QUICK QUESTIONS
+        </p>
         <div className="mt-3 flex flex-wrap gap-2">
           {templates.map((template) => (
             <button
@@ -30,33 +69,55 @@ export default function ChatBox({ messages, templates, onSend, pending }) {
               onClick={() => submitMessage(template.message)}
               type="button"
             >
-              {template.label}
+              {template.message}
             </button>
           ))}
         </div>
       </div>
-      <div className="h-[430px] space-y-4 overflow-y-auto bg-slate-50/70 p-5 md:p-7">
+      <div className="chat-thread" ref={threadRef}>
         {messages.map((message) => (
           <div
             className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
             key={message.id}
           >
-            <div
-              className={
-                message.role === "user" ? "bubble-user" : "bubble-agent"
-              }
-            >
-              <p className="text-sm leading-7">{message.content}</p>
-              {message.citations?.length > 0 && (
-                <div className="mt-3 space-y-1 rounded-xl bg-white/80 p-3 text-xs text-slate-500">
-                  <p className="font-medium text-slate-700">参考卡片</p>
-                  {message.citations.map((citation) => (
-                    <p key={citation}>{citation}</p>
-                  ))}
-                </div>
+            <div className={message.role === "user" ? "bubble-user" : "bubble-agent"}>
+              {message.role === "assistant" && (
+                <span className="chat-answer-mode">
+                  {message.modeLabel ?? "Agent"}
+                </span>
+              )}
+              <p className="mt-2 whitespace-pre-line text-sm leading-7">
+                {message.content}
+              </p>
+              {message.snippets?.length > 0 && (
+                <details className="chat-snippets">
+                  <summary>参考知识库片段 · {message.snippets.length}</summary>
+                  <div className="mt-3 space-y-2">
+                    {message.snippets.map((snippet) => (
+                      <article className="chat-snippet-item" key={`${snippet.source}-${snippet.title}`}>
+                        <div className="flex items-center justify-between gap-2">
+                          <p className="text-xs font-semibold text-slate-700">
+                            {snippet.title}
+                          </p>
+                          <span className="rounded-full bg-indigo-50 px-2 py-1 text-[10px] font-bold text-indigo-700">
+                            {sourceLabels[snippet.source]} · {snippet.score}
+                          </span>
+                        </div>
+                        <p className="mt-2 text-xs leading-6 text-slate-500">
+                          {snippet.content}
+                        </p>
+                        {snippet.sourceLabel && (
+                          <p className="mt-2 text-[11px] text-indigo-600">
+                            {snippet.sourceLabel}
+                          </p>
+                        )}
+                      </article>
+                    ))}
+                  </div>
+                </details>
               )}
               {message.disclaimer && (
-                <p className="mt-3 border-t border-slate-200 pt-3 text-xs text-slate-500">
+                <p className="mt-3 border-t border-slate-200 pt-3 text-xs leading-6 text-slate-500">
                   {message.disclaimer}
                 </p>
               )}
@@ -66,17 +127,18 @@ export default function ChatBox({ messages, templates, onSend, pending }) {
         {pending && (
           <div className="bubble-agent inline-flex items-center gap-2 text-sm text-slate-500">
             <span className="loading-dot" />
-            正在生成演示回答...
+            正在检索本地知识库并生成演示回答...
           </div>
         )}
       </div>
-      <form className="space-y-4 border-t border-slate-100 p-5 md:p-7" onSubmit={handleSubmit}>
+      <form className="chat-composer" onSubmit={handleSubmit}>
         <DisclaimerBanner compact />
-        <div className="flex gap-3">
-          <input
-            className="field-input flex-1"
+        <div className="flex items-end gap-3">
+          <textarea
+            className="field-input min-h-[52px] flex-1 resize-none"
             onChange={(event) => setInput(event.target.value)}
-            placeholder="输入你的备考问题..."
+            placeholder={placeholder}
+            rows={2}
             value={input}
           />
           <button className="button-primary shrink-0" disabled={pending} type="submit">
