@@ -38,7 +38,10 @@ export default function Chat() {
     profile,
     context: { selectedSchoolId, strategySelectionSource },
   });
-  const displayedMessages = [welcome, ...chatHistory];
+  const displayedMessages = [
+    { ...welcome, source: welcome.source ?? "local-mock" },
+    ...chatHistory,
+  ];
 
   async function handleSend(content) {
     const requestMode = mode;
@@ -56,7 +59,7 @@ export default function Chat() {
       const result = await sendChatMessage({
         message: content,
         profile,
-        history: [...chatHistory, userMessage],
+        history: chatHistory,
         context: { selectedSchoolId, strategySelectionSource, tasks },
         mode: requestMode,
       });
@@ -66,11 +69,14 @@ export default function Chat() {
         role: "assistant",
         content: result.answer,
         mode: result.mode,
-        modeLabel: result.modeLabel,
+        modeLabel: result.modeLabel ?? activeMode.label,
         snippets: result.snippets,
         citations: result.citations,
         disclaimer: result.disclaimer,
         isMock: result.isMock,
+        source: result.source,
+        model: result.model,
+        fallbackReason: result.fallbackReason,
       });
     } finally {
       setPending(false);
@@ -118,7 +124,7 @@ export default function Chat() {
               围绕择校、计划、资料、真题和复盘，提供基于画像与知识库的考研问答支持。
             </p>
           </div>
-          <span className="badge">本地 mock · 无真实 API 调用</span>
+          <span className="badge">DeepSeek 可选 · 本地回退可用</span>
         </div>
         <div className="mt-9 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
           {statusItems.map((item) => (

@@ -8,6 +8,11 @@ const sourceLabels = {
   prompt: "场景规则",
 };
 
+const answerSourceLabels = {
+  deepseek: "DeepSeek 模型生成",
+  "local-mock": "本地演示回答",
+};
+
 export default function ChatBox({
   activeMode,
   messages,
@@ -89,6 +94,21 @@ export default function ChatBox({
               <p className="mt-2 whitespace-pre-line text-sm leading-7">
                 {message.content}
               </p>
+              {message.role === "assistant" && message.source && (
+                <div className="mt-3 flex flex-wrap items-center gap-2 text-[11px] text-slate-500">
+                  <span className="rounded-full bg-slate-100 px-2.5 py-1 font-semibold">
+                    {answerSourceLabels[message.source] ?? "Agent 回答"}
+                    {message.source === "deepseek" && message.model
+                      ? ` · ${message.model}`
+                      : ""}
+                  </span>
+                  {message.fallbackReason && (
+                    <span>
+                      当前已自动切换至本地演示，不影响课堂展示。
+                    </span>
+                  )}
+                </div>
+              )}
               {message.snippets?.length > 0 && (
                 <details className="chat-snippets">
                   <summary>参考知识库片段 · {message.snippets.length}</summary>
@@ -127,7 +147,7 @@ export default function ChatBox({
         {pending && (
           <div className="bubble-agent inline-flex items-center gap-2 text-sm text-slate-500">
             <span className="loading-dot" />
-            正在检索本地知识库并生成演示回答...
+            正在检索知识库并生成回答...
           </div>
         )}
       </div>

@@ -4,11 +4,13 @@
 
 ## 当前版本
 
-当前版本是 **mock 演示版**：
+当前版本支持 **DeepSeek 可选接入 + 本地 mock 演示回退**：
 
 - 前端使用 React、Vite、Tailwind CSS v4 与 HashRouter 构建。
-- 画像、院校报告、聊天回答与复盘建议均来自本地演示数据和规则逻辑。
-- 不连接真实大模型、不连接数据库、不包含真实用户认证。
+- 画像、定位报告、计划与复盘仍来自本地演示数据和规则逻辑。
+- 智能体问答默认可直接使用本地 mock；部署服务端函数并配置密钥后，可由服务端调用 DeepSeek API。
+- DeepSeek 请求仅通过 `api/chat.js` 执行；浏览器端不会读取或保存 API Key。
+- 当后端不可用、未配置密钥或模型请求失败时，问答会自动回退至本地演示回答，不影响课堂展示。
 - 页面中涉及院校、分数线、招生人数和参考资料的展示均为演示信息，正式信息以研招网和目标院校官网为准。
 
 ## 本地运行
@@ -37,7 +39,7 @@ npm run preview
 | 考研画像诊断 | `/#/diagnosis` | 填写用户背景并生成摘要 |
 | 择校报告 | `/#/report` | 对比演示目标并选择主目标 |
 | 备考计划 | `/#/plan` | 查看阶段计划并完成今日任务 |
-| 智能体问答 | `/#/chat` | 使用本地 mock 回答体验问答 |
+| 智能体问答 | `/#/chat` | 支持 DeepSeek 服务端回答与本地 mock 自动回退 |
 | 每日复盘 | `/#/review` | 根据任务完成情况生成建议 |
 | 项目说明 | `/#/about` | 查看 MVP 范围、技术栈与边界 |
 
@@ -50,19 +52,32 @@ src/
   lib/           mock Agent、状态容器与 API 适配器
   pages/         七个核心页面
 api/
-  chat.js        未来 POST /api/chat 的 mock 接口预留
+  chat.js        Vercel Serverless Function：DeepSeek 服务端代理与 mock 回退
 docs/
   product-spec.md
 ```
 
-## 后续接入大模型
+## DeepSeek API 接入
 
-当前聊天页面通过 `src/lib/api.js` 调用本地 mock 逻辑。未来接入真实服务时：
+当前聊天页面通过 `src/lib/api.js` 优先请求 `POST /api/chat`，请求结构为 `{ message, profile, history, context, mode }`。服务端函数调用 DeepSeek 时统一返回来源、模型信息与免责声明；当接口不可用时，前端自动调用已有的本地 `chatAgent`。
 
-1. 保持前端发送结构 `{ message, profile, history, context }`。
-2. 将 `src/lib/api.js` 替换为对服务端 `POST /api/chat` 的请求。
-3. 在服务端执行知识检索、回答生成、引用校验与安全检查。
-4. 响应至少返回 `{ answer }`，并可增加引用与免责声明字段。
+要启用 DeepSeek：
+
+1. 将项目部署到支持后端函数的平台，例如 Vercel。
+2. 在部署平台的服务端环境变量中配置 `DEEPSEEK_API_KEY`。
+3. 可选配置 `DEEPSEEK_MODEL`，未配置时默认使用 `deepseek-v4-flash`。
+4. 前端会显示回答来源为“DeepSeek 模型生成”或“本地演示回答”。
+
+启用 DeepSeek 后，用户提交的问题、对话历史以及用于个性化回答的画像/任务 context 会由服务端发送给模型服务；课堂展示时请勿输入身份证号、联系方式等敏感个人信息。
+
+可参考 `.env.example` 的变量名称，但不要在示例文件中填写真实密钥。
+
+```dotenv
+DEEPSEEK_API_KEY=your_deepseek_api_key_here
+DEEPSEEK_MODEL=deepseek-v4-flash
+```
+
+仅部署到 GitHub Pages 时，`api/chat.js` 不会作为后端接口运行。页面会自动使用本地 mock 回答，完整画像、报告、计划、问答与复盘演示闭环仍然可用。
 
 **请勿将任何 API Key 提交到 GitHub。** 密钥只能配置在本地未跟踪的环境文件或部署平台的服务端环境变量中，不能暴露到浏览器端代码。
 
