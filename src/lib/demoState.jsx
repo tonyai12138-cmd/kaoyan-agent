@@ -1,7 +1,12 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { buildTasks, demoProfile } from "../data/mockData";
 import { welcomeMessage } from "../data/prompts";
-import { createDiagnosis, createReview } from "./mockAgent";
+import {
+  createDiagnosis,
+  createReview,
+  createStudyPlan,
+  hasCompletedDiagnosis,
+} from "./mockAgent";
 
 const DemoContext = createContext(null);
 const storageKey = "yantu-agent-demo-state";
@@ -13,6 +18,7 @@ function makeInitialState() {
     diagnosis: createDiagnosis(demoProfile),
     selectedSchoolId: initialSchoolId,
     hasSelectedReportTarget: false,
+    strategySelectionSource: null,
     tasks: buildTasks(initialSchoolId),
     chatHistory: [welcomeMessage],
     reviewResult: null,
@@ -25,11 +31,34 @@ function readState() {
     if (!stored) return makeInitialState();
 
     const parsed = JSON.parse(stored);
-    return {
+    const strategySelectionSource =
+      parsed.strategySelectionSource ??
+      (parsed.hasSelectedReportTarget === true ? "manual" : null);
+    const nextState = {
       ...makeInitialState(),
       ...parsed,
       hasSelectedReportTarget: parsed.hasSelectedReportTarget === true,
+      strategySelectionSource,
     };
+
+    if (
+      hasCompletedDiagnosis(nextState.profile) &&
+      (!Array.isArray(nextState.tasks) ||
+        nextState.tasks.some((task) => !task.purpose))
+    ) {
+      const plan = createStudyPlan(
+        nextState.profile,
+        nextState.selectedSchoolId,
+        strategySelectionSource,
+      );
+      const oldTasks = Array.isArray(nextState.tasks) ? nextState.tasks : [];
+      nextState.tasks = plan.todayTasks.map((task) => ({
+        ...task,
+        completed: oldTasks.find((oldTask) => oldTask.id === task.id)?.completed ?? false,
+      }));
+    }
+
+    return nextState;
   } catch {
     return makeInitialState();
   }
@@ -46,22 +75,40 @@ export function DemoProvider({ children }) {
     () => ({
       ...state,
       submitProfile(profile) {
-        setState((current) => ({
-          ...current,
-          profile,
-          diagnosis: createDiagnosis(profile),
-          hasSelectedReportTarget: false,
-          reviewResult: null,
-        }));
+        setState((current) => {
+          const plan = createStudyPlan(profile, null, null);
+
+          return {
+            ...current,
+            profile,
+            diagnosis: createDiagnosis(profile),
+            hasSelectedReportTarget: false,
+            strategySelectionSource: null,
+            tasks: plan.status === "ready" ? plan.todayTasks : current.tasks,
+            reviewResult: null,
+          };
+        });
       },
-      selectSchool(schoolId) {
-        setState((current) => ({
-          ...current,
-          selectedSchoolId: schoolId,
-          hasSelectedReportTarget: true,
-          tasks: buildTasks(schoolId),
-          reviewResult: null,
-        }));
+      selectSchool(schoolId, strategySelectionSource = "manual") {
+        setState((current) => {
+          const plan = createStudyPlan(
+            current.profile,
+            schoolId,
+            strategySelectionSource,
+          );
+
+          return {
+            ...current,
+            selectedSchoolId: schoolId,
+            hasSelectedReportTarget: true,
+            strategySelectionSource,
+            tasks:
+              plan.status === "ready"
+                ? plan.todayTasks
+                : buildTasks(schoolId),
+            reviewResult: null,
+          };
+        });
       },
       toggleTask(taskId) {
         setState((current) => ({
