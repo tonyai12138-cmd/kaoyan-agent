@@ -2,9 +2,8 @@ import { answerChatQuestion } from "./chatAgent";
 import { retrieveKnowledge } from "./retrieve";
 
 /**
- * Mock-first API adapter.
- * Future model integration can replace the local branch below with:
- * fetch("/api/chat", { method: "POST", body: JSON.stringify(payload) }).
+ * DeepSeek is called only through the server-side `/api/chat` proxy.
+ * Static hosting or unavailable server functions automatically use the local Agent.
  */
 export async function sendChatMessage({
   message,
@@ -13,15 +12,65 @@ export async function sendChatMessage({
   context,
   mode = "school",
 }) {
-  await new Promise((resolve) => globalThis.setTimeout(resolve, 280));
   const snippets = retrieveKnowledge(message, mode);
+  const requestContext = {
+    ...context,
+    knowledgeSnippets: snippets,
+  };
+  let fallbackReason = "api_error";
 
-  return answerChatQuestion({
-    message,
-    profile,
-    history,
-    context,
-    mode,
-    snippets,
-  });
+  try {
+    const response = await fetch("/api/chat", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        message,
+        profile,
+        history,
+        context: requestContext,
+        mode,
+      }),
+    });
+
+    if (!response.ok) {
+      fallbackReason =
+        response.status === 400 ? "invalid_request" : "api_error";
+      throw new Error(`Chat endpoint returned ${response.status}`);
+    }
+
+    const result = await response.json();
+    if (
+      typeof result?.answer !== "string" ||
+      typeof result?.isMock !== "boolean" ||
+      !["deepseek", "local-mock"].includes(result?.source)
+    ) {
+      throw new Error("Chat endpoint returned an invalid response");
+    }
+
+    return {
+      ...result,
+      mode,
+      snippets,
+      citations: snippets.slice(0, 2).map((snippet) => snippet.title),
+    };
+  } catch {
+    await new Promise((resolve) => globalThis.setTimeout(resolve, 280));
+    const localAnswer = answerChatQuestion({
+      message,
+      profile,
+      history,
+      context,
+      mode,
+      snippets,
+    });
+
+    return {
+      ...localAnswer,
+      source: "local-mock",
+      model: undefined,
+      fallbackReason,
+    };
+  }
 }
