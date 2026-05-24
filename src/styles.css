@@ -312,6 +312,74 @@ button:disabled {
     @apply flex items-center gap-3 rounded-2xl bg-slate-50 p-4 text-sm font-medium text-slate-700;
   }
 
+  .plan-hero {
+    @apply overflow-hidden rounded-[2rem] border border-indigo-100 bg-gradient-to-br from-white via-white to-cyan-50/70 shadow-[0_22px_65px_-40px_rgba(79,70,229,0.4)];
+  }
+
+  .plan-status-pill {
+    @apply inline-flex rounded-full border border-cyan-100 bg-cyan-50 px-4 py-2 text-xs font-bold tracking-[0.14em] text-indigo-700;
+  }
+
+  .plan-metric-card {
+    @apply rounded-2xl border border-white bg-white/90 p-5 shadow-sm shadow-indigo-100/60;
+  }
+
+  .plan-reminder {
+    @apply flex items-start gap-4 rounded-2xl border border-indigo-100 bg-white/70 p-5;
+  }
+
+  .plan-empty-state {
+    @apply rounded-[2rem] border border-indigo-100 bg-gradient-to-br from-white via-white to-cyan-50/70 shadow-[0_22px_65px_-40px_rgba(79,70,229,0.4)];
+  }
+
+  .plan-preview-item {
+    @apply flex items-center gap-3 rounded-2xl bg-slate-50 p-4 text-sm font-medium text-slate-700;
+  }
+
+  .plan-task-card {
+    @apply flex cursor-pointer items-start gap-4 rounded-2xl border border-slate-100 bg-slate-50/65 p-5 transition hover:border-indigo-200 hover:bg-indigo-50/45;
+  }
+
+  .plan-task-card-done {
+    @apply border-emerald-100 bg-emerald-50/55;
+  }
+
+  .plan-module-pill {
+    @apply rounded-full bg-indigo-50 px-3 py-1 text-xs font-semibold text-indigo-700;
+  }
+
+  .plan-duration-pill {
+    @apply rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600;
+  }
+
+  .plan-priority-pill {
+    @apply rounded-full bg-amber-50 px-3 py-1 text-xs font-semibold text-amber-700;
+  }
+
+  .plan-week-card {
+    @apply rounded-[1.35rem] border border-white/90 bg-white/88 p-5 shadow-[0_16px_45px_-35px_rgba(15,23,42,0.32)];
+  }
+
+  .plan-day-pill {
+    @apply shrink-0 rounded-lg bg-indigo-50 px-3 py-1.5 text-xs font-bold text-indigo-700;
+  }
+
+  .plan-focus-item {
+    @apply flex items-center gap-4 rounded-xl border border-slate-100 bg-slate-50/70 p-4 text-sm font-semibold text-slate-700;
+  }
+
+  .plan-focus-item span {
+    @apply text-xs font-bold text-indigo-500;
+  }
+
+  .review-prompt {
+    @apply flex items-center gap-3 rounded-xl border border-slate-100 bg-slate-50/70 p-4 text-sm font-medium text-slate-700;
+  }
+
+  .review-prompt span {
+    @apply inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-indigo-50 text-xs font-bold text-indigo-700;
+  }
+
   .field-label {
     @apply block text-sm font-semibold leading-7 text-slate-700;
   }

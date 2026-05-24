@@ -400,6 +400,397 @@ export function createPositioningReport(profile = {}) {
   };
 }
 
+const planStrategies = {
+  "east-business": { id: "sprint", label: "冲刺档" },
+  "south-finance": { id: "balanced", label: "稳妥档" },
+  "river-commerce": { id: "backup", label: "保底档" },
+};
+
+function createTodayTasks(profile, strategy) {
+  const isCompact =
+    profile.biggestConcern === "执行" ||
+    profile.biggestConcern === "焦虑" ||
+    profile.weeklyHoursValue < 15;
+  const isSprint = profile.timeBand === "sprint";
+  const tasks = [];
+  const addTask = (id, title, subject, duration, purpose, priority = "高") => {
+    tasks.push({ id, title, subject, duration, purpose, priority, completed: false });
+  };
+
+  addTask(
+    "plan-task-verification",
+    profile.biggestConcern === "资料"
+      ? "建立官方资料核验清单"
+      : isSprint
+        ? "核验目标科目与冲刺边界"
+        : "核验目标考试科目与候选方向",
+    "择校核验",
+    isCompact ? "20 分钟" : "30 分钟",
+    profile.biggestConcern === "资料"
+      ? "只保留可追溯来源，减少无效资料切换。"
+      : "让后续学习任务建立在已核验的信息上。",
+  );
+
+  addTask(
+    "plan-task-english",
+    profile.englishLevel === "基础薄弱"
+      ? "英语核心词汇与长难句拆解"
+      : isSprint
+        ? "英语阅读限时训练与错项回看"
+        : "英语阅读精练与生词整理",
+    "英语",
+    isCompact ? "35 分钟" : isSprint ? "50 分钟" : "60 分钟",
+    profile.englishLevel === "基础薄弱"
+      ? "先补可持续的阅读基础，避免直接堆叠难题。"
+      : "保持稳定输入，并用复盘提升答题准确性。",
+  );
+
+  if (profile.needsMath) {
+    addTask(
+      "plan-task-math",
+      profile.mathIsWeak
+        ? "数学基础定义与例题回补"
+        : isSprint
+          ? "数学真题错题归类"
+          : "数学核心题型巩固",
+      "数学",
+      isCompact ? "35 分钟" : profile.mathIsWeak ? "60 分钟" : "50 分钟",
+      profile.mathIsWeak
+        ? "从基础薄弱项开始补强，不直接进入高难冲刺。"
+        : "巩固高频方法，并识别下一轮重点。",
+    );
+  }
+
+  addTask(
+    "plan-task-professional",
+    profile.professionalIsWeak || profile.isCrossExamValue
+      ? "专业课框架与资料目录整理"
+      : isSprint
+        ? "专业课高频背诵与真题回忆"
+        : "专业课核心章节结构梳理",
+    "专业课",
+    isCompact ? "40 分钟" : isSprint ? "70 分钟" : "75 分钟",
+    profile.professionalIsWeak || profile.isCrossExamValue
+      ? "先建立知识框架并核验学习范围，缩小信息差。"
+      : "把知识点转化为可回忆、可输出的答题素材。",
+  );
+
+  addTask(
+    "plan-task-politics",
+    isSprint ? "政治高频考点速记" : "政治基础要点积累",
+    "政治",
+    isCompact ? "20 分钟" : "30 分钟",
+    isSprint ? "用短时背诵保持得分点覆盖。" : "以低负担方式持续积累公共课基础。",
+    "中",
+  );
+
+  addTask(
+    "plan-task-review",
+    profile.biggestConcern === "焦虑"
+      ? "睡前低压力复盘与情绪记录"
+      : profile.biggestConcern === "执行"
+        ? "记录完成动作与明日第一步"
+        : "记录今日卡点与明日安排",
+    "复盘",
+    "15 分钟",
+    profile.biggestConcern === "焦虑"
+      ? "用事实记录代替自我否定，降低明日启动压力。"
+      : "让计划根据真实完成情况持续调整。",
+    "中",
+  );
+
+  if (strategy.id === "sprint") {
+    return tasks.map((task) =>
+      task.id === "plan-task-professional"
+        ? {
+            ...task,
+            priority: "高",
+            duration: isCompact ? task.duration : isSprint ? "80 分钟" : "90 分钟",
+            purpose: `${task.purpose} 冲刺档需用输出结果检验目标承接能力。`,
+          }
+        : task.id === "plan-task-verification"
+          ? { ...task, purpose: `${task.purpose} 同时保留稳妥备选作为复核基线。` }
+        : task,
+    );
+  }
+
+  if (strategy.id === "backup") {
+    return tasks.map((task) =>
+      task.id === "plan-task-verification"
+        ? {
+            ...task,
+            title: "复核稳妥方向的科目与可执行性",
+            purpose: "确认备选方向真实匹配个人意愿，不因控制风险而盲目降档。",
+          }
+        : task.id === "plan-task-professional"
+          ? {
+              ...task,
+              title: "专业课基础框架稳固",
+              purpose: "用更集中的范围提高执行稳定性，并保留后续调整空间。",
+            }
+          : task,
+    );
+  }
+
+  return tasks;
+}
+
+function createWeeklyPlan(profile, strategy) {
+  const isSprint = profile.timeBand === "sprint";
+  const centralSubject = profile.needsMath
+    ? profile.mathIsWeak
+      ? "数学基础补弱"
+      : "数学核心题型"
+    : "专业课框架加深";
+  const weeklyPlan = isSprint
+    ? [
+        {
+          day: "周一",
+          theme: "冲刺范围收敛",
+          tasks: ["核验考试科目", "列出高频薄弱点", "压缩任务清单"],
+          review: "是否删掉了低价值任务",
+        },
+        {
+          day: "周二",
+          theme: "限时训练日",
+          tasks: ["英语限时训练", centralSubject, "整理错因"],
+          review: "限时中的失分类型",
+        },
+        {
+          day: "周三",
+          theme: "专业课回忆日",
+          tasks: ["高频主题背诵", "真题提纲输出", "错漏补记"],
+          review: "能否脱稿写出框架",
+        },
+        {
+          day: "周四",
+          theme: "公共课稳分日",
+          tasks: ["英语错题回看", "政治速记", centralSubject],
+          review: "重复错误是否减少",
+        },
+        {
+          day: "周五",
+          theme: "真题整合日",
+          tasks: ["真题片段练习", "背诵抽测", "核对薄弱项"],
+          review: "下次训练只改哪一点",
+        },
+        {
+          day: "周六",
+          theme: "模拟节奏日",
+          tasks: ["限时组合训练", "整理错题", "稳定作息"],
+          review: "时间分配是否失衡",
+        },
+        {
+          day: "周日",
+          theme: "复盘调整日",
+          tasks: ["核算完成率", "更新下周重点", "安排休息"],
+          review: "计划是否需要继续压缩",
+        },
+      ]
+    : [
+        {
+          day: "周一",
+          theme: "目标核验日",
+          tasks: ["核验考试科目", "建立候选信息表", "安排本周时段"],
+          review: "哪些信息仍待官网确认",
+        },
+        {
+          day: "周二",
+          theme: "英语基础日",
+          tasks: ["阅读精练", "生词回顾", "长难句拆解"],
+          review: "重复出现的阅读障碍",
+        },
+        {
+          day: "周三",
+          theme: "核心补强日",
+          tasks: [centralSubject, "整理例题或框架", "记录疑问"],
+          review: "基础漏洞是否被定位",
+        },
+        {
+          day: "周四",
+          theme: "专业课搭建日",
+          tasks: ["章节框架", "资料目录核验", "输出小结"],
+          review: "能否讲清章节逻辑",
+        },
+        {
+          day: "周五",
+          theme: "公共课积累日",
+          tasks: ["英语回顾", "政治要点", "本周错题整理"],
+          review: "哪些任务适合固定化",
+        },
+        {
+          day: "周六",
+          theme: "综合训练日",
+          tasks: ["基础小测", "专业课回忆", "补做薄弱任务"],
+          review: "完成质量而非任务数量",
+        },
+        {
+          day: "周日",
+          theme: "复盘规划日",
+          tasks: ["统计完成率", "调整下周时长", "预留休息"],
+          review: "节奏是否可以持续",
+        },
+      ];
+
+  if (profile.biggestConcern === "资料") {
+    weeklyPlan[0].tasks = ["核验官网目录", "整理来源清单", "删除不可追溯资料"];
+    weeklyPlan[0].review = "保留的信息是否都有正式来源";
+  }
+  if (profile.biggestConcern === "焦虑" || profile.biggestConcern === "执行") {
+    weeklyPlan[6].tasks = ["统计最小任务", "安排下周第一步", "主动休息"];
+    weeklyPlan[6].review = "下一周是否足够轻量可执行";
+  }
+  if (strategy.id === "sprint") {
+    weeklyPlan[5].theme = "冲刺验证日";
+    weeklyPlan[5].tasks = ["限时输出训练", "核算薄弱差距", "对照稳妥备选"];
+    weeklyPlan[5].review = "冲刺目标是否仍可执行";
+  }
+  if (strategy.id === "backup") {
+    weeklyPlan[5].theme = "稳妥适配日";
+    weeklyPlan[5].tasks = ["复核培养方向", "完成基础小测", "确认接受程度"];
+    weeklyPlan[5].review = "是否避免了过度降档";
+  }
+
+  return weeklyPlan;
+}
+
+function createStageFocus(stage, profile) {
+  const focusMap = {
+    启动准备期: ["明确专业方向", "核验考试科目", "建立候选院校池", "了解合规资料与真题来源"],
+    基础建立期: [
+      "英语基础",
+      profile.needsMath ? "数学基础" : "专业课基础深化",
+      "专业课第一轮框架",
+      "每周复盘",
+    ],
+    强化推进期: ["真题训练", "专业课背诵", "错题复盘", "目标方向收敛"],
+    冲刺调整期: ["高频考点", "真题限时训练", "背诵压缩", "作息稳定", "模拟训练"],
+  };
+
+  return focusMap[stage] ?? focusMap.启动准备期;
+}
+
+function createTimeAllocation(profile, strategy) {
+  const allocations = [
+    { subject: "英语", weight: 25, reason: "持续输入与阅读训练" },
+    { subject: "专业课", weight: 35, reason: "形成主干知识与输出能力" },
+    { subject: "政治", weight: 15, reason: "稳定积累公共课内容" },
+    { subject: "择校核验", weight: 10, reason: "保持信息来源准确" },
+  ];
+
+  if (profile.needsMath) {
+    allocations.splice(1, 0, {
+      subject: "数学",
+      weight: 25,
+      reason: profile.mathIsWeak ? "基础补弱优先" : "保持题型训练",
+    });
+  }
+
+  const changeWeight = (subject, delta) => {
+    const item = allocations.find((allocation) => allocation.subject === subject);
+    if (item) item.weight += delta;
+  };
+
+  if (profile.needsMath && profile.mathIsWeak) changeWeight("数学", 12);
+  if (profile.isCrossExamValue || profile.professionalIsWeak) changeWeight("专业课", 10);
+  if (profile.englishLevel === "基础薄弱") changeWeight("英语", 8);
+  if (profile.timeBand === "sprint") {
+    changeWeight("择校核验", -5);
+    changeWeight("专业课", 6);
+    changeWeight(profile.needsMath ? "数学" : "英语", 5);
+  }
+  if (strategy.id === "sprint") {
+    changeWeight("专业课", 6);
+    changeWeight(profile.needsMath ? "数学" : "英语", 5);
+  }
+  if (strategy.id === "backup") {
+    changeWeight("择校核验", 5);
+    changeWeight("专业课", 4);
+  }
+  if (profile.biggestConcern === "资料") {
+    const sourceAllocation = allocations.find((item) => item.subject === "择校核验");
+    sourceAllocation.weight = Math.max(sourceAllocation.weight, 14);
+    sourceAllocation.reason = "筛选并核验资料来源";
+  }
+
+  const total = allocations.reduce((sum, item) => sum + item.weight, 0);
+  const normalized = allocations.map((item) => ({
+    ...item,
+    percentage: Math.round((item.weight / total) * 100),
+  }));
+  const offset =
+    100 - normalized.reduce((sum, item) => sum + item.percentage, 0);
+  const highest = normalized.reduce((result, item) =>
+    item.percentage > result.percentage ? item : result,
+  );
+  highest.percentage += offset;
+
+  return normalized;
+}
+
+export function createStudyPlan(profile = {}, selectedSchoolId, strategySelectionSource) {
+  if (!hasCompletedDiagnosis(profile)) {
+    return {
+      status: "incomplete",
+      isExample: true,
+      isDemo: true,
+      disclaimer: demoDisclaimer,
+    };
+  }
+
+  const normalized = normalizeProfile(profile);
+  const report = createPositioningReport(profile);
+  const recommended = report.recommendations.find((item) => item.recommended);
+  const manuallySelected = strategySelectionSource === "manual";
+  const selected = manuallySelected
+    ? report.recommendations.find((item) => item.planTargetId === selectedSchoolId) ??
+      recommended
+    : recommended;
+  const strategy = planStrategies[selected.planTargetId];
+  const stage = getStage(normalized);
+  const stageReminderBase =
+    stage === "冲刺调整期"
+      ? "当前更适合压缩目标、聚焦真题与高频任务，并保持作息稳定。"
+      : stage === "强化推进期"
+        ? "当前适合将基础训练转为专题输出，并用每周复盘收敛重点。"
+        : stage === "基础建立期"
+          ? "当前适合稳定搭建基础与专业课框架，避免频繁切换资料。"
+          : "当前适合先核验方向与考试科目，再建立可持续的学习节奏。";
+  const strategyReminder =
+    strategy.id === "sprint"
+      ? "冲刺档应同步保留稳妥复核线，避免只上探不校准。"
+      : strategy.id === "backup"
+        ? "保底档仍需核验方向适配，避免为了稳妥而过度降档。"
+        : "稳妥档优先保障节奏持续，并在完成度稳定后再调整目标。";
+
+  return {
+    status: "ready",
+    stage,
+    strategyId: strategy.id,
+    planTargetId: selected.planTargetId,
+    strategyLabel: strategy.label,
+    strategySourceLabel: manuallySelected ? "用户选定策略" : "AI 推荐策略",
+    stageReminder: `${stageReminderBase} ${strategyReminder}`,
+    countdownLabel:
+      normalized.monthsRemainingValue > 0
+        ? `距考试约 ${normalized.monthsRemainingValue} 个月`
+        : "待补充考试时间",
+    todayTasks: createTodayTasks(normalized, strategy),
+    weeklyPlan: createWeeklyPlan(normalized, strategy),
+    stageFocus: createStageFocus(stage, normalized),
+    timeAllocation: createTimeAllocation(normalized, strategy),
+    reviewTemplate: [
+      "今天完成了什么？",
+      "哪个任务卡住了？",
+      "明天最重要的一件事是什么？",
+      "情绪状态如何？",
+      "是否需要调整计划？",
+    ],
+    isDemo: true,
+    disclaimer: demoDisclaimer,
+  };
+}
+
 export function getSchool(schoolId) {
   return (
     schoolsData.schools.find((school) => school.id === schoolId) ??

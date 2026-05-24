@@ -84,7 +84,7 @@ export default function Report() {
 
   function handleGeneratePlan() {
     if (!hasSelectedReportTarget) {
-      selectSchool(aiRecommendation.planTargetId);
+      selectSchool(aiRecommendation.planTargetId, "ai");
     }
     navigate("/plan");
   }
@@ -151,7 +151,7 @@ export default function Report() {
           {report.recommendations.map((recommendation) => (
             <ReportCard
               key={recommendation.id}
-              onSelect={selectSchool}
+              onSelect={(schoolId) => selectSchool(schoolId, "manual")}
               recommendation={recommendation}
               selected={
                 hasSelectedReportTarget &&
