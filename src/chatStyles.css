@@ -1,5 +1,7 @@
 @reference "tailwindcss";
 
+@layer theme, base, components, utilities;
+
 @layer components {
   .chat-hero {
     @apply overflow-hidden rounded-[2rem] border border-indigo-100 bg-gradient-to-br from-white via-white to-indigo-50/80 shadow-[0_22px_65px_-40px_rgba(79,70,229,0.4)];
