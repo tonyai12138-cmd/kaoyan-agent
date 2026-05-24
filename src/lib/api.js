@@ -1,16 +1,27 @@
-import { answerQuestion } from "./mockAgent";
+import { answerChatQuestion } from "./chatAgent";
+import { retrieveKnowledge } from "./retrieve";
 
 /**
- * Mock-first API adapter. Replace the implementation with a POST request to
- * /api/chat after a server-side model integration has been configured.
+ * Mock-first API adapter.
+ * Future model integration can replace the local branch below with:
+ * fetch("/api/chat", { method: "POST", body: JSON.stringify(payload) }).
  */
-export async function sendChatMessage({ message, profile, history, context }) {
-  await new Promise((resolve) => window.setTimeout(resolve, 280));
+export async function sendChatMessage({
+  message,
+  profile,
+  history,
+  context,
+  mode = "school",
+}) {
+  await new Promise((resolve) => globalThis.setTimeout(resolve, 280));
+  const snippets = retrieveKnowledge(message, mode);
 
-  return answerQuestion({
+  return answerChatQuestion({
     message,
     profile,
     history,
     context,
+    mode,
+    snippets,
   });
 }

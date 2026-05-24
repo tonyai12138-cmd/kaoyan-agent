@@ -1,6 +1,5 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { buildTasks, demoProfile } from "../data/mockData";
-import { welcomeMessage } from "../data/prompts";
 import {
   createDiagnosis,
   createReview,
@@ -20,7 +19,7 @@ function makeInitialState() {
     hasSelectedReportTarget: false,
     strategySelectionSource: null,
     tasks: buildTasks(initialSchoolId),
-    chatHistory: [welcomeMessage],
+    chatHistory: [],
     reviewResult: null,
   };
 }
@@ -40,6 +39,9 @@ function readState() {
       hasSelectedReportTarget: parsed.hasSelectedReportTarget === true,
       strategySelectionSource,
     };
+    nextState.chatHistory = Array.isArray(nextState.chatHistory)
+      ? nextState.chatHistory.filter((message) => message.id !== "welcome")
+      : [];
 
     if (
       hasCompletedDiagnosis(nextState.profile) &&
@@ -124,6 +126,12 @@ export function DemoProvider({ children }) {
         setState((current) => ({
           ...current,
           chatHistory: [...current.chatHistory, message],
+        }));
+      },
+      clearChatHistory() {
+        setState((current) => ({
+          ...current,
+          chatHistory: [],
         }));
       },
       submitReview(review) {
