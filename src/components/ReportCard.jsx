@@ -1,61 +1,57 @@
 import DisclaimerBanner from "./DisclaimerBanner";
 
-export default function ReportCard({ school, selected, onSelect }) {
+export default function ReportCard({ recommendation, selected, onSelect }) {
   return (
     <article
-      className={`surface-card flex h-full flex-col p-6 ${
-        selected ? "ring-2 ring-indigo-500" : ""
-      }`}
+      className={`report-recommendation-card flex h-full flex-col p-6 ${
+        selected ? "report-recommendation-selected" : ""
+      } ${recommendation.recommended ? "report-recommendation-highlight" : ""}`}
     >
       <div className="flex items-start justify-between gap-3">
         <div>
           <p className="mb-2 text-xs font-semibold tracking-widest text-indigo-600">
-            {school.tag}
+            {recommendation.tag}
           </p>
-          <h3 className="text-lg font-bold text-slate-950">{school.name}</h3>
-          <p className="mt-1 text-sm text-slate-600">{school.program}</p>
+          <h3 className="text-xl font-bold text-slate-950">{recommendation.tier}</h3>
         </div>
-        {selected && <span className="badge badge-success">已选择</span>}
+        <div className="flex flex-col items-end gap-2">
+          {recommendation.recommended && <span className="badge">AI 优先建议</span>}
+          {selected && <span className="badge badge-success">当前计划目标</span>}
+        </div>
       </div>
-      <p className="mt-5 text-sm leading-7 text-slate-600">{school.fit}</p>
-      <dl className="mt-5 space-y-3 rounded-2xl bg-slate-50 p-4 text-sm">
+      <div className="mt-5 rounded-2xl bg-indigo-50/70 p-4">
+        <p className="text-xs font-semibold text-indigo-600">样例方向与选择标准</p>
+        <p className="mt-2 text-sm font-medium leading-7 text-slate-800">
+          {recommendation.sampleDirection}
+        </p>
+      </div>
+      <dl className="mt-5 space-y-4 text-sm">
         <div>
-          <dt className="text-slate-500">初试科目</dt>
-          <dd className="mt-1 font-medium text-slate-800">
-            {school.subjects.join(" / ")}
-          </dd>
-        </div>
-        <div className="grid grid-cols-2 gap-3">
-          <div>
-            <dt className="text-slate-500">分数线</dt>
-            <dd className="mt-1 font-medium text-slate-800">{school.scoreLine}</dd>
-          </div>
-          <div>
-            <dt className="text-slate-500">招生人数</dt>
-            <dd className="mt-1 font-medium text-slate-800">
-              {school.plannedEnrollment}
-            </dd>
-          </div>
+          <dt className="font-semibold text-slate-900">为什么适合</dt>
+          <dd className="mt-1 leading-7 text-slate-600">{recommendation.why}</dd>
         </div>
         <div>
-          <dt className="text-slate-500">参考资料</dt>
-          <dd className="mt-1 font-medium text-slate-800">
-            {school.referenceBooks}
-          </dd>
+          <dt className="font-semibold text-amber-700">主要风险</dt>
+          <dd className="mt-1 leading-7 text-slate-600">{recommendation.risk}</dd>
+        </div>
+        <div>
+          <dt className="font-semibold text-slate-900">需要补足条件</dt>
+          <dd className="mt-1 leading-7 text-slate-600">{recommendation.condition}</dd>
+        </div>
+        <div>
+          <dt className="font-semibold text-slate-900">验证动作</dt>
+          <dd className="mt-1 leading-7 text-slate-600">{recommendation.verification}</dd>
         </div>
       </dl>
-      <p className="mt-4 text-sm leading-6 text-amber-700">
-        风险提示：{school.risk}
-      </p>
-      <div className="mt-4">
+      <div className="mt-auto pt-5">
         <DisclaimerBanner compact />
       </div>
       <button
         className={selected ? "button-secondary mt-5" : "button-primary mt-5"}
-        onClick={() => onSelect(school.id)}
+        onClick={() => onSelect(recommendation.planTargetId)}
         type="button"
       >
-        {selected ? "当前主目标" : "设为主目标"}
+        {selected ? "已用于后续计划" : "选择此档作为计划目标"}
       </button>
     </article>
   );

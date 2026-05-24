@@ -12,6 +12,7 @@ function makeInitialState() {
     profile: demoProfile,
     diagnosis: createDiagnosis(demoProfile),
     selectedSchoolId: initialSchoolId,
+    hasSelectedReportTarget: false,
     tasks: buildTasks(initialSchoolId),
     chatHistory: [welcomeMessage],
     reviewResult: null,
@@ -21,7 +22,14 @@ function makeInitialState() {
 function readState() {
   try {
     const stored = window.localStorage.getItem(storageKey);
-    return stored ? { ...makeInitialState(), ...JSON.parse(stored) } : makeInitialState();
+    if (!stored) return makeInitialState();
+
+    const parsed = JSON.parse(stored);
+    return {
+      ...makeInitialState(),
+      ...parsed,
+      hasSelectedReportTarget: parsed.hasSelectedReportTarget === true,
+    };
   } catch {
     return makeInitialState();
   }
@@ -42,6 +50,7 @@ export function DemoProvider({ children }) {
           ...current,
           profile,
           diagnosis: createDiagnosis(profile),
+          hasSelectedReportTarget: false,
           reviewResult: null,
         }));
       },
@@ -49,6 +58,7 @@ export function DemoProvider({ children }) {
         setState((current) => ({
           ...current,
           selectedSchoolId: schoolId,
+          hasSelectedReportTarget: true,
           tasks: buildTasks(schoolId),
           reviewResult: null,
         }));
