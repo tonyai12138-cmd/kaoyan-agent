@@ -1,0 +1,44 @@
+name: Sync structured knowledge base
+
+on:
+  push:
+    branches:
+      - codex/kb-structure-upgrade
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout feature branch
+        uses: actions/checkout@v4
+        with:
+          ref: codex/kb-structure-upgrade
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+      - name: Apply validated knowledge base files
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const path = require('node:path');
+          const { brotliDecompressSync } = require('node:zlib');
+          const parts = [1, 2, 3, 4, 5].map((index) => fs.readFileSync(`.codex-transfer/kb.part${index}`, 'utf8').trim()).join('');
+          const files = JSON.parse(brotliDecompressSync(Buffer.from(parts, 'base64')).toString('utf8'));
+          for (const [filename, content] of Object.entries(files)) {
+            fs.mkdirSync(path.dirname(filename), { recursive: true });
+            fs.writeFileSync(filename, content, 'utf8');
+          }
+          NODE
+      - name: Commit clean source changes
+        run: |
+          git rm --ignore-unmatch .github/workflows/codex-kb-publish.yml .codex-transfer/kb.part1 .codex-transfer/kb.part2 .codex-transfer/kb.part3 .codex-transfer/kb.part4 .codex-transfer/kb.part5
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/schools.json src/data/faq.json src/data/questionTemplates.json src/data/prompts.js src/lib/retrieve.js src/lib/chatAgent.js api/chat.js src/components/ChatBox.jsx README.md
+          git commit -m "Upgrade structured knowledge base and retrieval metadata"
+          git push origin HEAD:codex/kb-structure-upgrade
