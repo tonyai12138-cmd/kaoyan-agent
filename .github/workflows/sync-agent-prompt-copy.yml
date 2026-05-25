@@ -1,0 +1,78 @@
+name: Sync Agent Prompt Copy
+
+on:
+  push:
+    branches:
+      - codex/agent-prompt-normalization
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout feature branch
+        uses: actions/checkout@v4
+        with:
+          ref: codex/agent-prompt-normalization
+      - name: Apply targeted wording updates
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import { readFileSync, writeFileSync } from "node:fs";
+          function replace(path, before, after) {
+            const source = readFileSync(path, "utf8");
+            if (!source.includes(before)) throw new Error(`Missing expected content in ${path}: ${before}`);
+            writeFileSync(path, source.replace(before, after));
+          }
+          function replaceAll(path, before, after) {
+            const source = readFileSync(path, "utf8");
+            if (!source.includes(before)) throw new Error(`Missing expected content in ${path}: ${before}`);
+            writeFileSync(path, source.split(before).join(after));
+          }
+          const common = "正式信息以研招网和目标院校研究生招生官网为准。 当前为课程展示用原型，部分数据为演示数据，不构成正式报考建议。";
+          const emotion = " 情绪陪伴仅提供学习支持和一般压力缓解建议，不替代专业心理咨询或医疗建议。";
+          const oldDataDisclaimer = "演示数据，正式信息以研招网和目标院校官网为准";
+
+          replace("src/components/ChatBox.jsx", 'answerSourceLabels[message.source] ?? "Agent 回答"', 'answerSourceLabels[message.source] ?? "研途智伴 Agent 回答"');
+          replace("src/pages/Chat.jsx", "研途智伴智能体", "研途智伴 Agent");
+          replace("src/pages/Home.jsx", 'import { dashboardStats } from "../data/mockData";', 'import { dashboardStats } from "../data/mockData";\nimport { emotionDisclaimer, factDisclaimer } from "../data/prompts";');
+          replace("src/pages/Home.jsx", '  "正式信息以研招网和目标院校官网为准",\n  "情绪陪伴不替代专业心理咨询",\n  "不上传或传播盗版资料",', '  factDisclaimer,\n  emotionDisclaimer,\n  "不传播盗版资料，也不鼓励购买来源不明的资料",');
+          replace("src/pages/Report.jsx", 'import ReportCard from "../components/ReportCard";', 'import ReportCard from "../components/ReportCard";\nimport { factDisclaimer, prototypeDisclaimer } from "../data/prompts";');
+          replace("src/pages/Report.jsx", '  "院校、专业、招生人数、考试科目、复试线等信息以研招网和目标院校官网为准。",', '  factDisclaimer,');
+          replace("src/pages/Report.jsx", '  "当前为课程展示用 mock 演示数据。",', '  prototypeDisclaimer,');
+
+          replaceAll("src/data/faq.json", oldDataDisclaimer, common);
+          replace("src/data/faq.json", '"关键词占位"', '"关键词占位"');
+          replace("src/data/faq.json", '"核验", "适不适合"]', '"核验", "适不适合", "分数线", "招生人数", "复试线", "录取比例"]');
+          replace("src/data/faq.json", "目标院校具体考试科目、参考资料和招生安排仍应以当年度官网公告逐项核验。", "目标院校具体考试科目、参考资料和招生安排仍应到其研究生招生官网的当年度公告逐项核验。");
+          replace("src/data/faq.json", "研招网官网入口：硕士目录、招生简章、网报公告", "官方核验入口：研招网与目标院校研究生招生官网");
+          replace("src/data/faq.json", "经验帖只能作为线索，不能代替官方来源；不上传或传播盗版资料。", "经验帖只能作为线索，不能代替官方来源；不传播盗版资料，也不鼓励购买来源不明的资料。");
+          replace("src/data/faq.json", "信息核验原则：研招网与目标院校官网优先", "信息核验原则：研招网与目标院校研究生招生官网优先");
+          replace("src/data/faq.json", "情绪陪伴不替代专业心理咨询；若持续严重焦虑、失眠或出现自伤想法，应及时寻求专业帮助。", "情绪陪伴仅提供学习支持和一般压力缓解建议，不替代专业心理咨询或医疗建议；若持续严重焦虑、失眠或出现自伤想法，应联系可信任的人、学校心理中心或专业机构。");
+          replace("src/data/faq.json", `"sourceLabel": "支持边界卡：一般支持与专业求助提示",\n      "isDemo": true,\n      "disclaimer": "${common}"`, `"sourceLabel": "支持边界卡：一般支持与专业求助提示",\n      "isDemo": true,\n      "disclaimer": "${common}${emotion}"`);
+          replaceAll("src/data/questionTemplates.json", oldDataDisclaimer, common);
+          replaceAll("src/data/schools.json", oldDataDisclaimer, common);
+
+          replace("src/lib/mockAgent.js", 'import { fallbackReply } from "../data/prompts";', 'import {\n  emotionDisclaimer,\n  factDisclaimer,\n  fallbackReply,\n  knowledgeMissingNotice,\n} from "../data/prompts";');
+          replace("src/lib/mockAgent.js", 'verification: "在研招网与目标院校官网建立冲刺候选清单，并记录正式依据。",', 'verification: `建立冲刺候选清单，并记录正式依据。${factDisclaimer}`,');
+          replace("src/lib/mockAgent.js", '"院校、科目与招考信息只以研招网和目标院校官网核验结果为依据。",', 'factDisclaimer,');
+          replace("src/lib/mockAgent.js", '"到研招网和目标院校官网核验考试科目、目录与最新公告。",', '`核验考试科目、目录与最新公告。${factDisclaimer}`,');
+          replace("src/lib/mockAgent.js", '"到研招网和目标院校官网核验考试科目与专业目录。",', '`核验考试科目与专业目录。${factDisclaimer}`,');
+          replace("src/lib/mockAgent.js", '? "资料建议：先建立来源清单，只有研招网与目标院校官网核验过的信息才进入决策表。"', '? `资料建议：先建立来源清单，只有经过官方核验的信息才进入决策表。${factDisclaimer}`');
+          replace("src/lib/mockAgent.js", '? "执行建议：将明日目标缩减为三项以内的可完成动作；情绪陪伴不替代专业心理咨询。"', '? `执行建议：将明日目标缩减为三项以内的可完成动作。${emotionDisclaimer}`');
+          replace("src/lib/mockAgent.js", '  const school = getSchool(context?.selectedSchoolId);\n', '');
+          replace("src/lib/mockAgent.js", '  if (faq?.id === "subjects") {', '  if (\n    faq?.id === "subjects" ||\n    /某校|院校|学校.*(?:分数线|招生|科目|参考书)|分数线|招生人数|复试线|录取比例/.test(\n      message,\n    )\n  ) {');
+          replace("src/lib/mockAgent.js", '      answer: `${targetPrefix}${school.name}的${school.program}在演示卡片中列出的科目为：${school.subjects.join("、")}。请把该信息作为界面体验样例，而不是报考依据。`,\n      citations: [faq.sourceLabel, `${school.name} - ${school.program}演示卡`],', '      answer: `${targetPrefix}${knowledgeMissingNotice}\\n\\n### 下一步行动\\n请到官方页面核验对应年度信息，并记录网页来源与发布日期。`,\n      citations: faq?.sourceLabel ? [faq.sourceLabel] : [],');
+          replace("api/README.md", "当前版本为前端 mock 演示版。`chat.js` 仅定义未来 `POST /api/chat` 的接口形态并返回本地演示回答，不调用外部模型，也不读取密钥。", "`chat.js` 是 Vercel Serverless Function 形式的 `POST /api/chat` 接口。配置 `DEEPSEEK_API_KEY` 后将调用 DeepSeek；未配置密钥或上游调用失败时，自动返回本地演示回答。");
+          NODE
+      - name: Commit synchronized wording
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add api/README.md src/components/ChatBox.jsx src/data/faq.json src/data/questionTemplates.json src/data/schools.json src/lib/mockAgent.js src/pages/Chat.jsx src/pages/Home.jsx src/pages/Report.jsx
+          git commit -m "Synchronize agent wording and disclaimers"
+          git push origin HEAD:codex/agent-prompt-normalization
