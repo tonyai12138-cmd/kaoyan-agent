@@ -1,5 +1,12 @@
-import { demoDisclaimer } from "../data/mockData";
-import { fallbackReply } from "../data/prompts";
+import {
+  agentIdentity,
+  chatModes,
+  commonDisclaimer,
+  emotionDisclaimer,
+  getChatDisclaimer,
+  knowledgeMissingNotice,
+  normalizeChatMode,
+} from "../data/prompts";
 import {
   createPositioningReport,
   createStudyPlan,
@@ -8,29 +15,46 @@ import {
 } from "./mockAgent";
 
 const urgentTerms = ["自杀", "自伤", "不想活", "结束生命"];
-const chatModeLabels = {
-  school: "择校咨询",
-  plan: "计划解释",
-  exam: "真题拆解",
-  verify: "资料核验",
-  support: "情绪陪伴",
-};
+const factQuestionPattern =
+  /某校|院校|学校|专业|考试科目|招生人数|招生名额|复试线|分数线|参考书|录取比例/;
+const chatModeLabels = Object.fromEntries(
+  chatModes.map((mode) => [mode.id, mode.label]),
+);
 
 function formatAnswerSections(sections) {
   return sections
-    .map((section) => `${section.title}\n${section.content}`)
+    .map((section) => `### ${section.title}\n${section.content}`)
     .join("\n\n");
 }
 
 function formatPriorityTasks(tasks) {
   if (!tasks.length) {
-    return "完成画像诊断并生成计划后，我会把今天最优先的任务拆到具体时长。";
+    return "1. 完成画像诊断并生成计划后，再拆解到具体时长。\n2. 确认本周可学习时间。\n3. 记录当前最影响执行的卡点。";
   }
 
   return tasks
     .slice(0, 3)
     .map((task, index) => `${index + 1}. ${task.title}（${task.duration}）`)
     .join("\n");
+}
+
+function formatRetrievedBasis(snippets) {
+  if (!snippets.length) {
+    return knowledgeMissingNotice;
+  }
+
+  return snippets
+    .slice(0, 2)
+    .map((snippet) => `- **${snippet.title}**：${snippet.content}`)
+    .join("\n");
+}
+
+function factBasisForQuestion(message, snippets) {
+  if (factQuestionPattern.test(message)) {
+    return `${knowledgeMissingNotice}\n\n本地知识片段仅用于提供核验路径，不包含可直接转述为院校事实的数据。`;
+  }
+
+  return formatRetrievedBasis(snippets);
 }
 
 export function createChatWelcome({ profile = {}, context = {} }) {
@@ -40,8 +64,8 @@ export function createChatWelcome({ profile = {}, context = {} }) {
       role: "assistant",
       modeLabel: "导览",
       content:
-        "你好，我是研途智伴智能体。完成画像诊断后，我可以结合你的阶段、策略和今日任务给出更个性化的回答。现在也可以先体验择校、资料核验或真题拆解。",
-      disclaimer: demoDisclaimer,
+        "你好，我是**研途智伴 Agent**。完成画像诊断后，我可以结合你的阶段、策略和今日任务，提供贯穿择校、计划、真题、资料核验与复盘的一站式备考支持。",
+      disclaimer: commonDisclaimer,
       isMock: true,
     };
   }
@@ -57,8 +81,8 @@ export function createChatWelcome({ profile = {}, context = {} }) {
     id: "welcome",
     role: "assistant",
     modeLabel: "导览",
-    content: `你好，我是研途智伴智能体。你当前处于${plan.stage}，主要困扰是“${concern}”。我可以围绕${plan.strategySourceLabel}的${plan.strategyLabel}计划，帮助你解释任务、核验资料或进行今日复盘。`,
-    disclaimer: demoDisclaimer,
+    content: `你好，我是**研途智伴 Agent**。你当前处于**${plan.stage}**，主要困扰是“${concern}”。我可以围绕${plan.strategySourceLabel}的${plan.strategyLabel}计划，继续支持任务解释、资料核验、真题拆解和每日复盘。`,
+    disclaimer: commonDisclaimer,
     isMock: true,
   };
 }
@@ -70,32 +94,43 @@ export function answerChatQuestion({
   mode = "school",
   snippets = [],
 }) {
-  const modeLabel = chatModeLabels[mode] ?? chatModeLabels.school;
+  const activeMode = normalizeChatMode(mode);
+  const modeLabel = chatModeLabels[activeMode] ?? chatModeLabels.school;
 
   if (urgentTerms.some((term) => message.includes(term))) {
     return {
       answer: formatAnswerSections([
         {
-          title: "先照顾此刻的安全",
-          content:
-            "听到你正在承受很大的压力。备考任务可以暂停，你的安全最重要。",
+          title: "先承认当前压力",
+          content: "听到你正在承受很大的压力。备考任务可以暂停，你此刻的安全最重要。",
         },
         {
-          title: "立即寻求支持",
-          content:
-            "请尽快联系信任的亲友、学校心理支持渠道；若存在紧急危险，请立即联系当地紧急援助服务。",
+          title: "将问题拆成可执行小任务",
+          content: "现在先不要求自己继续完成学习任务，先移动到安全、有人陪伴或便于获得支持的环境。",
         },
         {
-          title: "能力边界",
+          title: "今日最低完成版本",
+          content: "今天的最低任务是保障安全并获得现实中的支持，学习计划可以之后再调整。",
+        },
+        {
+          title: "复盘与调整建议",
+          content: "等安全和状态稳定后，再与可信任的人一起评估是否需要暂停或减轻备考任务。",
+        },
+        {
+          title: "专业支持边界",
           content:
-            "这里提供的一般情绪陪伴不能替代专业心理咨询或紧急干预。",
+            "若你有自伤想法或紧急危险，请立即联系可信任的人、学校心理中心、专业机构或当地紧急援助服务。",
+        },
+        {
+          title: "下一步行动",
+          content: "现在就给一位可信任的人发消息或打电话，明确告诉对方你需要陪伴和帮助。",
         },
       ]),
       mode: "support",
       modeLabel: chatModeLabels.support,
       snippets: [],
       citations: [],
-      disclaimer: demoDisclaimer,
+      disclaimer: `${commonDisclaimer} ${emotionDisclaimer}`,
       isMock: true,
       safety: "urgent",
     };
@@ -115,9 +150,9 @@ export function answerChatQuestion({
     Array.isArray(context.tasks) && context.tasks.length
       ? context.tasks
       : plan?.todayTasks ?? [];
-  let answer = fallbackReply;
+  let answer;
 
-  if (mode === "school") {
+  if (activeMode === "school") {
     const riskSummary = report?.risks
       .slice(0, 2)
       .map((risk) => `${risk.name}（${risk.level}）`)
@@ -126,26 +161,28 @@ export function answerChatQuestion({
       {
         title: "初步判断",
         content: completed
-          ? `你目前处于${report.stage}，综合定位为“${report.positioningTag}”。当前可先以${plan.strategyLabel}作为核验路径。`
+          ? `你目前处于${report.stage}，综合定位为“${report.positioningTag}”。当前可先以${plan.strategyLabel}作为验证路径，而非录取结论。`
           : "你还没有完成画像诊断，当前只能提供通用判断框架，无法给出个人策略结论。",
       },
       {
         title: "主要依据",
         content: completed
-          ? `风险偏好为${normalized.normalizedRiskPreference}，当前最大困扰为${profile.biggestConcern}；阶段计划来源为${plan.strategySourceLabel}。`
-          : "需要基础背景、目标方向、时间投入和风险偏好，才能形成三档策略建议。",
+          ? `风险偏好为${normalized.normalizedRiskPreference}，当前最大困扰为${profile.biggestConcern}；阶段计划来源为${plan.strategySourceLabel}。\n\n${factBasisForQuestion(message, snippets)}`
+          : factBasisForQuestion(message, snippets),
       },
       {
         title: "风险提醒",
-        content: riskSummary || "任何择校方向都需要核验正式目录和考试要求，不承诺录取结果。",
+        content:
+          riskSummary ||
+          "任何择校方向都必须核验正式目录、考试要求与招生公告；不承诺上岸，也不提供录取保证。",
       },
       {
         title: "下一步核验动作",
         content:
-          "先在研招网与目标院校官网核验专业目录、考试科目和当年度公告，再将候选方向写入报告进行比较。",
+          "在研招网和目标院校研究生招生官网核验专业目录、考试科目与当年度公告，并将来源链接和发布日期记录进候选清单。",
       },
     ]);
-  } else if (mode === "plan") {
+  } else if (activeMode === "plan") {
     answer = formatAnswerSections([
       {
         title: "当前任务重点",
@@ -165,17 +202,20 @@ export function answerChatQuestion({
       },
       {
         title: "如何复盘",
-        content:
-          "晚间只记录完成情况、卡点与明天第一件事；若任务过重，优先缩小范围再调整节奏。",
+        content: "晚间只记录完成情况、卡点与明天第一件事；若任务过重，优先缩小范围再调整节奏。",
+      },
+      {
+        title: "下一步行动",
+        content: "先完成列表中的第一项任务，并在复盘页记录是否按建议时长完成。",
       },
     ]);
-  } else if (mode === "exam") {
+  } else if (activeMode === "exam") {
     const hasQuestionSignal = /分析|论述|简答|案例|真题|如何作答|拆解/.test(message);
     answer = formatAnswerSections([
       {
         title: "题目考点",
         content: hasQuestionSignal
-          ? "识别核心概念、作用机制与可评价的营销结果，先回答题目要求再扩展论述。"
+          ? "识别核心概念、作用机制与可评价的营销结果，先回应题目要求再扩展论述。"
           : "请补充具体题干；在此之前可先按概念、机制、案例与评价四层准备。",
       },
       {
@@ -188,7 +228,7 @@ export function answerChatQuestion({
       },
       {
         title: "案例方向",
-        content: "可使用合法公开、自己能够准确说明的数字营销场景，避免编造品牌事实和数据。",
+        content: "只使用合法公开且能够准确说明来源的数字营销场景，避免编造品牌事实和数据。",
       },
       {
         title: "常见失分点",
@@ -203,63 +243,74 @@ export function answerChatQuestion({
         title: "建议背诵结构",
         content: "定义 1 句 + 机制 3 点 + 案例对应 2 点 + 策略与边界各 1 点。",
       },
+      {
+        title: "下一步行动",
+        content: "用以上七段结构写一版 300 字答案，再对照题干删去没有回应题意的内容。",
+      },
     ]);
-  } else if (mode === "verify") {
+  } else if (activeMode === "verify") {
     answer = formatAnswerSections([
       {
         title: "哪些信息必须核验",
-        content:
-          "目标专业、考试科目、培养方向、参考资料说明、招生安排和后续公告均需要核验。",
+        content: "院校、专业、考试科目、招生人数、复试线、参考书与录取比例等事实信息均需核验。",
       },
       {
         title: "优先核验渠道",
-        content:
-          "先查研招网相关入口，再回到目标院校官网的当年度招生简章、专业目录与公告页面逐项确认。",
+        content: `${knowledgeMissingNotice}\n\n${formatRetrievedBasis(snippets)}`,
       },
       {
         title: "资料风险提醒",
-        content:
-          "经验帖与课程资料只能作为线索，不能替代官方信息；不上传或传播盗版资料。",
+        content: "经验帖与机构资料只能作为检索线索，不能替代官方信息；不传播盗版资料，也不购买来源不明的资料。",
       },
       {
         title: "建议建立资料清单",
-        content:
-          "按“信息项、来源页面、发布日期、已核验/待核验、待解决问题”五列记录，避免重复搜索与版本混用。",
+        content: "按“信息项、来源页面、发布日期、已核验/待核验、待解决问题”五列记录，避免版本混用。",
+      },
+      {
+        title: "下一步行动",
+        content: "先选择一项最影响决策的信息，在官方页面查到来源后将链接和发布日期写入清单。",
       },
     ]);
-  } else if (mode === "support") {
+  } else {
     answer = formatAnswerSections([
       {
         title: "先承认当前压力",
-        content:
-          "在长期备考中感到焦虑、疲惫或因未完成计划而自责，都值得被认真看见；你不需要用一次失误定义整个进度。",
+        content: "在长期备考中感到焦虑、疲惫或因未完成计划而自责，都值得被认真看见；一次进度波动不定义整个过程。",
       },
       {
-        title: "把问题拆成小任务",
-        content:
-          "先选择一项 20 至 30 分钟可以结束的任务，完成后再决定是否继续，不把今天变成补债日。",
+        title: "将问题拆成可执行小任务",
+        content: "先选择一项 20 至 30 分钟可完成的任务，完成后再决定是否继续，不把今天变成补债日。",
       },
       {
         title: "今日最低完成版本",
         content: completed
           ? `完成“${currentTasks[0]?.title ?? "记录今日状态"}”，再做 10 分钟复盘并按时休息。`
-          : "完成一次 20 分钟轻量学习并记录卡点，明天再补充画像生成适配计划。",
+          : "完成一次 20 分钟轻量学习并记录卡点，之后再补充画像生成适配计划。",
       },
       {
-        title: "需要专业帮助时",
+        title: "复盘与调整建议",
+        content: "只记录完成的一步、一个阻碍和明天第一项任务；若压力持续偏高，将任务量主动下调。",
+      },
+      {
+        title: "专业支持边界",
         content:
-          "情绪陪伴不替代专业心理咨询。若持续严重焦虑、失眠，或出现自伤想法，请及时联系学校心理支持、专业机构或紧急援助渠道。",
+          "若持续严重焦虑、失眠或出现自伤想法，请联系可信任的人、学校心理中心或专业机构；紧急情况下及时寻求紧急援助。",
+      },
+      {
+        title: "下一步行动",
+        content: "现在选定一个不超过 20 分钟的任务，完成后在每日复盘中记录状态变化。",
       },
     ]);
   }
 
   return {
     answer,
-    mode,
+    mode: activeMode,
     modeLabel,
     snippets,
     citations: snippets.slice(0, 2).map((snippet) => snippet.title),
-    disclaimer: demoDisclaimer,
+    disclaimer: getChatDisclaimer(activeMode),
     isMock: true,
+    identity: agentIdentity,
   };
 }
