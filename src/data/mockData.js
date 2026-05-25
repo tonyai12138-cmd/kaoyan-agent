@@ -1,5 +1,6 @@
-export const demoDisclaimer =
-  "演示数据，正式信息以研招网和目标院校官网为准";
+import { commonDisclaimer } from "./prompts";
+
+export const demoDisclaimer = commonDisclaimer;
 
 export const featureCards = [
   {

@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import DisclaimerBanner from "../components/DisclaimerBanner";
 import ReportCard from "../components/ReportCard";
+import { factDisclaimer, prototypeDisclaimer } from "../data/prompts";
 import { useDemo } from "../lib/demoState";
 import { createPositioningReport } from "../lib/mockAgent";
 
@@ -12,9 +13,9 @@ const previewBlocks = [
 
 const trustRules = [
   "本报告为 AI 辅助诊断，不构成正式报考建议。",
-  "院校、专业、招生人数、考试科目、复试线等信息以研招网和目标院校官网为准。",
+  factDisclaimer,
   "本项目不承诺上岸、不提供录取保证。",
-  "当前为课程展示用 mock 演示数据。",
+  prototypeDisclaimer,
 ];
 
 function EmptyReport() {

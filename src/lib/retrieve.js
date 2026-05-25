@@ -1,10 +1,11 @@
 import faqData from "../data/faq.json";
 import questionData from "../data/questionTemplates.json";
 import schoolsData from "../data/schools.json";
-import { promptKnowledge } from "../data/prompts";
-
-const defaultDisclaimer =
-  "演示数据，正式信息以研招网和目标院校官网为准";
+import {
+  commonDisclaimer,
+  normalizeChatMode,
+  promptKnowledge,
+} from "../data/prompts";
 
 const strategyKeywords = {
   "east-business": ["冲刺", "挑战", "目标"],
@@ -21,7 +22,7 @@ function createIndex() {
     keywords: item.keywords ?? [],
     sourceLabel: item.sourceLabel,
     sourceUrl: item.sourceUrl,
-    disclaimer: item.disclaimer ?? defaultDisclaimer,
+    disclaimer: item.disclaimer ?? commonDisclaimer,
   }));
 
   const schoolItems = schoolsData.schools.map((school) => ({
@@ -31,7 +32,7 @@ function createIndex() {
       "该条目仅用于说明策略档位的产品交互，不代表真实学校、分数、招生名额或录取结论。",
     modes: ["school"],
     keywords: strategyKeywords[school.id] ?? ["择校", "目标"],
-    disclaimer: defaultDisclaimer,
+    disclaimer: commonDisclaimer,
   }));
 
   const templateItems = questionData.modes.flatMap((group) =>
@@ -41,7 +42,7 @@ function createIndex() {
       content: `可在“${group.label}”模式继续追问：${template.message}`,
       modes: [group.id],
       keywords: template.keywords ?? [],
-      disclaimer: defaultDisclaimer,
+      disclaimer: commonDisclaimer,
     })),
   );
 
@@ -51,7 +52,7 @@ function createIndex() {
     content: item.content,
     modes: [item.mode],
     keywords: item.keywords ?? [],
-    disclaimer: defaultDisclaimer,
+    disclaimer: commonDisclaimer,
   }));
 
   return [...faqItems, ...schoolItems, ...templateItems, ...promptItems];
@@ -72,6 +73,7 @@ function scoreEntry(entry, query, mode) {
 
 export function retrieveKnowledge(message, mode = "school") {
   const query = String(message ?? "").trim().toLowerCase();
+  const normalizedMode = normalizeChatMode(mode);
 
   if (!query) {
     return [];
@@ -80,7 +82,7 @@ export function retrieveKnowledge(message, mode = "school") {
   return createIndex()
     .map((entry) => ({
       ...entry,
-      score: scoreEntry(entry, query, mode),
+      score: scoreEntry(entry, query, normalizedMode),
     }))
     .filter((entry) => entry.score > 0)
     .sort((left, right) => right.score - left.score || left.title.localeCompare(right.title, "zh-CN"))
