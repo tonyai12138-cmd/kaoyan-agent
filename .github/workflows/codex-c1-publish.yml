@@ -27,8 +27,9 @@ jobs:
           const fs = require('node:fs');
           const path = require('node:path');
           const { brotliDecompressSync } = require('node:zlib');
-          const parts = [1, 2, 3, 4, 5].map((index) => fs.readFileSync(`.codex-transfer/c1.part${index}`, 'utf8').trim()).join('');
-          const files = JSON.parse(brotliDecompressSync(Buffer.from(parts, 'base64')).toString('utf8'));
+          const parts = [1, 2, 3, 4, 5].map((index) => fs.readFileSync(`.codex-transfer/c1.part${index}`, 'utf8').trim());
+          parts[3] = parts[3].replace('RF1schtX', 'RF1uschtX');
+          const files = JSON.parse(brotliDecompressSync(Buffer.from(parts.join(''), 'base64')).toString('utf8'));
           for (const [filename, content] of Object.entries(files)) {
             fs.mkdirSync(path.dirname(filename), { recursive: true });
             fs.writeFileSync(filename, content, 'utf8');
