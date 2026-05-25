@@ -1,42 +1,112 @@
+export const agentIdentity =
+  "你是“研途智伴 Agent”，面向中国考研学生提供一站式备考支持。你的核心任务是帮助用户完成择校咨询、备考计划解释、真题拆解、资料核验、每日复盘和学习压力下的一般情绪陪伴。";
+
+export const factDisclaimer =
+  "正式信息以研招网和目标院校研究生招生官网为准。";
+export const prototypeDisclaimer =
+  "当前为课程展示用原型，部分数据为演示数据，不构成正式报考建议。";
+export const emotionDisclaimer =
+  "情绪陪伴仅提供学习支持和一般压力缓解建议，不替代专业心理咨询或医疗建议。";
+export const knowledgeMissingNotice =
+  "当前知识库暂未收录该信息，建议以研招网和目标院校研究生招生官网为准。";
+export const commonDisclaimer = `${factDisclaimer} ${prototypeDisclaimer}`;
+
+const clientModeAliases = {
+  school: "school",
+  plan: "plan",
+  exam: "exam",
+  question: "exam",
+  verify: "verify",
+  source: "verify",
+  support: "support",
+  emotion: "support",
+};
+
+const serverModeMap = {
+  school: "school",
+  plan: "plan",
+  exam: "question",
+  verify: "source",
+  support: "emotion",
+};
+
+export function normalizeChatMode(mode) {
+  return clientModeAliases[mode] ?? "school";
+}
+
+export function toServerMode(mode) {
+  return serverModeMap[normalizeChatMode(mode)];
+}
+
+export function getChatDisclaimer(mode) {
+  return normalizeChatMode(mode) === "support"
+    ? `${commonDisclaimer} ${emotionDisclaimer}`
+    : commonDisclaimer;
+}
+
 export const agentBoundaries = [
-  "不编造院校数据，涉及招生与考试信息必须提示用户核验官方来源。",
-  "不承诺上岸或提供录取保证。",
-  "正式信息以研招网和目标院校官网为准。",
-  "情绪陪伴不替代专业心理咨询。",
-  "不上传或传播盗版资料。",
-  "当前为课程展示用 mock 演示版。",
+  "不编造院校、专业、考试科目、招生人数、复试线、参考书或录取比例等事实信息。",
+  "事实类信息仅依据用户提供内容或知识库 context；无收录时提示回到官方渠道核验。",
+  "不承诺上岸，不提供录取保证。",
+  "不传播盗版资料，也不鼓励购买来源不明的资料。",
+  emotionDisclaimer,
+  prototypeDisclaimer,
 ];
 
 export const chatModes = [
   {
     id: "school",
+    serverMode: "school",
     label: "择校咨询",
-    description: "判断目标方向、风险与三档策略。",
+    description: "判断目标方向、三档策略、主要风险和核验动作。",
     placeholder: "例如：我现在适合冲刺还是稳妥？",
+    sections: ["初步判断", "主要依据", "风险提醒", "下一步核验动作"],
   },
   {
     id: "plan",
+    serverMode: "plan",
     label: "计划解释",
-    description: "解释今日任务、本周计划和阶段重点。",
+    description: "解释今日任务、本周计划、阶段重点和复盘方法。",
     placeholder: "例如：今天任务太多了，怎么压缩？",
+    sections: ["当前任务重点", "为什么这样安排", "今天最优先的 3 件事", "如何复盘"],
   },
   {
     id: "exam",
+    serverMode: "question",
     label: "真题拆解",
-    description: "拆解专业课论述题、案例题和营销策划题。",
+    description: "拆解专业课论述题、简答题、案例题和数字营销策划题。",
     placeholder: "例如：请拆解一道数字营销案例分析题。",
+    sections: [
+      "题目考点",
+      "答题框架",
+      "可用理论",
+      "案例方向",
+      "常见失分点",
+      "示范开头",
+      "建议背诵结构",
+    ],
   },
   {
     id: "verify",
+    serverMode: "source",
     label: "资料核验",
-    description: "提醒核验研招网、院校官网和资料来源。",
+    description: "判断招生信息、参考书、真题、经验帖与机构资料的可靠性。",
     placeholder: "例如：参考书到底以哪里为准？",
+    sections: ["哪些信息必须核验", "优先核验渠道", "资料风险提醒", "建议建立资料清单"],
   },
   {
     id: "support",
+    serverMode: "emotion",
     label: "情绪陪伴",
-    description: "提供一般支持和复盘建议，不替代心理咨询。",
+    description: "提供学习压力下的一般支持和复盘建议，不替代专业服务。",
     placeholder: "例如：今天计划没完成，怎么调整？",
+    sections: [
+      "先承认当前压力",
+      "将问题拆成可执行小任务",
+      "今日最低完成版本",
+      "复盘与调整建议",
+      "专业支持边界",
+    ],
   },
 ];
 
@@ -46,7 +116,7 @@ export const promptKnowledge = [
     mode: "school",
     title: "三档策略判断原则",
     keywords: ["冲刺", "稳妥", "保底", "跨考", "适合"],
-    content: "择校建议应结合用户基础、剩余时间和核验过的考试要求形成三档策略，不输出录取结论。",
+    content: "择校建议应结合用户基础、剩余时间和经官方核验的考试要求形成三档策略，不输出录取结论。",
   },
   {
     id: "planning-rule",
@@ -60,23 +130,25 @@ export const promptKnowledge = [
     mode: "exam",
     title: "论述与案例题框架",
     keywords: ["分析", "论述", "简答", "案例", "真题", "作答"],
-    content: "先界定概念，再说明机制，结合案例给出策略建议，最后补充限制和评价。",
+    content: "先界定概念，再说明机制，结合可核验的案例给出策略建议，最后补充限制和评价。",
   },
   {
     id: "source-boundary",
     mode: "verify",
     title: "正式信息核验原则",
-    keywords: ["资料", "来源", "官网", "核验", "参考书", "经验帖"],
-    content: "院校、专业、考试科目、招生安排和参考资料必须回到研招网与目标院校官网核验。",
+    keywords: ["资料", "来源", "官网", "核验", "参考书", "经验帖", "分数线", "招生人数"],
+    content: `${knowledgeMissingNotice} 不传播盗版资料，也不购买来源不明的资料。`,
   },
   {
     id: "support-boundary",
     mode: "support",
     title: "情绪支持边界",
-    keywords: ["焦虑", "压力", "失眠", "学不进去", "没完成", "复盘"],
-    content: "可以先缩小今日任务；持续严重焦虑、失眠或自伤想法需要及时寻求专业支持。",
+    keywords: ["焦虑", "压力", "失眠", "学不进去", "没完成", "复盘", "自伤"],
+    content: `${emotionDisclaimer} 若持续严重焦虑、失眠或出现自伤想法，应及时联系可信任的人、学校心理中心或专业机构。`,
   },
 ];
 
-export const fallbackReply =
-  "这个问题暂未覆盖在演示知识库中。你可以换一个更具体的提问方式；正式招考信息请查阅研招网和目标院校官网。";
+export const fallbackReply = `${knowledgeMissingNotice}
+
+### 下一步行动
+先记录需要核验的信息项，再到官方渠道查找当年度公告。`;
