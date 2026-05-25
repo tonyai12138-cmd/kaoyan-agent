@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import DisclaimerBanner from "./DisclaimerBanner";
+import MarkdownMessage from "./MarkdownMessage";
 
 const sourceLabels = {
   faq: "FAQ",
@@ -80,70 +81,79 @@ export default function ChatBox({
         </div>
       </div>
       <div className="chat-thread" ref={threadRef}>
-        {messages.map((message) => (
-          <div
-            className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
-            key={message.id}
-          >
-            <div className={message.role === "user" ? "bubble-user" : "bubble-agent"}>
-              {message.role === "assistant" && (
-                <span className="chat-answer-mode">
-                  {message.modeLabel ?? "Agent"}
-                </span>
-              )}
-              <p className="mt-2 whitespace-pre-line text-sm leading-7">
-                {message.content}
-              </p>
-              {message.role === "assistant" && message.source && (
-                <div className="mt-3 flex flex-wrap items-center gap-2 text-[11px] text-slate-500">
-                  <span className="rounded-full bg-slate-100 px-2.5 py-1 font-semibold">
-                    {answerSourceLabels[message.source] ?? "Agent 回答"}
-                    {message.source === "deepseek" && message.model
-                      ? ` · ${message.model}`
-                      : ""}
+        {messages.map((message) => {
+          const isAgentMessage =
+            message.role === "assistant" || message.role === "agent";
+
+          return (
+            <div
+              className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
+              key={message.id}
+            >
+              <div className={message.role === "user" ? "bubble-user" : "bubble-agent"}>
+                {isAgentMessage && (
+                  <span className="chat-answer-mode">
+                    {message.modeLabel ?? "Agent"}
                   </span>
-                  {message.fallbackReason && (
-                    <span>
-                      当前已自动切换至本地演示，不影响课堂展示。
+                )}
+                {isAgentMessage ? (
+                  <MarkdownMessage content={message.content} />
+                ) : (
+                  <p className="mt-2 whitespace-pre-line text-sm leading-7">
+                    {message.content}
+                  </p>
+                )}
+                {isAgentMessage && message.source && (
+                  <div className="mt-3 flex flex-wrap items-center gap-2 text-[11px] text-slate-500">
+                    <span className="rounded-full bg-slate-100 px-2.5 py-1 font-semibold">
+                      {answerSourceLabels[message.source] ?? "Agent 回答"}
+                      {message.source === "deepseek" && message.model
+                        ? ` · ${message.model}`
+                        : ""}
                     </span>
-                  )}
-                </div>
-              )}
-              {message.snippets?.length > 0 && (
-                <details className="chat-snippets">
-                  <summary>参考知识库片段 · {message.snippets.length}</summary>
-                  <div className="mt-3 space-y-2">
-                    {message.snippets.map((snippet) => (
-                      <article className="chat-snippet-item" key={`${snippet.source}-${snippet.title}`}>
-                        <div className="flex items-center justify-between gap-2">
-                          <p className="text-xs font-semibold text-slate-700">
-                            {snippet.title}
-                          </p>
-                          <span className="rounded-full bg-indigo-50 px-2 py-1 text-[10px] font-bold text-indigo-700">
-                            {sourceLabels[snippet.source]} · {snippet.score}
-                          </span>
-                        </div>
-                        <p className="mt-2 text-xs leading-6 text-slate-500">
-                          {snippet.content}
-                        </p>
-                        {snippet.sourceLabel && (
-                          <p className="mt-2 text-[11px] text-indigo-600">
-                            {snippet.sourceLabel}
-                          </p>
-                        )}
-                      </article>
-                    ))}
+                    {message.fallbackReason && (
+                      <span>
+                        当前已自动切换至本地演示，不影响课堂展示。
+                      </span>
+                    )}
                   </div>
-                </details>
-              )}
-              {message.disclaimer && (
-                <p className="mt-3 border-t border-slate-200 pt-3 text-xs leading-6 text-slate-500">
-                  {message.disclaimer}
-                </p>
-              )}
+                )}
+                {message.snippets?.length > 0 && (
+                  <details className="chat-snippets">
+                    <summary>参考知识库片段 · {message.snippets.length}</summary>
+                    <div className="mt-3 space-y-2">
+                      {message.snippets.map((snippet) => (
+                        <article className="chat-snippet-item" key={`${snippet.source}-${snippet.title}`}>
+                          <div className="flex items-center justify-between gap-2">
+                            <p className="text-xs font-semibold text-slate-700">
+                              {snippet.title}
+                            </p>
+                            <span className="rounded-full bg-indigo-50 px-2 py-1 text-[10px] font-bold text-indigo-700">
+                              {sourceLabels[snippet.source]} · {snippet.score}
+                            </span>
+                          </div>
+                          <p className="mt-2 text-xs leading-6 text-slate-500">
+                            {snippet.content}
+                          </p>
+                          {snippet.sourceLabel && (
+                            <p className="mt-2 text-[11px] text-indigo-600">
+                              {snippet.sourceLabel}
+                            </p>
+                          )}
+                        </article>
+                      ))}
+                    </div>
+                  </details>
+                )}
+                {message.disclaimer && (
+                  <p className="mt-3 border-t border-slate-200 pt-3 text-xs leading-6 text-slate-500">
+                    {message.disclaimer}
+                  </p>
+                )}
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
         {pending && (
           <div className="bubble-agent inline-flex items-center gap-2 text-sm text-slate-500">
             <span className="loading-dot" />
