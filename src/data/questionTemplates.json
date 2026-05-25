@@ -1,141 +1,399 @@
 {
+  "knowledgeBase": {
+    "name": "经管类与数字营销专业课题型模板库",
+    "version": "0.2.0",
+    "description": "用于真题拆解和答题框架检索的教学模板，不代表任何院校真实命题范围。"
+  },
   "isDemo": true,
-  "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。 当前为课程展示用原型，部分数据为演示数据，不构成正式报考建议。",
+  "dataStatus": "demo",
+  "disclaimer": "模板仅用于学习参考，具体考试要求以目标院校专业课要求为准。",
   "modes": [
     {
       "id": "school",
       "label": "择校咨询",
       "templates": [
-        {
-          "id": "school-strategy",
-          "label": "冲刺还是稳妥",
-          "message": "我现在适合冲刺还是稳妥？",
-          "keywords": ["冲刺", "稳妥", "策略"],
-          "isDemo": true
-        },
-        {
-          "id": "school-fit",
-          "label": "判断适配",
-          "message": "如何判断一所学校适不适合我？",
-          "keywords": ["学校", "适合", "核验"],
-          "isDemo": true
-        },
-        {
-          "id": "school-cross",
-          "label": "跨考注意事项",
-          "message": "跨考经管类需要注意什么？",
-          "keywords": ["跨考", "经管", "专业课"],
-          "isDemo": true
-        }
+        { "id": "school-strategy", "label": "冲刺还是稳妥", "message": "我现在适合冲刺还是稳妥？", "keywords": ["冲刺", "稳妥", "策略"], "isDemo": true },
+        { "id": "school-fit", "label": "判断适配", "message": "如何判断一所学校适不适合我？", "keywords": ["学校", "适合", "核验"], "isDemo": true },
+        { "id": "school-cross", "label": "跨考注意事项", "message": "跨考经管类需要注意什么？", "keywords": ["跨考", "经管类", "专业课"], "isDemo": true }
       ]
     },
     {
       "id": "plan",
       "label": "计划解释",
       "templates": [
-        {
-          "id": "plan-compact",
-          "label": "压缩任务",
-          "message": "今天任务太多了，怎么压缩？",
-          "keywords": ["今天", "任务", "压缩"],
-          "isDemo": true
-        },
-        {
-          "id": "plan-math",
-          "label": "数学调整",
-          "message": "我数学很弱，计划应该怎么调整？",
-          "keywords": ["数学", "计划", "调整"],
-          "isDemo": true
-        },
-        {
-          "id": "plan-week",
-          "label": "安排本周",
-          "message": "本周计划怎么安排更合理？",
-          "keywords": ["本周", "计划", "安排"],
-          "isDemo": true
-        }
+        { "id": "plan-compact", "label": "压缩任务", "message": "今天任务太多了，怎么压缩？", "keywords": ["今天", "任务", "压缩"], "isDemo": true },
+        { "id": "plan-math", "label": "数学调整", "message": "我数学很弱，计划应该怎么调整？", "keywords": ["数学", "计划", "调整"], "isDemo": true },
+        { "id": "plan-week", "label": "安排本周", "message": "本周计划怎么安排更合理？", "keywords": ["本周", "计划", "安排"], "isDemo": true }
       ]
     },
     {
       "id": "exam",
       "label": "真题拆解",
       "templates": [
-        {
-          "id": "exam-community",
-          "label": "品牌社群论述",
-          "message": "请分析品牌社群如何影响消费者忠诚度。",
-          "keywords": ["分析", "品牌社群", "消费者忠诚度"],
-          "isDemo": true
-        },
-        {
-          "id": "exam-case",
-          "label": "数字营销案例",
-          "message": "请拆解一道数字营销案例分析题。",
-          "keywords": ["拆解", "数字营销", "案例", "分析"],
-          "isDemo": true
-        },
-        {
-          "id": "exam-writing",
-          "label": "论述题写法",
-          "message": "专业课论述题怎么写才不像流水账？",
-          "keywords": ["专业课", "论述题", "写"],
-          "isDemo": true
-        }
+        { "id": "exam-community", "label": "品牌社群论述", "message": "请分析品牌社群如何影响消费者忠诚度。", "keywords": ["品牌社群", "消费者忠诚度"], "isDemo": true },
+        { "id": "exam-case", "label": "数字营销案例", "message": "请拆解一道数字营销案例分析题。", "keywords": ["数字营销", "案例分析"], "isDemo": true },
+        { "id": "exam-writing", "label": "论述题写法", "message": "专业课论述题怎么写才不像流水账？", "keywords": ["专业课", "论述题"], "isDemo": true }
       ]
     },
     {
       "id": "verify",
       "label": "资料核验",
       "templates": [
-        {
-          "id": "verify-source",
-          "label": "资料可靠性",
-          "message": "如何判断考研资料靠不靠谱？",
-          "keywords": ["资料", "靠谱", "判断"],
-          "isDemo": true
-        },
-        {
-          "id": "verify-books",
-          "label": "参考书来源",
-          "message": "参考书到底以哪里为准？",
-          "keywords": ["参考书", "哪里", "为准"],
-          "isDemo": true
-        },
-        {
-          "id": "verify-post",
-          "label": "经验帖边界",
-          "message": "经验帖能不能直接相信？",
-          "keywords": ["经验帖", "相信"],
-          "isDemo": true
-        }
+        { "id": "verify-source", "label": "资料可靠性", "message": "如何判断考研资料靠不靠谱？", "keywords": ["资料", "靠谱"], "isDemo": true },
+        { "id": "verify-books", "label": "参考书来源", "message": "参考书到底以哪里为准？", "keywords": ["参考书", "为准"], "isDemo": true },
+        { "id": "verify-post", "label": "经验帖边界", "message": "经验帖能不能直接相信？", "keywords": ["经验帖", "相信"], "isDemo": true }
       ]
     },
     {
       "id": "support",
       "label": "情绪陪伴",
       "templates": [
-        {
-          "id": "support-anxiety",
-          "label": "缓解焦虑",
-          "message": "我最近很焦虑，学不进去怎么办？",
-          "keywords": ["焦虑", "学不进去"],
-          "isDemo": true
-        },
-        {
-          "id": "support-missed",
-          "label": "任务没完成",
-          "message": "今天计划又没完成，怎么调整？",
-          "keywords": ["计划", "没完成", "调整"],
-          "isDemo": true
-        },
-        {
-          "id": "support-review",
-          "label": "压力复盘",
-          "message": "考研压力很大，我应该怎么复盘？",
-          "keywords": ["压力", "复盘"],
-          "isDemo": true
-        }
+        { "id": "support-anxiety", "label": "缓解焦虑", "message": "我最近很焦虑，学不进去怎么办？", "keywords": ["焦虑", "学不进去"], "isDemo": true },
+        { "id": "support-missed", "label": "任务没完成", "message": "今天计划又没完成，怎么调整？", "keywords": ["计划", "没完成"], "isDemo": true },
+        { "id": "support-review", "label": "压力复盘", "message": "考研压力很大，我应该怎么复盘？", "keywords": ["压力", "复盘"], "isDemo": true }
       ]
+    }
+  ],
+  "templates": [
+    {
+      "id": "template_001",
+      "questionType": "论述题",
+      "subjectArea": "市场营销",
+      "scenario": "品牌社群",
+      "sampleQuestion": "请分析品牌社群如何影响消费者忠诚度。",
+      "answerStructure": ["概念界定", "作用机制", "案例分析", "局限与反思", "管理启示"],
+      "usefulTheories": ["关系营销", "消费者认同", "品牌社群理论"],
+      "caseDirections": ["公开可核验的品牌社区互动场景", "会员共创活动", "内容社区讨论机制"],
+      "commonMistakes": ["只写概念不写机制", "案例无来源", "没有回应忠诚度"],
+      "sampleOpening": "品牌社群对消费者忠诚度的作用，关键在于互动关系、身份认同与价值共创所形成的持续连接。",
+      "keywords": ["品牌社群", "消费者忠诚", "关系营销"],
+      "applicableModes": ["question"],
+      "sourceType": "methodology",
+      "dataStatus": "demo",
+      "disclaimer": "模板仅用于学习参考，具体考试要求以目标院校专业课要求为准。"
+    },
+    {
+      "id": "template_002",
+      "questionType": "名词解释",
+      "subjectArea": "数字营销",
+      "scenario": "私域运营",
+      "sampleQuestion": "请解释私域流量的含义及其运营价值。",
+      "answerStructure": ["概念定义", "核心特征", "运营价值", "使用边界"],
+      "usefulTheories": ["顾客关系管理", "用户生命周期"],
+      "caseDirections": ["企业会员社群", "品牌服务触点"],
+      "commonMistakes": ["把私域等同于微信群", "不写用户权益边界"],
+      "sampleOpening": "私域流量是品牌能够持续触达并在合规前提下运营的用户关系资产。",
+      "keywords": ["私域流量", "私域运营", "用户关系"],
+      "applicableModes": ["question"],
+      "sourceType": "methodology",
+      "dataStatus": "demo",
+      "disclaimer": "模板仅用于学习参考，具体考试要求以目标院校专业课要求为准。"
+    },
+    {
+      "id": "template_003",
+      "questionType": "简答题",
+      "subjectArea": "消费者行为",
+      "scenario": "购买决策",
+      "sampleQuestion": "简述消费者购买决策过程及数字触点的作用。",
+      "answerStructure": ["需求识别", "信息搜寻", "方案评价", "购买与购后", "数字触点"],
+      "usefulTheories": ["消费者决策过程", "顾客旅程"],
+      "caseDirections": ["搜索与内容平台", "评价与客服触点"],
+      "commonMistakes": ["阶段遗漏", "数字触点与阶段脱节"],
+      "sampleOpening": "消费者购买并非单一动作，而是从需求识别到购后反馈的连续决策过程。",
+      "keywords": ["消费者行为", "购买决策", "数字触点"],
+      "applicableModes": ["question"],
+      "sourceType": "methodology",
+      "dataStatus": "demo",
+      "disclaimer": "模板仅用于学习参考，具体考试要求以目标院校专业课要求为准。"
+    },
+    {
+      "id": "template_004",
+      "questionType": "案例分析题",
+      "subjectArea": "数字营销",
+      "scenario": "用户增长",
+      "sampleQuestion": "某应用下载增长但留存下降，请分析原因并提出改进。",
+      "answerStructure": ["问题识别", "漏斗诊断", "原因假设", "策略设计", "指标验证"],
+      "usefulTheories": ["AARRR 增长模型", "用户生命周期价值"],
+      "caseDirections": ["注册流程", "首周留存", "召回机制"],
+      "commonMistakes": ["只追新增不看留存", "未说明验证指标"],
+      "sampleOpening": "增长不等于有效增长，留存下降说明获取用户与持续价值之间存在断点。",
+      "keywords": ["用户增长", "留存", "案例分析", "AARRR"],
+      "applicableModes": ["question"],
+      "sourceType": "methodology",
+      "dataStatus": "demo",
+      "disclaimer": "模板仅用于学习参考，具体考试要求以目标院校专业课要求为准。"
+    },
+    {
+      "id": "template_005",
+      "questionType": "材料分析题",
+      "subjectArea": "品牌管理",
+      "scenario": "品牌危机",
+      "sampleQuestion": "结合材料分析品牌舆情危机中的沟通策略。",
+      "answerStructure": ["材料事实提炼", "危机成因", "利益相关者", "沟通方案", "恢复评价"],
+      "usefulTheories": ["危机沟通", "品牌信任"],
+      "caseDirections": ["公开回应节奏", "消费者反馈处理"],
+      "commonMistakes": ["脱离材料", "将道歉写成全部策略"],
+      "sampleOpening": "危机沟通首先需要基于材料识别信任受损的原因和受影响的利益相关者。",
+      "keywords": ["品牌危机", "舆情", "材料分析", "沟通策略"],
+      "applicableModes": ["question"],
+      "sourceType": "methodology",
+      "dataStatus": "demo",
+      "disclaimer": "模板仅用于学习参考，具体考试要求以目标院校专业课要求为准。"
+    },
+    {
+      "id": "template_006",
+      "questionType": "数字营销策划题",
+      "subjectArea": "数字营销",
+      "scenario": "新品上市",
+      "sampleQuestion": "为一款校园新品设计数字营销传播方案。",
+      "answerStructure": ["目标与受众", "洞察与定位", "渠道内容", "转化路径", "评估与风险"],
+      "usefulTheories": ["STP", "整合营销传播", "顾客旅程"],
+      "caseDirections": ["校园内容场景", "社群触达", "试用反馈"],
+      "commonMistakes": ["只有渠道清单", "没有指标与合规边界"],
+      "sampleOpening": "校园新品传播应从细分受众的真实需求出发，设计从认知到体验反馈的闭环。",
+      "keywords": ["数字营销策划", "新品上市", "校园", "传播方案"],
+      "applicableModes": ["question"],
+      "sourceType": "methodology",
+      "dataStatus": "demo",
+      "disclaimer": "模板仅用于学习参考，具体考试要求以目标院校专业课要求为准。"
+    },
+    {
+      "id": "template_007",
+      "questionType": "品牌分析题",
+      "subjectArea": "品牌管理",
+      "scenario": "品牌定位",
+      "sampleQuestion": "分析一个新消费品牌的定位形成路径。",
+      "answerStructure": ["市场背景", "目标人群", "价值主张", "识别系统", "风险与迭代"],
+      "usefulTheories": ["品牌定位", "品牌资产"],
+      "caseDirections": ["公开品牌传播资料", "产品与内容一致性"],
+      "commonMistakes": ["把口号当定位", "虚构经营结果"],
+      "sampleOpening": "品牌定位不是传播口号，而是目标人群、差异价值与持续兑现之间的匹配。",
+      "keywords": ["品牌分析", "品牌定位", "新消费", "品牌资产"],
+      "applicableModes": ["question"],
+      "sourceType": "methodology",
+      "dataStatus": "demo",
+      "disclaimer": "模板仅用于学习参考，具体考试要求以目标院校专业课要求为准。"
+    },
+    {
+      "id": "template_008",
+      "questionType": "消费者行为分析题",
+      "subjectArea": "消费者行为",
+      "scenario": "冲动消费",
+      "sampleQuestion": "分析直播场景中消费者冲动购买的形成机制。",
+      "answerStructure": ["行为界定", "刺激因素", "心理机制", "后果评价", "治理建议"],
+      "usefulTheories": ["S-O-R 模型", "感知稀缺", "社会证明"],
+      "caseDirections": ["限时机制", "互动氛围", "信息披露"],
+      "commonMistakes": ["只批评消费者", "忽视合规与权益"],
+      "sampleOpening": "直播中的冲动购买通常由外部刺激与内部心理反应共同推动，需要同时评价营销效果与消费者保护。",
+      "keywords": ["消费者行为", "直播", "冲动购买", "S-O-R"],
+      "applicableModes": ["question"],
+      "sourceType": "methodology",
+      "dataStatus": "demo",
+      "disclaimer": "模板仅用于学习参考，具体考试要求以目标院校专业课要求为准。"
+    },
+    {
+      "id": "template_009",
+      "questionType": "SWOT 分析题",
+      "subjectArea": "管理学",
+      "scenario": "平台竞争",
+      "sampleQuestion": "使用 SWOT 分析某内容平台的营销机会。",
+      "answerStructure": ["对象界定", "优势劣势", "机会威胁", "策略匹配", "局限"],
+      "usefulTheories": ["SWOT", "竞争战略"],
+      "caseDirections": ["内容供给", "用户互动", "监管环境"],
+      "commonMistakes": ["四项罗列无策略", "把推测写成事实"],
+      "sampleOpening": "SWOT 的价值不在罗列因素，而在于将内外部条件转化为可执行的策略选择。",
+      "keywords": ["SWOT", "平台竞争", "营销机会"],
+      "applicableModes": ["question"],
+      "sourceType": "methodology",
+      "dataStatus": "demo",
+      "disclaimer": "模板仅用于学习参考，具体考试要求以目标院校专业课要求为准。"
+    },
+    {
+      "id": "template_010",
+      "questionType": "案例分析题",
+      "subjectArea": "数字营销",
+      "scenario": "AARRR 增长模型",
+      "sampleQuestion": "用 AARRR 模型诊断一款校园服务产品的增长问题。",
+      "answerStructure": ["获取", "激活", "留存", "收入", "推荐", "关键改进"],
+      "usefulTheories": ["AARRR 增长模型", "转化漏斗"],
+      "caseDirections": ["首次体验", "复访机制", "分享激励"],
+      "commonMistakes": ["阶段混淆", "不写数据验证方法"],
+      "sampleOpening": "AARRR 诊断应定位增长在哪一环失效，而不是笼统提出增加曝光。",
+      "keywords": ["AARRR", "增长模型", "校园服务", "漏斗"],
+      "applicableModes": ["question"],
+      "sourceType": "methodology",
+      "dataStatus": "demo",
+      "disclaimer": "模板仅用于学习参考，具体考试要求以目标院校专业课要求为准。"
+    },
+    {
+      "id": "template_011",
+      "questionType": "论述题",
+      "subjectArea": "数字营销",
+      "scenario": "私域运营",
+      "sampleQuestion": "论述私域运营对品牌长期关系建设的价值与边界。",
+      "answerStructure": ["概念界定", "关系价值", "运营机制", "隐私合规", "结论"],
+      "usefulTheories": ["关系营销", "顾客生命周期", "隐私边界"],
+      "caseDirections": ["会员触达", "服务社群", "授权沟通"],
+      "commonMistakes": ["只写转化", "忽视骚扰和隐私风险"],
+      "sampleOpening": "私域运营的核心不在反复触达，而在经用户许可后持续提供关系价值。",
+      "keywords": ["私域运营", "品牌关系", "合规", "长期价值"],
+      "applicableModes": ["question"],
+      "sourceType": "methodology",
+      "dataStatus": "demo",
+      "disclaimer": "模板仅用于学习参考，具体考试要求以目标院校专业课要求为准。"
+    },
+    {
+      "id": "template_012",
+      "questionType": "材料分析题",
+      "subjectArea": "数字营销",
+      "scenario": "内容种草",
+      "sampleQuestion": "结合材料评价内容种草对消费者决策的影响。",
+      "answerStructure": ["材料事实", "影响机制", "信任基础", "风险识别", "管理建议"],
+      "usefulTheories": ["信息搜寻", "口碑传播", "信任机制"],
+      "caseDirections": ["测评内容", "社区互动", "商业标识"],
+      "commonMistakes": ["把种草等于购买", "忽视广告标识"],
+      "sampleOpening": "内容种草影响决策的前提是信息可信与场景相关，不能将曝光简单等同于转化。",
+      "keywords": ["内容种草", "消费者决策", "口碑", "信任"],
+      "applicableModes": ["question"],
+      "sourceType": "methodology",
+      "dataStatus": "demo",
+      "disclaimer": "模板仅用于学习参考，具体考试要求以目标院校专业课要求为准。"
+    },
+    {
+      "id": "template_013",
+      "questionType": "案例分析题",
+      "subjectArea": "数字营销",
+      "scenario": "直播电商",
+      "sampleQuestion": "分析直播电商中的转化机制与信任风险。",
+      "answerStructure": ["场景特征", "转化机制", "信任风险", "合规措施", "效果评价"],
+      "usefulTheories": ["社会证明", "感知风险", "信任理论"],
+      "caseDirections": ["主播互动", "商品信息展示", "售后反馈"],
+      "commonMistakes": ["只谈优惠", "不写信息透明与售后"],
+      "sampleOpening": "直播电商的高互动性能够降低决策距离，但也放大信息不对称与信任风险。",
+      "keywords": ["直播电商", "转化机制", "信任风险"],
+      "applicableModes": ["question"],
+      "sourceType": "methodology",
+      "dataStatus": "demo",
+      "disclaimer": "模板仅用于学习参考，具体考试要求以目标院校专业课要求为准。"
+    },
+    {
+      "id": "template_014",
+      "questionType": "简答题",
+      "subjectArea": "数字营销",
+      "scenario": "KOL 与 KOC 营销",
+      "sampleQuestion": "简述 KOL 与 KOC 营销的差异和适用场景。",
+      "answerStructure": ["概念对比", "传播机制", "适用目标", "风险边界"],
+      "usefulTheories": ["意见领袖", "口碑传播", "信源可信度"],
+      "caseDirections": ["大规模认知", "社区口碑", "商业合作标识"],
+      "commonMistakes": ["只按粉丝量比较", "忽视商业披露"],
+      "sampleOpening": "KOL 与 KOC 的差异不仅在传播规模，也在信任形成方式和营销目标的适配。",
+      "keywords": ["KOL", "KOC", "意见领袖", "口碑传播"],
+      "applicableModes": ["question"],
+      "sourceType": "methodology",
+      "dataStatus": "demo",
+      "disclaimer": "模板仅用于学习参考，具体考试要求以目标院校专业课要求为准。"
+    },
+    {
+      "id": "template_015",
+      "questionType": "数字营销策划题",
+      "subjectArea": "市场营销",
+      "scenario": "用户画像",
+      "sampleQuestion": "为校园阅读产品构建用户画像并设计触达策略。",
+      "answerStructure": ["目标界定", "画像维度", "需求痛点", "触达内容", "评估指标"],
+      "usefulTheories": ["市场细分", "用户画像", "顾客旅程"],
+      "caseDirections": ["学习场景", "内容偏好", "复购或续订路径"],
+      "commonMistakes": ["画像仅写人口属性", "策略与痛点不匹配"],
+      "sampleOpening": "有效用户画像应服务于决策，连接用户需求、使用场景与可验证的触达方案。",
+      "keywords": ["用户画像", "校园", "触达策略", "市场细分"],
+      "applicableModes": ["question"],
+      "sourceType": "methodology",
+      "dataStatus": "demo",
+      "disclaimer": "模板仅用于学习参考，具体考试要求以目标院校专业课要求为准。"
+    },
+    {
+      "id": "template_016",
+      "questionType": "论述题",
+      "subjectArea": "品牌管理",
+      "scenario": "品牌共创",
+      "sampleQuestion": "论述数字环境下消费者参与品牌共创的意义。",
+      "answerStructure": ["概念界定", "参与机制", "品牌价值", "治理风险", "启示"],
+      "usefulTheories": ["价值共创", "品牌参与", "关系营销"],
+      "caseDirections": ["产品反馈社区", "用户内容创作"],
+      "commonMistakes": ["只赞美参与", "忽略管理成本和风险"],
+      "sampleOpening": "数字环境使消费者从被动接收者转为品牌价值形成过程中的参与者。",
+      "keywords": ["品牌共创", "消费者参与", "数字环境"],
+      "applicableModes": ["question"],
+      "sourceType": "methodology",
+      "dataStatus": "demo",
+      "disclaimer": "模板仅用于学习参考，具体考试要求以目标院校专业课要求为准。"
+    },
+    {
+      "id": "template_017",
+      "questionType": "案例分析题",
+      "subjectArea": "市场营销",
+      "scenario": "渠道协同",
+      "sampleQuestion": "分析线上线下渠道冲突并提出协同方案。",
+      "answerStructure": ["冲突表现", "原因诊断", "顾客影响", "协同策略", "评价机制"],
+      "usefulTheories": ["渠道管理", "全渠道体验"],
+      "caseDirections": ["价格一致性", "库存服务", "会员权益"],
+      "commonMistakes": ["只写降价", "未考虑用户体验"],
+      "sampleOpening": "渠道冲突的本质是目标、资源和顾客体验配置失衡，需要从协同机制而非单点促销解决。",
+      "keywords": ["渠道冲突", "全渠道", "协同", "市场营销"],
+      "applicableModes": ["question"],
+      "sourceType": "methodology",
+      "dataStatus": "demo",
+      "disclaimer": "模板仅用于学习参考，具体考试要求以目标院校专业课要求为准。"
+    },
+    {
+      "id": "template_018",
+      "questionType": "材料分析题",
+      "subjectArea": "消费者行为",
+      "scenario": "算法推荐",
+      "sampleQuestion": "结合材料分析算法推荐对消费选择的影响。",
+      "answerStructure": ["材料概括", "便利价值", "选择偏差", "伦理风险", "治理建议"],
+      "usefulTheories": ["信息过滤", "选择架构", "消费者权益"],
+      "caseDirections": ["内容推荐", "信息茧房", "透明设置"],
+      "commonMistakes": ["技术决定论", "不回应消费者权益"],
+      "sampleOpening": "算法推荐在降低搜索成本的同时，也可能改变消费者接触信息的范围和决策自主性。",
+      "keywords": ["算法推荐", "消费选择", "消费者权益", "材料分析"],
+      "applicableModes": ["question"],
+      "sourceType": "methodology",
+      "dataStatus": "demo",
+      "disclaimer": "模板仅用于学习参考，具体考试要求以目标院校专业课要求为准。"
+    },
+    {
+      "id": "template_019",
+      "questionType": "简答题",
+      "subjectArea": "管理学",
+      "scenario": "营销指标",
+      "sampleQuestion": "简述数字营销效果评价的基本指标层次。",
+      "answerStructure": ["目标确认", "触达互动", "转化留存", "价值与风险"],
+      "usefulTheories": ["营销漏斗", "顾客生命周期价值"],
+      "caseDirections": ["内容互动", "注册转化", "长期留存"],
+      "commonMistakes": ["只看曝光", "虚构数据", "忽视目标"],
+      "sampleOpening": "数字营销效果评价必须从目标出发，区分过程指标与最终价值指标。",
+      "keywords": ["营销指标", "效果评价", "转化", "留存"],
+      "applicableModes": ["question"],
+      "sourceType": "methodology",
+      "dataStatus": "demo",
+      "disclaimer": "模板仅用于学习参考，具体考试要求以目标院校专业课要求为准。"
+    },
+    {
+      "id": "template_020",
+      "questionType": "数字营销策划题",
+      "subjectArea": "数字营销",
+      "scenario": "社会责任传播",
+      "sampleQuestion": "设计一项兼顾社会价值与品牌沟通的线上活动方案。",
+      "answerStructure": ["议题选择", "利益相关者", "内容互动", "执行风险", "效果评估"],
+      "usefulTheories": ["企业社会责任", "利益相关者", "整合营销传播"],
+      "caseDirections": ["公益合作", "用户参与", "信息披露"],
+      "commonMistakes": ["公益议题工具化", "不写真实性核验"],
+      "sampleOpening": "社会责任传播的前提是真实行动与透明沟通，品牌表达应服务于公共价值而非替代行动。",
+      "keywords": ["社会责任", "线上活动", "品牌沟通", "策划"],
+      "applicableModes": ["question"],
+      "sourceType": "methodology",
+      "dataStatus": "demo",
+      "disclaimer": "模板仅用于学习参考，具体考试要求以目标院校专业课要求为准。"
     }
   ]
 }
