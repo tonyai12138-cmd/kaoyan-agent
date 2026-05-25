@@ -10,6 +10,30 @@ export const emotionDisclaimer =
 export const knowledgeMissingNotice =
   "当前知识库暂未收录该信息，建议以研招网和目标院校研究生招生官网为准。";
 export const commonDisclaimer = `${factDisclaimer} ${prototypeDisclaimer}`;
+export const officialVerificationAdvice =
+  "涉及专业目录、考试科目、招生人数、复试线、参考书或调剂规则时，请记录官方链接、发布年份与核验日期，再用于报考判断。";
+
+export const knowledgeStatusDefinitions = {
+  verified: {
+    label: "已核验",
+    description: "已由官方来源核验，可在保留来源的前提下引用。",
+  },
+  partial: {
+    label: "部分核验",
+    description: "仅部分字段完成官方核验，未核验字段不可作为结论。",
+  },
+  pending: {
+    label: "待核验",
+    description: "尚未取得官方来源，不能作为正式报考依据。",
+  },
+  demo: {
+    label: "演示",
+    description: "课程展示用结构或方法样例，不代表真实院校事实。",
+  },
+};
+
+export const knowledgeBasePresentationCopy =
+  "知识库将院校专业、方法问答与题型模板拆成可检索条目，并为院校事实记录来源、核验时间与状态；演示或待核验条目只用于展示流程，不输出报考结论。";
 
 const clientModeAliases = {
   school: "school",
@@ -49,6 +73,7 @@ export const agentBoundaries = [
   "事实类信息仅依据用户提供内容或知识库 context；无收录时提示回到官方渠道核验。",
   "不承诺上岸，不提供录取保证。",
   "不传播盗版资料，也不鼓励购买来源不明的资料。",
+  "知识库中标为演示或待核验的条目不作为院校事实依据。",
   emotionDisclaimer,
   prototypeDisclaimer,
 ];
@@ -117,6 +142,8 @@ export const promptKnowledge = [
     title: "三档策略判断原则",
     keywords: ["冲刺", "稳妥", "保底", "跨考", "适合"],
     content: "择校建议应结合用户基础、剩余时间和经官方核验的考试要求形成三档策略，不输出录取结论。",
+    sourceType: "methodology",
+    dataStatus: "demo",
   },
   {
     id: "planning-rule",
@@ -124,6 +151,8 @@ export const promptKnowledge = [
     title: "计划解释原则",
     keywords: ["计划", "任务", "数学", "本周", "压缩"],
     content: "先说明当前阶段任务目的，再将当天安排压缩为能执行、能复盘的具体动作。",
+    sourceType: "methodology",
+    dataStatus: "demo",
   },
   {
     id: "exam-framework",
@@ -131,13 +160,17 @@ export const promptKnowledge = [
     title: "论述与案例题框架",
     keywords: ["分析", "论述", "简答", "案例", "真题", "作答"],
     content: "先界定概念，再说明机制，结合可核验的案例给出策略建议，最后补充限制和评价。",
+    sourceType: "methodology",
+    dataStatus: "demo",
   },
   {
     id: "source-boundary",
     mode: "verify",
     title: "正式信息核验原则",
     keywords: ["资料", "来源", "官网", "核验", "参考书", "经验帖", "分数线", "招生人数"],
-    content: `${knowledgeMissingNotice} 不传播盗版资料，也不购买来源不明的资料。`,
+    content: `${knowledgeMissingNotice} ${officialVerificationAdvice} 不传播盗版资料，也不购买来源不明的资料。`,
+    sourceType: "official_guidance",
+    dataStatus: "pending",
   },
   {
     id: "support-boundary",
@@ -145,6 +178,8 @@ export const promptKnowledge = [
     title: "情绪支持边界",
     keywords: ["焦虑", "压力", "失眠", "学不进去", "没完成", "复盘", "自伤"],
     content: `${emotionDisclaimer} 若持续严重焦虑、失眠或出现自伤想法，应及时联系可信任的人、学校心理中心或专业机构。`,
+    sourceType: "methodology",
+    dataStatus: "demo",
   },
 ];
 

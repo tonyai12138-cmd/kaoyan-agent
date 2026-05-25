@@ -11,6 +11,8 @@ const defaultModel = "deepseek-v4-flash";
 const deepseekEndpoint = "https://api.deepseek.com/chat/completions";
 const factQuestionPattern =
   /某校|院校|学校|专业|考试科目|招生人数|招生名额|复试线|分数线|参考书|录取比例/;
+const knowledgeStatusRules =
+  "verified 表示已由官方来源核验；partial 表示仅部分字段核验；pending 表示待核验；demo 表示演示数据。只有 dataStatus 为 verified 且 sourceType 为 official 的片段可作为院校事实依据。";
 
 // Keep these aliases and system rules synchronized with src/data/prompts.js.
 // The Vercel function maintains its own copy so its server-only deployment stays isolated.
@@ -37,7 +39,7 @@ const systemPrompt = `你是“研途智伴 Agent”，面向中国考研学生�
 
 回答边界：
 1. 不编造院校、专业、考试科目、招生人数、复试线、参考书、录取比例等事实信息；
-2. 涉及院校事实信息时，必须优先依据用户提供的信息或知识库 context；仅当 context 明确给出该事实值和来源时才可转述，不得从演示策略样例推断真实信息；
+2. 涉及院校事实信息时，必须优先依据用户提供的信息或知识库 context；仅当 context 明确给出该事实值、官方来源且 dataStatus 为 verified、sourceType 为 official 时才可转述，不得从演示或待核验样例推断真实信息；
 3. 如果 context 没有收录用户询问的事实信息，必须原样说明：“当前知识库暂未收录该信息，建议以研招网和目标院校研究生招生官网为准。”；
 4. 不承诺上岸，不提供录取保证；
 5. 不传播盗版资料，不鼓励购买来源不明的资料；
@@ -45,6 +47,9 @@ const systemPrompt = `你是“研途智伴 Agent”，面向中国考研学生�
 7. 用户提到严重焦虑、失眠或自伤想法时，建议其联系可信任的人、学校心理中心或专业机构；存在紧急危险时建议及时寻求紧急援助；
 8. 当前项目为课程展示原型，涉及演示数据时必须明确说明，不构成正式报考建议；
 9. 回答要具体、可执行、结构化，优先使用 Markdown 小标题、列表或表格，避免过长段落。
+
+知识库状态规则：
+${knowledgeStatusRules}
 
 根据 mode 使用固定输出结构：
 school：初步判断、主要依据、风险提醒、下一步核验动作；
@@ -121,13 +126,27 @@ function formatSnippetBasis(context) {
 
   return snippets
     .slice(0, 2)
-    .map((snippet) => `- **${snippet.title}**：${snippet.content}`)
+    .map(
+      (snippet) =>
+        `- **${snippet.title}**（${snippet.dataStatus ?? "pending"} / ${snippet.sourceType ?? "pending"}）：${snippet.content}`,
+    )
     .join("\n");
+}
+
+function hasVerifiedOfficialFact(context) {
+  return contextSnippets(context).some(
+    (snippet) =>
+      snippet.source === "school" &&
+      snippet.dataStatus === "verified" &&
+      snippet.sourceType === "official",
+  );
 }
 
 function buildContextMessage({ message, profile, context, mode }) {
   const factsGuard = factQuestionPattern.test(message)
-    ? `用户正在询问事实类信息。若 context 未明确提供所问事实的值和来源，必须回复：${knowledgeMissingNotice}`
+    ? hasVerifiedOfficialFact(context)
+      ? `用户正在询问事实类信息。仅可引用 verified / official 片段中明确提供且与问题对应的事实，并保留官方核验提醒。${knowledgeStatusRules}`
+      : `用户正在询问事实类信息。当前 context 不含 verified / official 的院校事实片段，不得输出具体数字或具体考试结论，必须回复：${knowledgeMissingNotice}`
     : "对于可能涉及事实的信息，仅依据 context 或用户提供内容回答，不进行推断补编。";
 
   return [
@@ -135,6 +154,7 @@ function buildContextMessage({ message, profile, context, mode }) {
     `用户画像与当前计划状态：${safeContext(profile, 2400)}`,
     `知识库与任务 context：${safeContext(context)}`,
     `知识库片段数量：${contextSnippets(context).length}`,
+    `知识库状态解释：${knowledgeStatusRules}`,
     factsGuard,
   ].join("\n");
 }

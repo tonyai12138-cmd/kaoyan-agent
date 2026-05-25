@@ -3,9 +3,11 @@ import {
   chatModes,
   commonDisclaimer,
   emotionDisclaimer,
+  factDisclaimer,
   getChatDisclaimer,
   knowledgeMissingNotice,
   normalizeChatMode,
+  officialVerificationAdvice,
 } from "../data/prompts";
 import {
   createPositioningReport,
@@ -45,13 +47,27 @@ function formatRetrievedBasis(snippets) {
 
   return snippets
     .slice(0, 2)
-    .map((snippet) => `- **${snippet.title}**：${snippet.content}`)
+    .map(
+      (snippet) =>
+        `- **${snippet.title}**（${snippet.dataStatus ?? "pending"} / ${snippet.sourceType ?? "pending"}）：${snippet.content}`,
+    )
     .join("\n");
 }
 
 function factBasisForQuestion(message, snippets) {
   if (factQuestionPattern.test(message)) {
-    return `${knowledgeMissingNotice}\n\n本地知识片段仅用于提供核验路径，不包含可直接转述为院校事实的数据。`;
+    const verifiedFacts = snippets.filter(
+      (snippet) =>
+        snippet.source === "school" &&
+        snippet.dataStatus === "verified" &&
+        snippet.sourceType === "official",
+    );
+
+    if (!verifiedFacts.length) {
+      return `${knowledgeMissingNotice}\n\n检索到的演示或待核验片段仅用于提供查证路径，不能转述为院校事实。${officialVerificationAdvice}`;
+    }
+
+    return `${formatRetrievedBasis(verifiedFacts)}\n\n${factDisclaimer} ${officialVerificationAdvice}`;
   }
 
   return formatRetrievedBasis(snippets);

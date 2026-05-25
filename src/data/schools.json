@@ -1,51 +1,438 @@
 {
+  "knowledgeBase": {
+    "name": "院校专业知识库结构样例",
+    "version": "0.2.0",
+    "checkedAt": "2026-05",
+    "description": "用于演示院校专业信息的来源追踪与核验状态管理，不包含可直接用于报考决策的真实招生结论。"
+  },
   "isDemo": true,
-  "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。 当前为课程展示用原型，部分数据为演示数据，不构成正式报考建议。",
+  "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。",
   "schools": [
     {
       "id": "east-business",
-      "name": "华东示例大学",
-      "program": "市场营销管理（学硕）",
-      "region": "上海",
-      "tag": "挑战目标",
-      "fit": "匹配市场营销背景，重视研究分析能力",
-      "subjects": ["思想政治理论", "英语（一）", "数学（三）", "管理学综合"],
-      "scoreLine": "示例分数线：365 分",
-      "plannedEnrollment": "示例招生人数：18 人",
-      "referenceBooks": "示例参考书：管理学基础与营销研究方法",
-      "risk": "需投入较多数学强化时间，目标竞争度偏高",
       "isDemo": true,
-      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。 当前为课程展示用原型，部分数据为演示数据，不构成正式报考建议。"
+      "dataStatus": "demo",
+      "school": "华东示例大学",
+      "region": "华东",
+      "city": "上海（演示）",
+      "college": "示例商学院",
+      "major": "市场营销管理",
+      "majorCode": "待核验",
+      "degreeType": "学硕（演示）",
+      "studyMode": "待核验",
+      "researchDirection": "品牌管理与数字营销（演示方向）",
+      "mathRequired": "待核验",
+      "examSubjects": [
+        {
+          "subjectName": "考试科目待核验",
+          "subjectCode": "待核验",
+          "status": "pending"
+        }
+      ],
+      "plannedEnrollment": {
+        "value": "暂未收录",
+        "status": "pending",
+        "note": "以当年招生目录为准"
+      },
+      "recommendedExemption": {
+        "value": "暂未收录",
+        "status": "pending",
+        "note": "以当年招生目录为准"
+      },
+      "scoreLines": [
+        {
+          "year": "2025",
+          "value": "暂未收录",
+          "status": "pending",
+          "sourceUrl": "",
+          "note": "以院校官方复试分数线为准"
+        }
+      ],
+      "referenceBooks": [
+        {
+          "name": "暂未收录",
+          "status": "pending",
+          "note": "以院校研究生招生官网或考试大纲为准"
+        }
+      ],
+      "examOutline": {
+        "value": "暂未收录",
+        "status": "pending",
+        "sourceUrl": "",
+        "note": "以院校官网考试大纲为准"
+      },
+      "reExamSubjects": [
+        {
+          "name": "暂未收录",
+          "status": "pending",
+          "note": "以院校复试通知为准"
+        }
+      ],
+      "source": {
+        "sourceName": "演示数据",
+        "sourceType": "demo",
+        "sourceUrl": "",
+        "checkedAt": "2026-05",
+        "reliability": "demo"
+      },
+      "keywords": ["经管类", "市场营销", "品牌管理", "数字营销", "华东", "择校"],
+      "notes": "课堂展示用知识库结构样例，方向名称为演示文本，正式报考前必须再次核验。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
     },
     {
       "id": "south-finance",
-      "name": "南方示例财经大学",
-      "program": "工商管理（营销方向）",
-      "region": "广州",
-      "tag": "平衡目标",
-      "fit": "科目结构与经管基础衔接较顺畅，适合稳步推进",
-      "subjects": ["思想政治理论", "英语（一）", "数学（三）", "工商管理基础"],
-      "scoreLine": "示例分数线：348 分",
-      "plannedEnrollment": "示例招生人数：26 人",
-      "referenceBooks": "示例参考书：工商管理概论",
-      "risk": "仍需关注当年度招生方向和专业课范围变化",
       "isDemo": true,
-      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。 当前为课程展示用原型，部分数据为演示数据，不构成正式报考建议。"
+      "dataStatus": "demo",
+      "school": "南方示例财经大学",
+      "region": "华南",
+      "city": "广州（演示）",
+      "college": "示例管理学院",
+      "major": "工商管理",
+      "majorCode": "待核验",
+      "degreeType": "学硕（演示）",
+      "studyMode": "待核验",
+      "researchDirection": "营销管理（演示方向）",
+      "mathRequired": "待核验",
+      "examSubjects": [
+        {
+          "subjectName": "考试科目待核验",
+          "subjectCode": "待核验",
+          "status": "pending"
+        }
+      ],
+      "plannedEnrollment": {
+        "value": "暂未收录",
+        "status": "pending",
+        "note": "以当年招生目录为准"
+      },
+      "recommendedExemption": {
+        "value": "暂未收录",
+        "status": "pending",
+        "note": "以当年招生目录为准"
+      },
+      "scoreLines": [
+        {
+          "year": "2025",
+          "value": "暂未收录",
+          "status": "pending",
+          "sourceUrl": "",
+          "note": "以院校官方复试分数线为准"
+        }
+      ],
+      "referenceBooks": [
+        {
+          "name": "暂未收录",
+          "status": "pending",
+          "note": "以院校研究生招生官网或考试大纲为准"
+        }
+      ],
+      "examOutline": {
+        "value": "暂未收录",
+        "status": "pending",
+        "sourceUrl": "",
+        "note": "以院校官网考试大纲为准"
+      },
+      "reExamSubjects": [
+        {
+          "name": "暂未收录",
+          "status": "pending",
+          "note": "以院校复试通知为准"
+        }
+      ],
+      "source": {
+        "sourceName": "演示数据",
+        "sourceType": "demo",
+        "sourceUrl": "",
+        "checkedAt": "2026-05",
+        "reliability": "demo"
+      },
+      "keywords": ["经管类", "工商管理", "营销管理", "财经", "华南", "稳妥"],
+      "notes": "课堂展示用知识库结构样例，不代表真实院校专业目录或录取难度。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
     },
     {
       "id": "river-commerce",
-      "name": "江城示例商学院",
-      "program": "数字营销（专硕）",
-      "region": "武汉",
-      "tag": "稳健探索",
-      "fit": "案例分析比重较高，适合希望强化应用实践的学生",
-      "subjects": ["思想政治理论", "英语（二）", "经济类综合能力", "营销案例分析"],
-      "scoreLine": "示例分数线：335 分",
-      "plannedEnrollment": "示例招生人数：35 人",
-      "referenceBooks": "示例参考书：数字营销案例选读",
-      "risk": "专业设置与考试范围需以正式目录为准",
       "isDemo": true,
-      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。 当前为课程展示用原型，部分数据为演示数据，不构成正式报考建议。"
+      "dataStatus": "demo",
+      "school": "江城示例商学院",
+      "region": "华中",
+      "city": "武汉（演示）",
+      "college": "示例数字商业学院",
+      "major": "数字营销",
+      "majorCode": "待核验",
+      "degreeType": "专硕（演示）",
+      "studyMode": "待核验",
+      "researchDirection": "数字营销与用户增长（演示方向）",
+      "mathRequired": "待核验",
+      "examSubjects": [
+        {
+          "subjectName": "考试科目待核验",
+          "subjectCode": "待核验",
+          "status": "pending"
+        }
+      ],
+      "plannedEnrollment": {
+        "value": "暂未收录",
+        "status": "pending",
+        "note": "以当年招生目录为准"
+      },
+      "recommendedExemption": {
+        "value": "暂未收录",
+        "status": "pending",
+        "note": "以当年招生目录为准"
+      },
+      "scoreLines": [
+        {
+          "year": "2025",
+          "value": "暂未收录",
+          "status": "pending",
+          "sourceUrl": "",
+          "note": "以院校官方复试分数线为准"
+        }
+      ],
+      "referenceBooks": [
+        {
+          "name": "暂未收录",
+          "status": "pending",
+          "note": "以院校研究生招生官网或考试大纲为准"
+        }
+      ],
+      "examOutline": {
+        "value": "暂未收录",
+        "status": "pending",
+        "sourceUrl": "",
+        "note": "以院校官网考试大纲为准"
+      },
+      "reExamSubjects": [
+        {
+          "name": "暂未收录",
+          "status": "pending",
+          "note": "以院校复试通知为准"
+        }
+      ],
+      "source": {
+        "sourceName": "演示数据",
+        "sourceType": "demo",
+        "sourceUrl": "",
+        "checkedAt": "2026-05",
+        "reliability": "demo"
+      },
+      "keywords": ["数字营销", "用户增长", "市场营销", "华中", "专硕", "案例分析"],
+      "notes": "课堂展示用知识库结构样例，仅用于展示检索和状态标记。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "school_major_004",
+      "isDemo": true,
+      "dataStatus": "demo",
+      "school": "北方示例经管大学",
+      "region": "华北",
+      "city": "北京（演示）",
+      "college": "示例经济学院",
+      "major": "应用经济学",
+      "majorCode": "待核验",
+      "degreeType": "学硕（演示）",
+      "studyMode": "待核验",
+      "researchDirection": "产业经济与市场分析（演示方向）",
+      "mathRequired": "待核验",
+      "examSubjects": [
+        {
+          "subjectName": "考试科目待核验",
+          "subjectCode": "待核验",
+          "status": "pending"
+        }
+      ],
+      "plannedEnrollment": {
+        "value": "暂未收录",
+        "status": "pending",
+        "note": "以当年招生目录为准"
+      },
+      "recommendedExemption": {
+        "value": "暂未收录",
+        "status": "pending",
+        "note": "以当年招生目录为准"
+      },
+      "scoreLines": [
+        {
+          "year": "2025",
+          "value": "暂未收录",
+          "status": "pending",
+          "sourceUrl": "",
+          "note": "以院校官方复试分数线为准"
+        }
+      ],
+      "referenceBooks": [
+        {
+          "name": "暂未收录",
+          "status": "pending",
+          "note": "以院校研究生招生官网或考试大纲为准"
+        }
+      ],
+      "examOutline": {
+        "value": "暂未收录",
+        "status": "pending",
+        "sourceUrl": "",
+        "note": "以院校官网考试大纲为准"
+      },
+      "reExamSubjects": [
+        {
+          "name": "暂未收录",
+          "status": "pending",
+          "note": "以院校复试通知为准"
+        }
+      ],
+      "source": {
+        "sourceName": "演示数据",
+        "sourceType": "demo",
+        "sourceUrl": "",
+        "checkedAt": "2026-05",
+        "reliability": "demo"
+      },
+      "keywords": ["应用经济", "产业经济", "市场分析", "经管类", "华北", "数学"],
+      "notes": "该条目演示如何记录经济类方向，考试科目及数学要求尚未核验。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "school_major_005",
+      "isDemo": true,
+      "dataStatus": "demo",
+      "school": "海滨示例传媒学院",
+      "region": "华东",
+      "city": "杭州（演示）",
+      "college": "示例传播学院",
+      "major": "新闻传播",
+      "majorCode": "待核验",
+      "degreeType": "专硕（演示）",
+      "studyMode": "待核验",
+      "researchDirection": "数字传播与内容营销（演示方向）",
+      "mathRequired": "待核验",
+      "examSubjects": [
+        {
+          "subjectName": "考试科目待核验",
+          "subjectCode": "待核验",
+          "status": "pending"
+        }
+      ],
+      "plannedEnrollment": {
+        "value": "暂未收录",
+        "status": "pending",
+        "note": "以当年招生目录为准"
+      },
+      "recommendedExemption": {
+        "value": "暂未收录",
+        "status": "pending",
+        "note": "以当年招生目录为准"
+      },
+      "scoreLines": [
+        {
+          "year": "2025",
+          "value": "暂未收录",
+          "status": "pending",
+          "sourceUrl": "",
+          "note": "以院校官方复试分数线为准"
+        }
+      ],
+      "referenceBooks": [
+        {
+          "name": "暂未收录",
+          "status": "pending",
+          "note": "以院校研究生招生官网或考试大纲为准"
+        }
+      ],
+      "examOutline": {
+        "value": "暂未收录",
+        "status": "pending",
+        "sourceUrl": "",
+        "note": "以院校官网考试大纲为准"
+      },
+      "reExamSubjects": [
+        {
+          "name": "暂未收录",
+          "status": "pending",
+          "note": "以院校复试通知为准"
+        }
+      ],
+      "source": {
+        "sourceName": "演示数据",
+        "sourceType": "demo",
+        "sourceUrl": "",
+        "checkedAt": "2026-05",
+        "reliability": "demo"
+      },
+      "keywords": ["新闻传播", "数字传播", "内容营销", "新媒体", "跨考", "华东"],
+      "notes": "课堂展示用跨学科方向结构样例，不代表真实专业设置。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "school_major_006",
+      "isDemo": true,
+      "dataStatus": "demo",
+      "school": "西部示例管理学院",
+      "region": "西部",
+      "city": "成都（演示）",
+      "college": "示例管理学院",
+      "major": "工商管理",
+      "majorCode": "待核验",
+      "degreeType": "专硕（演示）",
+      "studyMode": "待核验",
+      "researchDirection": "品牌管理与消费者行为（演示方向）",
+      "mathRequired": "待核验",
+      "examSubjects": [
+        {
+          "subjectName": "考试科目待核验",
+          "subjectCode": "待核验",
+          "status": "pending"
+        }
+      ],
+      "plannedEnrollment": {
+        "value": "暂未收录",
+        "status": "pending",
+        "note": "以当年招生目录为准"
+      },
+      "recommendedExemption": {
+        "value": "暂未收录",
+        "status": "pending",
+        "note": "以当年招生目录为准"
+      },
+      "scoreLines": [
+        {
+          "year": "2025",
+          "value": "暂未收录",
+          "status": "pending",
+          "sourceUrl": "",
+          "note": "以院校官方复试分数线为准"
+        }
+      ],
+      "referenceBooks": [
+        {
+          "name": "暂未收录",
+          "status": "pending",
+          "note": "以院校研究生招生官网或考试大纲为准"
+        }
+      ],
+      "examOutline": {
+        "value": "暂未收录",
+        "status": "pending",
+        "sourceUrl": "",
+        "note": "以院校官网考试大纲为准"
+      },
+      "reExamSubjects": [
+        {
+          "name": "暂未收录",
+          "status": "pending",
+          "note": "以院校复试通知为准"
+        }
+      ],
+      "source": {
+        "sourceName": "演示数据",
+        "sourceType": "demo",
+        "sourceUrl": "",
+        "checkedAt": "2026-05",
+        "reliability": "demo"
+      },
+      "keywords": ["工商管理", "品牌管理", "消费者行为", "西部", "经管类", "择校"],
+      "notes": "课堂展示用知识库结构样例，招生信息尚未接入官方数据源。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
     }
   ]
 }

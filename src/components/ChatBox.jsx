@@ -4,9 +4,24 @@ import MarkdownMessage from "./MarkdownMessage";
 
 const sourceLabels = {
   faq: "FAQ",
-  school: "策略样例",
-  template: "快捷问题",
-  prompt: "场景规则",
+  school: "院校专业",
+  template: "题型模板",
+  prompt: "规则提示",
+};
+
+const dataStatusLabels = {
+  verified: "已核验",
+  partial: "部分核验",
+  pending: "待核验",
+  demo: "演示",
+};
+
+const sourceTypeLabels = {
+  official: "官方来源",
+  official_guidance: "官方核验指引",
+  methodology: "方法规则",
+  pending: "待补来源",
+  demo: "演示来源",
 };
 
 const answerSourceLabels = {
@@ -129,8 +144,20 @@ export default function ChatBox({
                               {snippet.title}
                             </p>
                             <span className="rounded-full bg-indigo-50 px-2 py-1 text-[10px] font-bold text-indigo-700">
-                              {sourceLabels[snippet.source]} · {snippet.score}
+                              {sourceLabels[snippet.source]} · 匹配 {snippet.score}
                             </span>
+                          </div>
+                          <div className="mt-2 flex flex-wrap gap-1.5">
+                            {snippet.dataStatus && (
+                              <span className="rounded-full bg-slate-100 px-2 py-1 text-[10px] font-semibold text-slate-600">
+                                {dataStatusLabels[snippet.dataStatus] ?? snippet.dataStatus}
+                              </span>
+                            )}
+                            {snippet.sourceType && (
+                              <span className="rounded-full bg-violet-50 px-2 py-1 text-[10px] font-semibold text-violet-700">
+                                {sourceTypeLabels[snippet.sourceType] ?? snippet.sourceType}
+                              </span>
+                            )}
                           </div>
                           <p className="mt-2 text-xs leading-6 text-slate-500">
                             {snippet.content}
@@ -138,6 +165,11 @@ export default function ChatBox({
                           {snippet.sourceLabel && (
                             <p className="mt-2 text-[11px] text-indigo-600">
                               {snippet.sourceLabel}
+                            </p>
+                          )}
+                          {snippet.disclaimer && (
+                            <p className="mt-2 border-t border-slate-100 pt-2 text-[11px] leading-5 text-slate-400">
+                              {snippet.disclaimer}
                             </p>
                           )}
                         </article>

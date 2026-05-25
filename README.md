@@ -57,6 +57,19 @@ docs/
   product-spec.md
 ```
 
+## 知识库与数据边界
+
+当前项目使用本地 JSON 知识库，为课堂演示提供可追溯的检索上下文：
+
+- `src/data/faq.json` 保存备考方法、资料核验与情绪支持 FAQ。
+- `src/data/schools.json` 保存院校专业结构样例，记录来源、核验时间与字段状态。
+- `src/data/questionTemplates.json` 保存经管类、市场营销和数字营销专业课题型模板。
+- `src/data/prompts.js` 集中维护 Agent 边界、模式规则、免责声明和知识库状态解释。
+
+院校专业数据使用 `verified`（官方核验）、`partial`（部分核验）、`pending`（待核验）和 `demo`（演示数据）四种状态。当前版本以 `demo` 与 `pending` 结构样例为主，不承诺覆盖所有院校和专业，也不将演示条目作为报考事实。
+
+招生人数、专业目录、考试科目、复试线、参考书和调剂规则等信息，必须以研招网和目标院校研究生招生官网发布的正式信息为准。后续可在保留来源与核验状态的前提下扩展为更大规模的官方数据知识库，并进一步优化 RAG 检索。
+
 ## DeepSeek API 接入
 
 当前聊天页面通过 `src/lib/api.js` 优先请求 `POST /api/chat`，请求结构为 `{ message, profile, history, context, mode }`。服务端函数调用 DeepSeek 时统一返回来源、模型信息与免责声明；当接口不可用时，前端自动调用已有的本地 `chatAgent`。
