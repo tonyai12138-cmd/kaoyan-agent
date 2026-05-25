@@ -1,4 +1,5 @@
 import { answerChatQuestion } from "./chatAgent";
+import { normalizeChatMode, toServerMode } from "../data/prompts";
 import { retrieveKnowledge } from "./retrieve";
 
 /**
@@ -12,7 +13,8 @@ export async function sendChatMessage({
   context,
   mode = "school",
 }) {
-  const snippets = retrieveKnowledge(message, mode);
+  const clientMode = normalizeChatMode(mode);
+  const snippets = retrieveKnowledge(message, clientMode);
   const requestContext = {
     ...context,
     knowledgeSnippets: snippets,
@@ -30,7 +32,7 @@ export async function sendChatMessage({
         profile,
         history,
         context: requestContext,
-        mode,
+        mode: toServerMode(clientMode),
       }),
     });
 
@@ -51,7 +53,7 @@ export async function sendChatMessage({
 
     return {
       ...result,
-      mode,
+      mode: clientMode,
       snippets,
       citations: snippets.slice(0, 2).map((snippet) => snippet.title),
     };
@@ -62,7 +64,7 @@ export async function sendChatMessage({
       profile,
       history,
       context,
-      mode,
+      mode: clientMode,
       snippets,
     });
 
