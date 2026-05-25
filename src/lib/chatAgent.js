@@ -8,6 +8,7 @@ import {
   knowledgeMissingNotice,
   normalizeChatMode,
   officialVerificationAdvice,
+  universityIndexBoundary,
 } from "../data/prompts";
 import {
   createPositioningReport,
@@ -18,7 +19,11 @@ import {
 
 const urgentTerms = ["自杀", "自伤", "不想活", "结束生命"];
 const factQuestionPattern =
-  /某校|院校|学校|专业|考试科目|招生人数|招生名额|复试线|分数线|参考书|录取比例/;
+  /某校|院校|学校|大学|高校|985|211|双一流|层次|专业|考试科目|招生人数|招生名额|复试线|分数线|参考书|录取比例/;
+const professionalFactPattern =
+  /专业|考试科目|招生人数|招生名额|复试线|分数线|参考书|录取比例/;
+const universityLevelPattern =
+  /985|211|双一流|层次|财经类|哪些.*大学|哪些.*学校|高校/;
 const chatModeLabels = Object.fromEntries(
   chatModes.map((mode) => [mode.id, mode.label]),
 );
@@ -55,6 +60,22 @@ function formatRetrievedBasis(snippets) {
 }
 
 function factBasisForQuestion(message, snippets) {
+  if (
+    universityLevelPattern.test(message) &&
+    !professionalFactPattern.test(message)
+  ) {
+    const universityIndexItems = snippets.filter(
+      (snippet) =>
+        snippet.source === "university" &&
+        snippet.sourceType === "official_index" &&
+        ["verified", "partial"].includes(snippet.dataStatus),
+    );
+
+    if (universityIndexItems.length) {
+      return `${formatRetrievedBasis(universityIndexItems)}\n\n${universityIndexBoundary} ${factDisclaimer}`;
+    }
+  }
+
   if (factQuestionPattern.test(message)) {
     const verifiedFacts = snippets.filter(
       (snippet) =>

@@ -1,0 +1,5227 @@
+{
+  "knowledgeBase": {
+    "name": "985 / 211 院校基础索引库",
+    "version": "0.1.0",
+    "scope": "仅用于学校层级初筛与工程名单身份查询，不包含专业目录、考试科目、招生人数、复试线或参考书。",
+    "checkedAt": "2026-05-26",
+    "coverage": {
+      "uniqueUniversities": 112,
+      "universities985": 39,
+      "universities211": 112,
+      "identityBasis": "教育部公开的历史 211工程 / 985工程学校名单口径"
+    },
+    "sourceDocuments": [
+      {
+        "title": "211工程学校名单",
+        "publisher": "中华人民共和国教育部",
+        "url": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26"
+      },
+      {
+        "title": "985工程学校名单",
+        "publisher": "中华人民共和国教育部",
+        "url": "https://www.moe.gov.cn/srcsite/A22/s7065/200612/t20061206_128833.html",
+        "checkedAt": "2026-05-26"
+      }
+    ],
+    "fieldPolicy": "学校名称及 985/211 身份已按教育部名单核对；城市、类型、官网、主管部门、双一流状态与研究生招生信息仍需逐校人工复核。"
+  },
+  "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。",
+  "universities": [
+    {
+      "id": "univ_001",
+      "school": "北京大学",
+      "province": "北京市",
+      "city": "北京市",
+      "is985": true,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "综合类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "北京大学",
+        "北京市",
+        "北京市",
+        "北京",
+        "北京",
+        "综合类",
+        "985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html; https://www.moe.gov.cn/srcsite/A22/s7065/200612/t20061206_128833.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_002",
+      "school": "中国人民大学",
+      "province": "北京市",
+      "city": "北京市",
+      "is985": true,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "综合类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "中国人民大学",
+        "北京市",
+        "北京市",
+        "北京",
+        "北京",
+        "综合类",
+        "985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html; https://www.moe.gov.cn/srcsite/A22/s7065/200612/t20061206_128833.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_003",
+      "school": "清华大学",
+      "province": "北京市",
+      "city": "北京市",
+      "is985": true,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "综合类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "清华大学",
+        "北京市",
+        "北京市",
+        "北京",
+        "北京",
+        "综合类",
+        "985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html; https://www.moe.gov.cn/srcsite/A22/s7065/200612/t20061206_128833.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_004",
+      "school": "北京交通大学",
+      "province": "北京市",
+      "city": "北京市",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "理工类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "北京交通大学",
+        "北京市",
+        "北京市",
+        "北京",
+        "北京",
+        "理工类",
+        "非985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_005",
+      "school": "北京工业大学",
+      "province": "北京市",
+      "city": "北京市",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "理工类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "北京工业大学",
+        "北京市",
+        "北京市",
+        "北京",
+        "北京",
+        "理工类",
+        "非985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_006",
+      "school": "北京航空航天大学",
+      "province": "北京市",
+      "city": "北京市",
+      "is985": true,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "理工类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "北京航空航天大学",
+        "北京市",
+        "北京市",
+        "北京",
+        "北京",
+        "理工类",
+        "985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html; https://www.moe.gov.cn/srcsite/A22/s7065/200612/t20061206_128833.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_007",
+      "school": "北京理工大学",
+      "province": "北京市",
+      "city": "北京市",
+      "is985": true,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "理工类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "北京理工大学",
+        "北京市",
+        "北京市",
+        "北京",
+        "北京",
+        "理工类",
+        "985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html; https://www.moe.gov.cn/srcsite/A22/s7065/200612/t20061206_128833.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_008",
+      "school": "北京科技大学",
+      "province": "北京市",
+      "city": "北京市",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "理工类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "北京科技大学",
+        "北京市",
+        "北京市",
+        "北京",
+        "北京",
+        "理工类",
+        "非985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_009",
+      "school": "北京化工大学",
+      "province": "北京市",
+      "city": "北京市",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "理工类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "北京化工大学",
+        "北京市",
+        "北京市",
+        "北京",
+        "北京",
+        "理工类",
+        "非985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_010",
+      "school": "北京邮电大学",
+      "province": "北京市",
+      "city": "北京市",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "理工类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "北京邮电大学",
+        "北京市",
+        "北京市",
+        "北京",
+        "北京",
+        "理工类",
+        "非985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_011",
+      "school": "中国农业大学",
+      "province": "北京市",
+      "city": "北京市",
+      "is985": true,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "农林类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "中国农业大学",
+        "北京市",
+        "北京市",
+        "北京",
+        "北京",
+        "农林类",
+        "985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html; https://www.moe.gov.cn/srcsite/A22/s7065/200612/t20061206_128833.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_012",
+      "school": "北京林业大学",
+      "province": "北京市",
+      "city": "北京市",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "农林类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "北京林业大学",
+        "北京市",
+        "北京市",
+        "北京",
+        "北京",
+        "农林类",
+        "非985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_013",
+      "school": "北京中医药大学",
+      "province": "北京市",
+      "city": "北京市",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "医药类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "北京中医药大学",
+        "北京市",
+        "北京市",
+        "北京",
+        "北京",
+        "医药类",
+        "非985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_014",
+      "school": "北京师范大学",
+      "province": "北京市",
+      "city": "北京市",
+      "is985": true,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "师范类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "北京师范大学",
+        "北京市",
+        "北京市",
+        "北京",
+        "北京",
+        "师范类",
+        "985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html; https://www.moe.gov.cn/srcsite/A22/s7065/200612/t20061206_128833.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_015",
+      "school": "北京外国语大学",
+      "province": "北京市",
+      "city": "北京市",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "其他"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "北京外国语大学",
+        "北京市",
+        "北京市",
+        "北京",
+        "北京",
+        "其他",
+        "非985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_016",
+      "school": "中国传媒大学",
+      "province": "北京市",
+      "city": "北京市",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "其他"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "新闻传播初筛",
+        "数字营销方向待核验",
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "中国传媒大学",
+        "北京市",
+        "北京市",
+        "北京",
+        "北京",
+        "其他",
+        "非985",
+        "211",
+        "经管",
+        "考研",
+        "新闻传播",
+        "数字营销"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_017",
+      "school": "中央财经大学",
+      "province": "北京市",
+      "city": "北京市",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "财经类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类初筛",
+        "应用经济待核验",
+        "工商管理待核验",
+        "数字营销方向待核验"
+      ],
+      "searchKeywords": [
+        "中央财经大学",
+        "北京市",
+        "北京市",
+        "北京",
+        "北京",
+        "财经类",
+        "非985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_018",
+      "school": "对外经济贸易大学",
+      "province": "北京市",
+      "city": "北京市",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "财经类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类初筛",
+        "应用经济待核验",
+        "工商管理待核验",
+        "数字营销方向待核验"
+      ],
+      "searchKeywords": [
+        "对外经济贸易大学",
+        "北京市",
+        "北京市",
+        "北京",
+        "北京",
+        "财经类",
+        "非985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_019",
+      "school": "北京体育大学",
+      "province": "北京市",
+      "city": "北京市",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "其他"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "北京体育大学",
+        "北京市",
+        "北京市",
+        "北京",
+        "北京",
+        "其他",
+        "非985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_020",
+      "school": "中央音乐学院",
+      "province": "北京市",
+      "city": "北京市",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "艺术类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "中央音乐学院",
+        "北京市",
+        "北京市",
+        "北京",
+        "北京",
+        "艺术类",
+        "非985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_021",
+      "school": "中央民族大学",
+      "province": "北京市",
+      "city": "北京市",
+      "is985": true,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "民族类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "中央民族大学",
+        "北京市",
+        "北京市",
+        "北京",
+        "北京",
+        "民族类",
+        "985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html; https://www.moe.gov.cn/srcsite/A22/s7065/200612/t20061206_128833.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_022",
+      "school": "中国政法大学",
+      "province": "北京市",
+      "city": "北京市",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "政法类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "中国政法大学",
+        "北京市",
+        "北京市",
+        "北京",
+        "北京",
+        "政法类",
+        "非985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_023",
+      "school": "华北电力大学",
+      "province": "多地办学，待核验",
+      "city": "多地办学，待核验",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "理工类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "华北电力大学",
+        "多地办学，待核验",
+        "多地办学，待核验",
+        "多地办学，待核验",
+        "多地办学，待核验",
+        "理工类",
+        "非985",
+        "211",
+        "经管",
+        "考研",
+        "北京",
+        "保定",
+        "多地办学"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_024",
+      "school": "南开大学",
+      "province": "天津市",
+      "city": "天津市",
+      "is985": true,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "综合类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "南开大学",
+        "天津市",
+        "天津市",
+        "天津",
+        "天津",
+        "综合类",
+        "985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html; https://www.moe.gov.cn/srcsite/A22/s7065/200612/t20061206_128833.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_025",
+      "school": "天津大学",
+      "province": "天津市",
+      "city": "天津市",
+      "is985": true,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "理工类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "天津大学",
+        "天津市",
+        "天津市",
+        "天津",
+        "天津",
+        "理工类",
+        "985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html; https://www.moe.gov.cn/srcsite/A22/s7065/200612/t20061206_128833.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_026",
+      "school": "天津医科大学",
+      "province": "天津市",
+      "city": "天津市",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "医药类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "天津医科大学",
+        "天津市",
+        "天津市",
+        "天津",
+        "天津",
+        "医药类",
+        "非985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_027",
+      "school": "河北工业大学",
+      "province": "天津市",
+      "city": "天津市",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "理工类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "河北工业大学",
+        "天津市",
+        "天津市",
+        "天津",
+        "天津",
+        "理工类",
+        "非985",
+        "211",
+        "经管",
+        "考研",
+        "河北"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_028",
+      "school": "太原理工大学",
+      "province": "山西省",
+      "city": "太原市",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "理工类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "太原理工大学",
+        "山西省",
+        "太原市",
+        "山西",
+        "太原",
+        "理工类",
+        "非985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_029",
+      "school": "内蒙古大学",
+      "province": "内蒙古自治区",
+      "city": "呼和浩特市",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "综合类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "内蒙古大学",
+        "内蒙古自治区",
+        "呼和浩特市",
+        "内蒙古",
+        "呼和浩特",
+        "综合类",
+        "非985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_030",
+      "school": "辽宁大学",
+      "province": "辽宁省",
+      "city": "沈阳市",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "综合类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "辽宁大学",
+        "辽宁省",
+        "沈阳市",
+        "辽宁",
+        "沈阳",
+        "综合类",
+        "非985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_031",
+      "school": "大连理工大学",
+      "province": "辽宁省",
+      "city": "大连市",
+      "is985": true,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "理工类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "大连理工大学",
+        "辽宁省",
+        "大连市",
+        "辽宁",
+        "大连",
+        "理工类",
+        "985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html; https://www.moe.gov.cn/srcsite/A22/s7065/200612/t20061206_128833.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_032",
+      "school": "东北大学",
+      "province": "辽宁省",
+      "city": "沈阳市",
+      "is985": true,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "理工类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "东北大学",
+        "辽宁省",
+        "沈阳市",
+        "辽宁",
+        "沈阳",
+        "理工类",
+        "985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html; https://www.moe.gov.cn/srcsite/A22/s7065/200612/t20061206_128833.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_033",
+      "school": "大连海事大学",
+      "province": "辽宁省",
+      "city": "大连市",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "理工类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "大连海事大学",
+        "辽宁省",
+        "大连市",
+        "辽宁",
+        "大连",
+        "理工类",
+        "非985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_034",
+      "school": "吉林大学",
+      "province": "吉林省",
+      "city": "长春市",
+      "is985": true,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "综合类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "吉林大学",
+        "吉林省",
+        "长春市",
+        "吉林",
+        "长春",
+        "综合类",
+        "985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html; https://www.moe.gov.cn/srcsite/A22/s7065/200612/t20061206_128833.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_035",
+      "school": "延边大学",
+      "province": "吉林省",
+      "city": "延吉市",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "综合类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "延边大学",
+        "吉林省",
+        "延吉市",
+        "吉林",
+        "延吉",
+        "综合类",
+        "非985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_036",
+      "school": "东北师范大学",
+      "province": "吉林省",
+      "city": "长春市",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "师范类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "东北师范大学",
+        "吉林省",
+        "长春市",
+        "吉林",
+        "长春",
+        "师范类",
+        "非985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_037",
+      "school": "哈尔滨工业大学",
+      "province": "黑龙江省",
+      "city": "哈尔滨市",
+      "is985": true,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "理工类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "哈尔滨工业大学",
+        "黑龙江省",
+        "哈尔滨市",
+        "黑龙江",
+        "哈尔滨",
+        "理工类",
+        "985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html; https://www.moe.gov.cn/srcsite/A22/s7065/200612/t20061206_128833.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_038",
+      "school": "哈尔滨工程大学",
+      "province": "黑龙江省",
+      "city": "哈尔滨市",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "理工类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "哈尔滨工程大学",
+        "黑龙江省",
+        "哈尔滨市",
+        "黑龙江",
+        "哈尔滨",
+        "理工类",
+        "非985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_039",
+      "school": "东北农业大学",
+      "province": "黑龙江省",
+      "city": "哈尔滨市",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "农林类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "东北农业大学",
+        "黑龙江省",
+        "哈尔滨市",
+        "黑龙江",
+        "哈尔滨",
+        "农林类",
+        "非985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_040",
+      "school": "东北林业大学",
+      "province": "黑龙江省",
+      "city": "哈尔滨市",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "农林类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "东北林业大学",
+        "黑龙江省",
+        "哈尔滨市",
+        "黑龙江",
+        "哈尔滨",
+        "农林类",
+        "非985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_041",
+      "school": "复旦大学",
+      "province": "上海市",
+      "city": "上海市",
+      "is985": true,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "综合类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "复旦大学",
+        "上海市",
+        "上海市",
+        "上海",
+        "上海",
+        "综合类",
+        "985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html; https://www.moe.gov.cn/srcsite/A22/s7065/200612/t20061206_128833.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_042",
+      "school": "同济大学",
+      "province": "上海市",
+      "city": "上海市",
+      "is985": true,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "理工类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "同济大学",
+        "上海市",
+        "上海市",
+        "上海",
+        "上海",
+        "理工类",
+        "985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html; https://www.moe.gov.cn/srcsite/A22/s7065/200612/t20061206_128833.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_043",
+      "school": "上海交通大学",
+      "province": "上海市",
+      "city": "上海市",
+      "is985": true,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "综合类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "上海交通大学",
+        "上海市",
+        "上海市",
+        "上海",
+        "上海",
+        "综合类",
+        "985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html; https://www.moe.gov.cn/srcsite/A22/s7065/200612/t20061206_128833.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_044",
+      "school": "华东理工大学",
+      "province": "上海市",
+      "city": "上海市",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "理工类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "华东理工大学",
+        "上海市",
+        "上海市",
+        "上海",
+        "上海",
+        "理工类",
+        "非985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_045",
+      "school": "东华大学",
+      "province": "上海市",
+      "city": "上海市",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "理工类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "东华大学",
+        "上海市",
+        "上海市",
+        "上海",
+        "上海",
+        "理工类",
+        "非985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_046",
+      "school": "华东师范大学",
+      "province": "上海市",
+      "city": "上海市",
+      "is985": true,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "师范类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "华东师范大学",
+        "上海市",
+        "上海市",
+        "上海",
+        "上海",
+        "师范类",
+        "985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html; https://www.moe.gov.cn/srcsite/A22/s7065/200612/t20061206_128833.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_047",
+      "school": "上海外国语大学",
+      "province": "上海市",
+      "city": "上海市",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "其他"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "上海外国语大学",
+        "上海市",
+        "上海市",
+        "上海",
+        "上海",
+        "其他",
+        "非985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_048",
+      "school": "上海财经大学",
+      "province": "上海市",
+      "city": "上海市",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "财经类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类初筛",
+        "应用经济待核验",
+        "工商管理待核验",
+        "数字营销方向待核验"
+      ],
+      "searchKeywords": [
+        "上海财经大学",
+        "上海市",
+        "上海市",
+        "上海",
+        "上海",
+        "财经类",
+        "非985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_049",
+      "school": "上海大学",
+      "province": "上海市",
+      "city": "上海市",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "综合类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "上海大学",
+        "上海市",
+        "上海市",
+        "上海",
+        "上海",
+        "综合类",
+        "非985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_050",
+      "school": "第二军医大学",
+      "province": "上海市",
+      "city": "上海市",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "医药类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "第二军医大学",
+        "上海市",
+        "上海市",
+        "上海",
+        "上海",
+        "医药类",
+        "非985",
+        "211",
+        "经管",
+        "考研",
+        "海军军医大学",
+        "现行名称待核验"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_051",
+      "school": "南京大学",
+      "province": "江苏省",
+      "city": "南京市",
+      "is985": true,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "综合类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "南京大学",
+        "江苏省",
+        "南京市",
+        "江苏",
+        "南京",
+        "综合类",
+        "985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html; https://www.moe.gov.cn/srcsite/A22/s7065/200612/t20061206_128833.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_052",
+      "school": "苏州大学",
+      "province": "江苏省",
+      "city": "苏州市",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "综合类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "苏州大学",
+        "江苏省",
+        "苏州市",
+        "江苏",
+        "苏州",
+        "综合类",
+        "非985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_053",
+      "school": "东南大学",
+      "province": "江苏省",
+      "city": "南京市",
+      "is985": true,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "综合类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "东南大学",
+        "江苏省",
+        "南京市",
+        "江苏",
+        "南京",
+        "综合类",
+        "985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html; https://www.moe.gov.cn/srcsite/A22/s7065/200612/t20061206_128833.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_054",
+      "school": "南京航空航天大学",
+      "province": "江苏省",
+      "city": "南京市",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "理工类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "南京航空航天大学",
+        "江苏省",
+        "南京市",
+        "江苏",
+        "南京",
+        "理工类",
+        "非985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_055",
+      "school": "南京理工大学",
+      "province": "江苏省",
+      "city": "南京市",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "理工类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "南京理工大学",
+        "江苏省",
+        "南京市",
+        "江苏",
+        "南京",
+        "理工类",
+        "非985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_056",
+      "school": "中国矿业大学",
+      "province": "多地办学，待核验",
+      "city": "多地办学，待核验",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "理工类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "中国矿业大学",
+        "多地办学，待核验",
+        "多地办学，待核验",
+        "多地办学，待核验",
+        "多地办学，待核验",
+        "理工类",
+        "非985",
+        "211",
+        "经管",
+        "考研",
+        "徐州",
+        "北京",
+        "多地办学"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_057",
+      "school": "河海大学",
+      "province": "江苏省",
+      "city": "南京市",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "理工类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "河海大学",
+        "江苏省",
+        "南京市",
+        "江苏",
+        "南京",
+        "理工类",
+        "非985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_058",
+      "school": "江南大学",
+      "province": "江苏省",
+      "city": "无锡市",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "综合类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "江南大学",
+        "江苏省",
+        "无锡市",
+        "江苏",
+        "无锡",
+        "综合类",
+        "非985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_059",
+      "school": "南京农业大学",
+      "province": "江苏省",
+      "city": "南京市",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "农林类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "南京农业大学",
+        "江苏省",
+        "南京市",
+        "江苏",
+        "南京",
+        "农林类",
+        "非985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_060",
+      "school": "中国药科大学",
+      "province": "江苏省",
+      "city": "南京市",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "医药类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "中国药科大学",
+        "江苏省",
+        "南京市",
+        "江苏",
+        "南京",
+        "医药类",
+        "非985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_061",
+      "school": "南京师范大学",
+      "province": "江苏省",
+      "city": "南京市",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "师范类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "南京师范大学",
+        "江苏省",
+        "南京市",
+        "江苏",
+        "南京",
+        "师范类",
+        "非985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_062",
+      "school": "浙江大学",
+      "province": "浙江省",
+      "city": "杭州市",
+      "is985": true,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "综合类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "浙江大学",
+        "浙江省",
+        "杭州市",
+        "浙江",
+        "杭州",
+        "综合类",
+        "985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html; https://www.moe.gov.cn/srcsite/A22/s7065/200612/t20061206_128833.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_063",
+      "school": "安徽大学",
+      "province": "安徽省",
+      "city": "合肥市",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "综合类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "安徽大学",
+        "安徽省",
+        "合肥市",
+        "安徽",
+        "合肥",
+        "综合类",
+        "非985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_064",
+      "school": "中国科学技术大学",
+      "province": "安徽省",
+      "city": "合肥市",
+      "is985": true,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "理工类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "中国科学技术大学",
+        "安徽省",
+        "合肥市",
+        "安徽",
+        "合肥",
+        "理工类",
+        "985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html; https://www.moe.gov.cn/srcsite/A22/s7065/200612/t20061206_128833.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_065",
+      "school": "合肥工业大学",
+      "province": "安徽省",
+      "city": "合肥市",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "理工类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "合肥工业大学",
+        "安徽省",
+        "合肥市",
+        "安徽",
+        "合肥",
+        "理工类",
+        "非985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_066",
+      "school": "厦门大学",
+      "province": "福建省",
+      "city": "厦门市",
+      "is985": true,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "综合类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "厦门大学",
+        "福建省",
+        "厦门市",
+        "福建",
+        "厦门",
+        "综合类",
+        "985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html; https://www.moe.gov.cn/srcsite/A22/s7065/200612/t20061206_128833.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_067",
+      "school": "福州大学",
+      "province": "福建省",
+      "city": "福州市",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "理工类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "福州大学",
+        "福建省",
+        "福州市",
+        "福建",
+        "福州",
+        "理工类",
+        "非985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_068",
+      "school": "南昌大学",
+      "province": "江西省",
+      "city": "南昌市",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "综合类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "南昌大学",
+        "江西省",
+        "南昌市",
+        "江西",
+        "南昌",
+        "综合类",
+        "非985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_069",
+      "school": "山东大学",
+      "province": "山东省",
+      "city": "济南市",
+      "is985": true,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "综合类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "山东大学",
+        "山东省",
+        "济南市",
+        "山东",
+        "济南",
+        "综合类",
+        "985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html; https://www.moe.gov.cn/srcsite/A22/s7065/200612/t20061206_128833.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_070",
+      "school": "中国海洋大学",
+      "province": "山东省",
+      "city": "青岛市",
+      "is985": true,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "综合类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "中国海洋大学",
+        "山东省",
+        "青岛市",
+        "山东",
+        "青岛",
+        "综合类",
+        "985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html; https://www.moe.gov.cn/srcsite/A22/s7065/200612/t20061206_128833.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_071",
+      "school": "中国石油大学",
+      "province": "多地办学，待核验",
+      "city": "多地办学，待核验",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "理工类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "中国石油大学",
+        "多地办学，待核验",
+        "多地办学，待核验",
+        "多地办学，待核验",
+        "多地办学，待核验",
+        "理工类",
+        "非985",
+        "211",
+        "经管",
+        "考研",
+        "北京",
+        "青岛",
+        "东营",
+        "多地办学"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_072",
+      "school": "郑州大学",
+      "province": "河南省",
+      "city": "郑州市",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "综合类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "郑州大学",
+        "河南省",
+        "郑州市",
+        "河南",
+        "郑州",
+        "综合类",
+        "非985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_073",
+      "school": "武汉大学",
+      "province": "湖北省",
+      "city": "武汉市",
+      "is985": true,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "综合类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "武汉大学",
+        "湖北省",
+        "武汉市",
+        "湖北",
+        "武汉",
+        "综合类",
+        "985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html; https://www.moe.gov.cn/srcsite/A22/s7065/200612/t20061206_128833.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_074",
+      "school": "华中科技大学",
+      "province": "湖北省",
+      "city": "武汉市",
+      "is985": true,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "综合类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "华中科技大学",
+        "湖北省",
+        "武汉市",
+        "湖北",
+        "武汉",
+        "综合类",
+        "985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html; https://www.moe.gov.cn/srcsite/A22/s7065/200612/t20061206_128833.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_075",
+      "school": "中国地质大学",
+      "province": "多地办学，待核验",
+      "city": "多地办学，待核验",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "理工类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "中国地质大学",
+        "多地办学，待核验",
+        "多地办学，待核验",
+        "多地办学，待核验",
+        "多地办学，待核验",
+        "理工类",
+        "非985",
+        "211",
+        "经管",
+        "考研",
+        "武汉",
+        "北京",
+        "多地办学"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_076",
+      "school": "武汉理工大学",
+      "province": "湖北省",
+      "city": "武汉市",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "理工类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "武汉理工大学",
+        "湖北省",
+        "武汉市",
+        "湖北",
+        "武汉",
+        "理工类",
+        "非985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_077",
+      "school": "华中农业大学",
+      "province": "湖北省",
+      "city": "武汉市",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "农林类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "华中农业大学",
+        "湖北省",
+        "武汉市",
+        "湖北",
+        "武汉",
+        "农林类",
+        "非985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_078",
+      "school": "华中师范大学",
+      "province": "湖北省",
+      "city": "武汉市",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "师范类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "华中师范大学",
+        "湖北省",
+        "武汉市",
+        "湖北",
+        "武汉",
+        "师范类",
+        "非985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_079",
+      "school": "中南财经政法大学",
+      "province": "湖北省",
+      "city": "武汉市",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "财经类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类初筛",
+        "应用经济待核验",
+        "工商管理待核验",
+        "数字营销方向待核验"
+      ],
+      "searchKeywords": [
+        "中南财经政法大学",
+        "湖北省",
+        "武汉市",
+        "湖北",
+        "武汉",
+        "财经类",
+        "非985",
+        "211",
+        "经管",
+        "考研",
+        "政法类"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_080",
+      "school": "湖南大学",
+      "province": "湖南省",
+      "city": "长沙市",
+      "is985": true,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "综合类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "湖南大学",
+        "湖南省",
+        "长沙市",
+        "湖南",
+        "长沙",
+        "综合类",
+        "985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html; https://www.moe.gov.cn/srcsite/A22/s7065/200612/t20061206_128833.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_081",
+      "school": "中南大学",
+      "province": "湖南省",
+      "city": "长沙市",
+      "is985": true,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "综合类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "中南大学",
+        "湖南省",
+        "长沙市",
+        "湖南",
+        "长沙",
+        "综合类",
+        "985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html; https://www.moe.gov.cn/srcsite/A22/s7065/200612/t20061206_128833.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_082",
+      "school": "湖南师范大学",
+      "province": "湖南省",
+      "city": "长沙市",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "师范类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "湖南师范大学",
+        "湖南省",
+        "长沙市",
+        "湖南",
+        "长沙",
+        "师范类",
+        "非985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_083",
+      "school": "国防科学技术大学",
+      "province": "湖南省",
+      "city": "长沙市",
+      "is985": true,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "理工类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "国防科学技术大学",
+        "湖南省",
+        "长沙市",
+        "湖南",
+        "长沙",
+        "理工类",
+        "985",
+        "211",
+        "经管",
+        "考研",
+        "国防科技大学",
+        "现行名称待核验"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html; https://www.moe.gov.cn/srcsite/A22/s7065/200612/t20061206_128833.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_084",
+      "school": "中山大学",
+      "province": "广东省",
+      "city": "广州市",
+      "is985": true,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "综合类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "中山大学",
+        "广东省",
+        "广州市",
+        "广东",
+        "广州",
+        "综合类",
+        "985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html; https://www.moe.gov.cn/srcsite/A22/s7065/200612/t20061206_128833.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_085",
+      "school": "暨南大学",
+      "province": "广东省",
+      "city": "广州市",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "综合类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "暨南大学",
+        "广东省",
+        "广州市",
+        "广东",
+        "广州",
+        "综合类",
+        "非985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_086",
+      "school": "华南理工大学",
+      "province": "广东省",
+      "city": "广州市",
+      "is985": true,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "理工类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "华南理工大学",
+        "广东省",
+        "广州市",
+        "广东",
+        "广州",
+        "理工类",
+        "985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html; https://www.moe.gov.cn/srcsite/A22/s7065/200612/t20061206_128833.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_087",
+      "school": "华南师范大学",
+      "province": "广东省",
+      "city": "广州市",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "师范类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "华南师范大学",
+        "广东省",
+        "广州市",
+        "广东",
+        "广州",
+        "师范类",
+        "非985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_088",
+      "school": "广西大学",
+      "province": "广西壮族自治区",
+      "city": "南宁市",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "综合类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "广西大学",
+        "广西壮族自治区",
+        "南宁市",
+        "广西",
+        "南宁",
+        "综合类",
+        "非985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_089",
+      "school": "海南大学",
+      "province": "海南省",
+      "city": "海口市",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "综合类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "海南大学",
+        "海南省",
+        "海口市",
+        "海南",
+        "海口",
+        "综合类",
+        "非985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_090",
+      "school": "四川大学",
+      "province": "四川省",
+      "city": "成都市",
+      "is985": true,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "综合类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "四川大学",
+        "四川省",
+        "成都市",
+        "四川",
+        "成都",
+        "综合类",
+        "985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html; https://www.moe.gov.cn/srcsite/A22/s7065/200612/t20061206_128833.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_091",
+      "school": "西南交通大学",
+      "province": "四川省",
+      "city": "成都市",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "理工类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "西南交通大学",
+        "四川省",
+        "成都市",
+        "四川",
+        "成都",
+        "理工类",
+        "非985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_092",
+      "school": "电子科技大学",
+      "province": "四川省",
+      "city": "成都市",
+      "is985": true,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "理工类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "电子科技大学",
+        "四川省",
+        "成都市",
+        "四川",
+        "成都",
+        "理工类",
+        "985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html; https://www.moe.gov.cn/srcsite/A22/s7065/200612/t20061206_128833.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_093",
+      "school": "四川农业大学",
+      "province": "四川省",
+      "city": "多地办学，待核验",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "农林类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "四川农业大学",
+        "四川省",
+        "多地办学，待核验",
+        "四川",
+        "多地办学，待核验",
+        "农林类",
+        "非985",
+        "211",
+        "经管",
+        "考研",
+        "雅安",
+        "成都",
+        "多地办学"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_094",
+      "school": "西南财经大学",
+      "province": "四川省",
+      "city": "成都市",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "财经类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类初筛",
+        "应用经济待核验",
+        "工商管理待核验",
+        "数字营销方向待核验"
+      ],
+      "searchKeywords": [
+        "西南财经大学",
+        "四川省",
+        "成都市",
+        "四川",
+        "成都",
+        "财经类",
+        "非985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_095",
+      "school": "重庆大学",
+      "province": "重庆市",
+      "city": "重庆市",
+      "is985": true,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "综合类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "重庆大学",
+        "重庆市",
+        "重庆市",
+        "重庆",
+        "重庆",
+        "综合类",
+        "985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html; https://www.moe.gov.cn/srcsite/A22/s7065/200612/t20061206_128833.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_096",
+      "school": "西南大学",
+      "province": "重庆市",
+      "city": "重庆市",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "综合类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "西南大学",
+        "重庆市",
+        "重庆市",
+        "重庆",
+        "重庆",
+        "综合类",
+        "非985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_097",
+      "school": "贵州大学",
+      "province": "贵州省",
+      "city": "贵阳市",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "综合类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "贵州大学",
+        "贵州省",
+        "贵阳市",
+        "贵州",
+        "贵阳",
+        "综合类",
+        "非985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_098",
+      "school": "云南大学",
+      "province": "云南省",
+      "city": "昆明市",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "综合类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "云南大学",
+        "云南省",
+        "昆明市",
+        "云南",
+        "昆明",
+        "综合类",
+        "非985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_099",
+      "school": "西藏大学",
+      "province": "西藏自治区",
+      "city": "拉萨市",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "综合类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "西藏大学",
+        "西藏自治区",
+        "拉萨市",
+        "西藏",
+        "拉萨",
+        "综合类",
+        "非985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_100",
+      "school": "西北大学",
+      "province": "陕西省",
+      "city": "西安市",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "综合类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "西北大学",
+        "陕西省",
+        "西安市",
+        "陕西",
+        "西安",
+        "综合类",
+        "非985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_101",
+      "school": "西安交通大学",
+      "province": "陕西省",
+      "city": "西安市",
+      "is985": true,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "综合类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "西安交通大学",
+        "陕西省",
+        "西安市",
+        "陕西",
+        "西安",
+        "综合类",
+        "985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html; https://www.moe.gov.cn/srcsite/A22/s7065/200612/t20061206_128833.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_102",
+      "school": "西北工业大学",
+      "province": "陕西省",
+      "city": "西安市",
+      "is985": true,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "理工类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "西北工业大学",
+        "陕西省",
+        "西安市",
+        "陕西",
+        "西安",
+        "理工类",
+        "985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html; https://www.moe.gov.cn/srcsite/A22/s7065/200612/t20061206_128833.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_103",
+      "school": "西安电子科技大学",
+      "province": "陕西省",
+      "city": "西安市",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "理工类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "西安电子科技大学",
+        "陕西省",
+        "西安市",
+        "陕西",
+        "西安",
+        "理工类",
+        "非985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_104",
+      "school": "长安大学",
+      "province": "陕西省",
+      "city": "西安市",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "理工类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "长安大学",
+        "陕西省",
+        "西安市",
+        "陕西",
+        "西安",
+        "理工类",
+        "非985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_105",
+      "school": "西北农林科技大学",
+      "province": "陕西省",
+      "city": "咸阳市",
+      "is985": true,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "农林类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "西北农林科技大学",
+        "陕西省",
+        "咸阳市",
+        "陕西",
+        "咸阳",
+        "农林类",
+        "985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html; https://www.moe.gov.cn/srcsite/A22/s7065/200612/t20061206_128833.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_106",
+      "school": "陕西师范大学",
+      "province": "陕西省",
+      "city": "西安市",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "师范类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "陕西师范大学",
+        "陕西省",
+        "西安市",
+        "陕西",
+        "西安",
+        "师范类",
+        "非985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_107",
+      "school": "第四军医大学",
+      "province": "陕西省",
+      "city": "西安市",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "医药类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "第四军医大学",
+        "陕西省",
+        "西安市",
+        "陕西",
+        "西安",
+        "医药类",
+        "非985",
+        "211",
+        "经管",
+        "考研",
+        "空军军医大学",
+        "现行名称待核验"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_108",
+      "school": "兰州大学",
+      "province": "甘肃省",
+      "city": "兰州市",
+      "is985": true,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "综合类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "兰州大学",
+        "甘肃省",
+        "兰州市",
+        "甘肃",
+        "兰州",
+        "综合类",
+        "985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html; https://www.moe.gov.cn/srcsite/A22/s7065/200612/t20061206_128833.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_109",
+      "school": "青海大学",
+      "province": "青海省",
+      "city": "西宁市",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "综合类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "青海大学",
+        "青海省",
+        "西宁市",
+        "青海",
+        "西宁",
+        "综合类",
+        "非985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_110",
+      "school": "宁夏大学",
+      "province": "宁夏回族自治区",
+      "city": "银川市",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "综合类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "宁夏大学",
+        "宁夏回族自治区",
+        "银川市",
+        "宁夏",
+        "银川",
+        "综合类",
+        "非985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_111",
+      "school": "新疆大学",
+      "province": "新疆维吾尔自治区",
+      "city": "乌鲁木齐市",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "综合类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "新疆大学",
+        "新疆维吾尔自治区",
+        "乌鲁木齐市",
+        "新疆",
+        "乌鲁木齐",
+        "综合类",
+        "非985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "univ_112",
+      "school": "石河子大学",
+      "province": "新疆维吾尔自治区",
+      "city": "石河子市",
+      "is985": false,
+      "is211": true,
+      "isDoubleFirstClass": "待核验",
+      "schoolType": [
+        "综合类"
+      ],
+      "supervisingDepartment": "待核验",
+      "officialWebsite": "待核验",
+      "graduateAdmissionWebsite": "待核验",
+      "graduateSchoolWebsite": "待核验",
+      "relatedFields": [
+        "经管类招生设置待核验"
+      ],
+      "searchKeywords": [
+        "石河子大学",
+        "新疆维吾尔自治区",
+        "石河子市",
+        "新疆",
+        "石河子",
+        "综合类",
+        "非985",
+        "211",
+        "经管",
+        "考研"
+      ],
+      "dataStatus": "partial",
+      "verifiedFields": [
+        "school",
+        "is985",
+        "is211"
+      ],
+      "source": {
+        "sourceName": "教育部公开工程名单",
+        "sourceType": "official_index",
+        "sourceUrl": "https://www.moe.gov.cn/srcsite/A22/s7065/200512/t20051223_82762.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "notes": "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    }
+  ]
+}

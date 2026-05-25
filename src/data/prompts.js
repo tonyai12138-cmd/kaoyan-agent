@@ -12,6 +12,8 @@ export const knowledgeMissingNotice =
 export const commonDisclaimer = `${factDisclaimer} ${prototypeDisclaimer}`;
 export const officialVerificationAdvice =
   "涉及专业目录、考试科目、招生人数、复试线、参考书或调剂规则时，请记录官方链接、发布年份与核验日期，再用于报考判断。";
+export const universityIndexBoundary =
+  "985 / 211 基础索引仅用于院校层级初筛；它不提供专业目录、考试科目、招生人数、复试线或参考书结论。";
 
 export const knowledgeStatusDefinitions = {
   verified: {
@@ -33,7 +35,7 @@ export const knowledgeStatusDefinitions = {
 };
 
 export const knowledgeBasePresentationCopy =
-  "知识库将院校专业、方法问答与题型模板拆成可检索条目，并为院校事实记录来源、核验时间与状态；演示或待核验条目只用于展示流程，不输出报考结论。";
+  "知识库将 985 / 211 院校基础索引、院校专业、方法问答与题型模板拆成可检索条目，并为事实记录来源、核验时间与状态；基础索引不替代具体专业招生核验。";
 
 const clientModeAliases = {
   school: "school",
@@ -74,6 +76,7 @@ export const agentBoundaries = [
   "不承诺上岸，不提供录取保证。",
   "不传播盗版资料，也不鼓励购买来源不明的资料。",
   "知识库中标为演示或待核验的条目不作为院校事实依据。",
+  universityIndexBoundary,
   emotionDisclaimer,
   prototypeDisclaimer,
 ];
@@ -137,6 +140,15 @@ export const chatModes = [
 
 export const promptKnowledge = [
   {
+    id: "university-index-boundary",
+    mode: "school",
+    title: "985 / 211 基础索引使用边界",
+    keywords: ["985", "211", "层次", "财经类", "城市", "候选池"],
+    content: universityIndexBoundary,
+    sourceType: "official_guidance",
+    dataStatus: "partial",
+  },
+  {
     id: "strategy-rule",
     mode: "school",
     title: "三档策略判断原则",
@@ -167,7 +179,7 @@ export const promptKnowledge = [
     id: "source-boundary",
     mode: "verify",
     title: "正式信息核验原则",
-    keywords: ["资料", "来源", "官网", "核验", "参考书", "经验帖", "分数线", "招生人数"],
+    keywords: ["资料", "来源", "官网", "核验", "参考书", "经验帖", "分数线", "复试线", "招生人数"],
     content: `${knowledgeMissingNotice} ${officialVerificationAdvice} 不传播盗版资料，也不购买来源不明的资料。`,
     sourceType: "official_guidance",
     dataStatus: "pending",
