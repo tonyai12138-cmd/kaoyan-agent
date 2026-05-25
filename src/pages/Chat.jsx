@@ -118,7 +118,7 @@ export default function Chat() {
           <div>
             <p className="section-kicker">STEP 04 / INTELLIGENT CHAT</p>
             <h1 className="mt-4 text-4xl font-bold tracking-tight text-slate-950 sm:text-5xl">
-              研途智伴智能体
+              研途智伴 Agent
             </h1>
             <p className="mt-5 max-w-3xl text-base leading-8 text-slate-600 sm:text-lg">
               围绕择校、计划、资料、真题和复盘，提供基于画像与知识库的考研问答支持。

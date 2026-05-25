@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import DisclaimerBanner from "../components/DisclaimerBanner";
 import FeatureCard from "../components/FeatureCard";
 import { dashboardStats } from "../data/mockData";
+import { emotionDisclaimer, factDisclaimer } from "../data/prompts";
 
 const coreValues = [
   {
@@ -75,9 +76,9 @@ const examJourney = [
 const boundaryRules = [
   "不编造院校数据",
   "不承诺上岸",
-  "正式信息以研招网和目标院校官网为准",
-  "情绪陪伴不替代专业心理咨询",
-  "不上传或传播盗版资料",
+  factDisclaimer,
+  emotionDisclaimer,
+  "不传播盗版资料，也不鼓励购买来源不明的资料",
 ];
 
 const todayTasks = [

@@ -106,7 +106,7 @@ export default function ChatBox({
                 {isAgentMessage && message.source && (
                   <div className="mt-3 flex flex-wrap items-center gap-2 text-[11px] text-slate-500">
                     <span className="rounded-full bg-slate-100 px-2.5 py-1 font-semibold">
-                      {answerSourceLabels[message.source] ?? "Agent 回答"}
+                      {answerSourceLabels[message.source] ?? "研途智伴 Agent 回答"}
                       {message.source === "deepseek" && message.model
                         ? ` · ${message.model}`
                         : ""}

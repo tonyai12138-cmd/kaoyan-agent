@@ -1,7 +1,12 @@
 import faqData from "../data/faq.json";
 import schoolsData from "../data/schools.json";
 import { demoDisclaimer, buildTasks } from "../data/mockData";
-import { fallbackReply } from "../data/prompts";
+import {
+  emotionDisclaimer,
+  factDisclaimer,
+  fallbackReply,
+  knowledgeMissingNotice,
+} from "../data/prompts";
 
 const urgentTerms = ["自杀", "自伤", "不想活", "结束生命"];
 
@@ -200,7 +205,7 @@ function createRecommendations(profile) {
         ? "数学补强压力突出，冲刺前需先通过基础测试和科目核验。"
         : "目标要求和竞争信息仍需逐项核验，不能仅凭偏好确定。",
       condition: "完成考试科目核验、基础测评与每周时间预算后，再决定是否作为主目标。",
-      verification: "在研招网与目标院校官网建立冲刺候选清单，并记录正式依据。",
+      verification: `建立冲刺候选清单，并记录正式依据。${factDisclaimer}`,
       planTargetId: "east-business",
       recommended: preferredId === "sprint",
     },
@@ -290,7 +295,7 @@ function createRiskRadar(profile) {
     profile.biggestConcern === "资料"
       ? "你当前最困扰的是资料选择，非官方资料可能造成判断偏差。"
       : "择校与考试资料会更新，演示建议不能替代正式来源确认。",
-    "院校、科目与招考信息只以研招网和目标院校官网核验结果为依据。",
+    factDisclaimer,
   );
   if (profile.biggestConcern === "焦虑" || profile.biggestConcern === "执行") {
     addRisk(
@@ -307,7 +312,7 @@ function createRiskRadar(profile) {
 function createSevenDayActions(profile) {
   const sprintActions = [
     "确认目标方向是否考数学，并立即收敛为三档候选标准。",
-    "到研招网和目标院校官网核验考试科目、目录与最新公告。",
+    `核验考试科目、目录与最新公告。${factDisclaimer}`,
     "整理可获得的真题来源与高频薄弱模块，删除低优先级资料。",
     "完成一次英语、数学或专业课的限时小测，确定最急需补强项。",
     "把每日任务压缩为三项以内，并锁定固定复盘时间。",
@@ -316,7 +321,7 @@ function createSevenDayActions(profile) {
   ];
   const standardActions = [
     "确认目标专业是否可能涉及数学，并列出三档候选标准。",
-    "到研招网和目标院校官网核验考试科目与专业目录。",
+    `核验考试科目与专业目录。${factDisclaimer}`,
     "建立候选信息表，记录公开依据与仍待核验的问题。",
     "确定专业课学习范围与合规资料来源清单。",
     "制定第一版每周学习时间表，明确基础补强任务。",
@@ -367,9 +372,9 @@ export function createPositioningReport(profile = {}) {
           : "稳中求进";
   const supportAdvice =
     normalized.biggestConcern === "资料"
-      ? "资料建议：先建立来源清单，只有研招网与目标院校官网核验过的信息才进入决策表。"
+      ? `资料建议：先建立来源清单，只有经过官方核验的信息才进入决策表。${factDisclaimer}`
       : normalized.biggestConcern === "焦虑" || normalized.biggestConcern === "执行"
-        ? "执行建议：将明日目标缩减为三项以内的可完成动作；情绪陪伴不替代专业心理咨询。"
+        ? `执行建议：将明日目标缩减为三项以内的可完成动作。${emotionDisclaimer}`
         : "行动建议：用官方信息完成候选核验后，再将主目标同步至备考计划。";
 
   return {
@@ -819,16 +824,20 @@ export function answerQuestion({ message, profile, context }) {
     };
   }
 
-  const school = getSchool(context?.selectedSchoolId);
   const faq = findFaq(message);
   const targetPrefix = profile?.major
     ? `结合你填写的${profile.major}背景，`
     : "";
 
-  if (faq?.id === "subjects") {
+  if (
+    faq?.id === "subjects" ||
+    /某校|院校|学校.*(?:分数线|招生|科目|参考书)|分数线|招生人数|复试线|录取比例/.test(
+      message,
+    )
+  ) {
     return {
-      answer: `${targetPrefix}${school.name}的${school.program}在演示卡片中列出的科目为：${school.subjects.join("、")}。请把该信息作为界面体验样例，而不是报考依据。`,
-      citations: [faq.sourceLabel, `${school.name} - ${school.program}演示卡`],
+      answer: `${targetPrefix}${knowledgeMissingNotice}\n\n### 下一步行动\n请到官方页面核验对应年度信息，并记录网页来源与发布日期。`,
+      citations: faq?.sourceLabel ? [faq.sourceLabel] : [],
       disclaimer: demoDisclaimer,
       isMock: true,
     };
