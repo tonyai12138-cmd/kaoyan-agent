@@ -3,6 +3,7 @@ import DisclaimerBanner from "./DisclaimerBanner";
 import MarkdownMessage from "./MarkdownMessage";
 
 const sourceLabels = {
+  university: "院校基础索引",
   faq: "FAQ",
   school: "院校专业",
   template: "题型模板",
@@ -18,6 +19,8 @@ const dataStatusLabels = {
 
 const sourceTypeLabels = {
   official: "官方来源",
+  official_index: "官方基础名单",
+  school_official: "院校官网",
   official_guidance: "官方核验指引",
   methodology: "方法规则",
   pending: "待补来源",
@@ -147,6 +150,26 @@ export default function ChatBox({
                               {sourceLabels[snippet.source]} · 匹配 {snippet.score}
                             </span>
                           </div>
+                          {snippet.source === "university" && (
+                            <div className="mt-2 flex flex-wrap items-center gap-1.5 text-[10px] font-semibold">
+                              <span className="rounded-full bg-slate-100 px-2 py-1 text-slate-700">
+                                {snippet.school}
+                              </span>
+                              <span className="rounded-full bg-slate-100 px-2 py-1 text-slate-600">
+                                {snippet.city}
+                              </span>
+                              {snippet.is985 && (
+                                <span className="rounded-full bg-indigo-50 px-2 py-1 text-indigo-700">
+                                  985
+                                </span>
+                              )}
+                              {snippet.is211 && (
+                                <span className="rounded-full bg-blue-50 px-2 py-1 text-blue-700">
+                                  211
+                                </span>
+                              )}
+                            </div>
+                          )}
                           <div className="mt-2 flex flex-wrap gap-1.5">
                             {snippet.dataStatus && (
                               <span className="rounded-full bg-slate-100 px-2 py-1 text-[10px] font-semibold text-slate-600">

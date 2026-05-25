@@ -1,6 +1,7 @@
 import faqData from "../data/faq.json";
 import questionData from "../data/questionTemplates.json";
 import schoolsData from "../data/schools.json";
+import universitiesData from "../data/universities.json";
 import {
   factDisclaimer,
   knowledgeStatusDefinitions,
@@ -10,8 +11,13 @@ import {
 } from "../data/prompts";
 
 const factSearchPattern =
-  /学校|院校|某校|专业|考试科目|招生人数|推免|分数线|复试线|参考书|录取比例/;
+  /学校|院校|某校|高校|大学|985|211|双一流|层次|专业|考试科目|招生人数|推免|分数线|复试线|参考书|录取比例/;
+const professionalFactPattern =
+  /专业|考试科目|招生人数|招生名额|推免|分数线|复试线|参考书|录取比例/;
+const universityIndexPattern =
+  /985|211|双一流|层次|财经类|哪些学校|哪些大学|高校|大学/;
 const sourceLabels = {
+  university: "院校基础索引",
   faq: "FAQ",
   school: "院校专业",
   template: "题型模板",
@@ -31,6 +37,13 @@ function modeBonus(entry, mode) {
 }
 
 function sourceBonus(entry, query, mode) {
+  if (
+    mode === "school" &&
+    universityIndexPattern.test(query) &&
+    entry.source === "university"
+  ) {
+    return 6;
+  }
   if (mode === "question" && entry.source === "template") {
     return 4;
   }
@@ -42,6 +55,13 @@ function sourceBonus(entry, query, mode) {
   }
   if (factSearchPattern.test(query) && entry.source === "school") {
     return 2;
+  }
+  if (
+    factSearchPattern.test(query) &&
+    !professionalFactPattern.test(query) &&
+    entry.source === "university"
+  ) {
+    return 3;
   }
   if (/分数线|复试线|招生人数|参考书|录取比例/.test(query) && entry.source === "faq") {
     return 4;
@@ -65,11 +85,74 @@ function scoreEntry(entry, query, mode) {
     }
   });
 
+  if (entry.source === "university") {
+    [entry.school, entry.city?.replace(/市$/u, ""), entry.province?.replace(/省$/u, "")]
+      .filter(Boolean)
+      .forEach((field) => {
+        if (normalizedQuery.includes(normalizeText(field))) {
+          hits += 5;
+        }
+      });
+    if (
+      normalizedQuery.includes("财经类") &&
+      entry.schoolTypes?.includes("财经类")
+    ) {
+      hits += 5;
+    }
+  }
+
   if (!hits) {
     return 0;
   }
 
-  return Math.min(10, hits + modeBonus(entry, mode) + sourceBonus(entry, query, mode));
+  return hits + modeBonus(entry, mode) + sourceBonus(entry, query, mode);
+}
+
+function createUniversityItems() {
+  return universitiesData.universities.map((university) => {
+    const tierTags = [
+      university.is985 ? "985" : null,
+      university.is211 ? "211" : null,
+    ].filter(Boolean);
+    const status = university.dataStatus ?? "pending";
+    const content = [
+      `学校：${university.school}；城市索引：${university.city}；层级标签：${tierTags.join(" / ") || "待核验"}`,
+      `类型标签：${university.schoolType.join(" / ")}；数据状态：${status}（${statusLabel(status)}）`,
+      "本片段只支持院校层级初筛；专业目录、考试科目、招生人数、复试线与参考书不由该索引提供。",
+    ].join("；");
+
+    return {
+      source: "university",
+      title: university.school,
+      school: university.school,
+      province: university.province,
+      city: university.city,
+      schoolTypes: university.schoolType,
+      is985: university.is985,
+      is211: university.is211,
+      content,
+      modes: ["school", "source"],
+      keywords: university.searchKeywords ?? [],
+      searchable: [
+        university.school,
+        university.province,
+        university.city,
+        university.is985 ? "985" : "非985",
+        university.is211 ? "211" : "非211",
+        university.isDoubleFirstClass,
+        ...(university.schoolType ?? []),
+        university.supervisingDepartment,
+        ...(university.relatedFields ?? []),
+        ...(university.searchKeywords ?? []),
+        university.notes,
+      ].join(" "),
+      sourceType: university.source?.sourceType ?? "pending",
+      dataStatus: status,
+      sourceLabel: university.source?.sourceName,
+      sourceUrl: university.source?.sourceUrl,
+      disclaimer: university.disclaimer ?? factDisclaimer,
+    };
+  });
 }
 
 function createSchoolItems() {
@@ -176,6 +259,7 @@ function createPromptItems() {
 
 function createIndex() {
   return [
+    ...createUniversityItems(),
     ...createSchoolItems(),
     ...createFaqItems(),
     ...createTemplateItems(),
@@ -192,6 +276,10 @@ export function retrieveKnowledge(message, mode = "school") {
   }
 
   return createIndex()
+    .filter(
+      (entry) =>
+        !(professionalFactPattern.test(query) && entry.source === "university"),
+    )
     .map((entry) => ({
       ...entry,
       score: scoreEntry(entry, query, serverMode),
@@ -215,6 +303,10 @@ export function retrieveKnowledge(message, mode = "school") {
         disclaimer,
         sourceLabel,
         sourceUrl,
+        school,
+        city,
+        is985,
+        is211,
       }) => ({
         source,
         title,
@@ -225,6 +317,10 @@ export function retrieveKnowledge(message, mode = "school") {
         disclaimer,
         sourceLabel,
         sourceUrl,
+        school,
+        city,
+        is985,
+        is211,
       }),
     );
 }

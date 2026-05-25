@@ -10,9 +10,13 @@ const commonDisclaimer = `${factDisclaimer} ${prototypeDisclaimer}`;
 const defaultModel = "deepseek-v4-flash";
 const deepseekEndpoint = "https://api.deepseek.com/chat/completions";
 const factQuestionPattern =
-  /某校|院校|学校|专业|考试科目|招生人数|招生名额|复试线|分数线|参考书|录取比例/;
+  /某校|院校|学校|大学|高校|985|211|双一流|层次|专业|考试科目|招生人数|招生名额|复试线|分数线|参考书|录取比例/;
+const professionalFactPattern =
+  /专业|考试科目|招生人数|招生名额|推免|复试线|分数线|参考书|录取比例/;
+const universityLevelPattern =
+  /985|211|双一流|层次|财经类|哪些.*大学|哪些.*学校|高校/;
 const knowledgeStatusRules =
-  "verified 表示已由官方来源核验；partial 表示仅部分字段核验；pending 表示待核验；demo 表示演示数据。只有 dataStatus 为 verified 且 sourceType 为 official 的片段可作为院校事实依据。";
+  "verified 表示已由官方来源核验；partial 表示仅部分字段核验；pending 表示待核验；demo 表示演示数据。院校专业事实仅可依据 dataStatus 为 verified 且 sourceType 为 official 的专业片段；source 为 university 且 sourceType 为 official_index 的片段仅可用于其中明确展示的 985 / 211 基础层级身份，不得外推专业招生事实。";
 
 // Keep these aliases and system rules synchronized with src/data/prompts.js.
 // The Vercel function maintains its own copy so its server-only deployment stays isolated.
@@ -39,7 +43,7 @@ const systemPrompt = `你是“研途智伴 Agent”，面向中国考研学生�
 
 回答边界：
 1. 不编造院校、专业、考试科目、招生人数、复试线、参考书、录取比例等事实信息；
-2. 涉及院校事实信息时，必须优先依据用户提供的信息或知识库 context；仅当 context 明确给出该事实值、官方来源且 dataStatus 为 verified、sourceType 为 official 时才可转述，不得从演示或待核验样例推断真实信息；
+2. 涉及院校事实信息时，必须优先依据用户提供的信息或知识库 context；专业与招生事实仅当 context 明确给出该事实值、官方来源且 dataStatus 为 verified、sourceType 为 official 时才可转述；sourceType 为 official_index 的 university 片段仅可转述其中明确展示的 985 / 211 基础层级身份，不得用于回答专业、科目、分数线、人数或参考书；
 3. 如果 context 没有收录用户询问的事实信息，必须原样说明：“当前知识库暂未收录该信息，建议以研招网和目标院校研究生招生官网为准。”；
 4. 不承诺上岸，不提供录取保证；
 5. 不传播盗版资料，不鼓励购买来源不明的资料；
@@ -142,11 +146,28 @@ function hasVerifiedOfficialFact(context) {
   );
 }
 
+function hasOfficialUniversityIndex(context) {
+  return contextSnippets(context).some(
+    (snippet) =>
+      snippet.source === "university" &&
+      snippet.sourceType === "official_index" &&
+      ["verified", "partial"].includes(snippet.dataStatus),
+  );
+}
+
 function buildContextMessage({ message, profile, context, mode }) {
-  const factsGuard = factQuestionPattern.test(message)
+  const factsGuard = professionalFactPattern.test(message)
     ? hasVerifiedOfficialFact(context)
-      ? `用户正在询问事实类信息。仅可引用 verified / official 片段中明确提供且与问题对应的事实，并保留官方核验提醒。${knowledgeStatusRules}`
-      : `用户正在询问事实类信息。当前 context 不含 verified / official 的院校事实片段，不得输出具体数字或具体考试结论，必须回复：${knowledgeMissingNotice}`
+      ? `用户正在询问专业或招生事实。仅可引用 verified / official 的专业片段中明确提供且与问题对应的事实，并保留官方核验提醒。${knowledgeStatusRules}`
+      : `用户正在询问专业或招生事实。基础院校索引不能回答该问题；当前 context 不含 verified / official 的专业事实片段，不得输出具体数字或具体考试结论，必须回复：${knowledgeMissingNotice}`
+    : universityLevelPattern.test(message)
+      ? hasOfficialUniversityIndex(context)
+        ? `用户正在询问学校基础层级。可引用 official_index university 片段中明确展示的 985 / 211 身份；不得由此推断专业、考试、招生或录取信息。${knowledgeStatusRules}`
+        : `用户正在询问学校基础层级，但当前 context 未检索到可用基础索引，必须回复：${knowledgeMissingNotice}`
+      : factQuestionPattern.test(message)
+        ? hasVerifiedOfficialFact(context)
+          ? `用户正在询问事实类信息。仅可引用 verified / official 片段中明确提供且与问题对应的事实，并保留官方核验提醒。${knowledgeStatusRules}`
+          : `用户正在询问事实类信息。当前 context 不含可引用的院校事实片段，不得输出具体数字或具体考试结论，必须回复：${knowledgeMissingNotice}`
     : "对于可能涉及事实的信息，仅依据 context 或用户提供内容回答，不进行推断补编。";
 
   return [
@@ -166,9 +187,15 @@ function formatAnswerSections(sections) {
 }
 
 function buildMockAnswer(message, mode, context) {
-  const basis = factQuestionPattern.test(message)
-    ? knowledgeMissingNotice
-    : formatSnippetBasis(context);
+  const hasLevelIndex =
+    universityLevelPattern.test(message) &&
+    !professionalFactPattern.test(message) &&
+    hasOfficialUniversityIndex(context);
+  const basis = hasLevelIndex
+    ? `${formatSnippetBasis(context)}\n\n985 / 211 基础索引仅用于院校层级初筛，不提供专业目录、考试科目、招生人数、复试线或参考书。${factDisclaimer}`
+    : factQuestionPattern.test(message)
+      ? knowledgeMissingNotice
+      : formatSnippetBasis(context);
 
   const answers = {
     school: [
