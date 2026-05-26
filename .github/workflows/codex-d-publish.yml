@@ -1,0 +1,90 @@
+name: Codex D publish source changes
+
+on:
+  push:
+    branches: [codex/rag-retrieval-quality-d]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: codex/rag-retrieval-quality-d
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+          cache: npm
+      - name: Restore checked source files
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const path = require('node:path');
+          const zlib = require('node:zlib');
+          const crypto = require('node:crypto');
+          const allowed = new Set([
+            'README.md',
+            'api/chat.js',
+            'src/components/ChatBox.jsx',
+            'src/data/prompts.js',
+            'src/lib/api.js',
+            'src/lib/chatAgent.js',
+            'src/lib/knowledgeLinks.js',
+            'src/lib/retrieve.js',
+          ]);
+          const encoded = Array.from({ length: 9 }, (_, index) =>
+            fs.readFileSync(`.codex-transfer/d.part${index + 1}`, 'utf8').trim(),
+          ).join('');
+          const digest = crypto.createHash('sha256').update(encoded).digest('hex');
+          if (digest !== '679f87c0a4e6865c7e2d87cc18cebccb9c7b6e67277c5181065493204141c899') {
+            throw new Error(`payload checksum mismatch: ${digest}`);
+          }
+          const payload = JSON.parse(zlib.brotliDecompressSync(Buffer.from(encoded, 'base64')).toString('utf8'));
+          if (Object.keys(payload).length !== allowed.size || Object.keys(payload).some((file) => !allowed.has(file))) {
+            throw new Error('unexpected source files in payload');
+          }
+          for (const [file, contents] of Object.entries(payload)) {
+            fs.mkdirSync(path.dirname(file), { recursive: true });
+            fs.writeFileSync(file, contents, 'utf8');
+          }
+          NODE
+      - name: Validate retrieval and build
+        run: |
+          npm ci
+          node --input-type=module <<'NODE'
+          import { createServer } from 'vite';
+          const vite = await createServer({ server: { middlewareMode: true }, appType: 'custom' });
+          const retrieval = await vite.ssrLoadModule('/src/lib/retrieve.js');
+          const cases = [
+            ['\u6b66\u6c49\u6709\u54ea\u4e9b 985 / 211\uff1f', 'school', 'university_level', 'university'],
+            ['\u4e2d\u5357\u8d22\u7ecf\u653f\u6cd5\u5927\u5b66\u5de5\u5546\u7ba1\u7406\u8003\u4ec0\u4e48\uff1f', 'school', 'major_level', 'school'],
+            ['\u6b66\u6c49\u5927\u5b66\u5e02\u573a\u8425\u9500\u4e13\u4e1a\u5386\u5e74\u590d\u8bd5\u7ebf\u662f\u591a\u5c11\uff1f', 'school', 'major_level', 'school'],
+            ['\u54c1\u724c\u793e\u7fa4\u5982\u4f55\u5f71\u54cd\u6d88\u8d39\u8005\u5fe0\u8bda\u5ea6\uff1f', 'question', 'question_analysis', 'template'],
+            ['\u5982\u4f55\u5224\u65ad\u8003\u7814\u8d44\u6599\u9760\u4e0d\u9760\u8c31\uff1f', 'source', 'source_verification', 'faq'],
+            ['\u6211\u6700\u8fd1\u5f88\u7126\u8651\uff0c\u5b66\u4e0d\u8fdb\u53bb\u600e\u4e48\u529e\uff1f', 'emotion', 'emotional_support', 'faq'],
+            ['\u6b66\u5927\u5e02\u573a\u8425\u9500\u590d\u8bd5\u7ebf\u662f\u591a\u5c11\uff1f', 'school', 'major_level', 'school'],
+            ['\u4e2d\u5357\u8d22\u5927\u8425\u9500\u7ba1\u7406\u8003\u4ec0\u4e48\uff1f', 'school', 'major_level', 'school'],
+            ['\u4e0a\u8d22\u5e94\u7528\u7ecf\u6d4e\u5b66\u62db\u751f\u4eba\u6570\u662f\u591a\u5c11\uff1f', 'school', 'major_level', 'school'],
+          ];
+          for (const [question, mode, intent, source] of cases) {
+            const snippets = retrieval.retrieveKnowledge(question, mode);
+            if (retrieval.detectQueryIntent(question, mode) !== intent || snippets[0]?.source !== source) {
+              throw new Error(`retrieval failed: ${question}`);
+            }
+          }
+          await vite.close();
+          NODE
+          npm run build
+      - name: Commit published source files
+        run: |
+          git rm --ignore-unmatch .github/workflows/codex-d-publish.yml .codex-transfer/d.part1 .codex-transfer/d.part2 .codex-transfer/d.part3 .codex-transfer/d.part4 .codex-transfer/d.part5 .codex-transfer/d.part6 .codex-transfer/d.part7 .codex-transfer/d.part8 .codex-transfer/d.part9
+          git add README.md api/chat.js src/components/ChatBox.jsx src/data/prompts.js src/lib/api.js src/lib/chatAgent.js src/lib/knowledgeLinks.js src/lib/retrieve.js
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git commit -m "Improve RAG retrieval intent routing"
+          git push origin HEAD:codex/rag-retrieval-quality-d
