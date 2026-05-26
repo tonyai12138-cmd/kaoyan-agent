@@ -9,11 +9,16 @@ import {
   promptKnowledge,
   toServerMode,
 } from "../data/prompts";
+import {
+  buildUniversityMajorSummary,
+  findMajorKnowledgeByUniversity,
+  getUniversityMajorStatus,
+} from "./knowledgeLinks";
 
 const factSearchPattern =
   /学校|院校|某校|高校|大学|985|211|双一流|层次|专业|考试科目|招生人数|推免|分数线|复试线|参考书|录取比例/;
 const professionalFactPattern =
-  /专业|考试科目|招生人数|招生名额|推免|分数线|复试线|参考书|录取比例/;
+  /专业|专业数据|专业目录|招生专业|考试科目|招生人数|招生名额|推免|分数线|复试线|参考书|录取比例/;
 const universityIndexPattern =
   /985|211|双一流|层次|财经类|哪些学校|哪些大学|高校|大学/;
 const sourceLabels = {
@@ -115,10 +120,17 @@ function createUniversityItems() {
       university.is211 ? "211" : null,
     ].filter(Boolean);
     const status = university.dataStatus ?? "pending";
+    const relatedMajors = findMajorKnowledgeByUniversity(university.id);
+    const majorStatus = getUniversityMajorStatus(university);
+    const candidatePreview = (university.candidateMajorAreas ?? [])
+      .slice(0, 3)
+      .map((candidate) => `${candidate.area}（${candidate.status}）`)
+      .join("、");
     const content = [
       `学校：${university.school}；城市索引：${university.city}；层级标签：${tierTags.join(" / ") || "待核验"}`,
       `类型标签：${university.schoolType.join(" / ")}；数据状态：${status}（${statusLabel(status)}）`,
-      "本片段只支持院校层级初筛；专业目录、考试科目、招生人数、复试线与参考书不由该索引提供。",
+      `专业关联状态：${majorStatus.label}；候选核验方向：${candidatePreview || "待补充"}`,
+      buildUniversityMajorSummary(university, relatedMajors),
     ].join("；");
 
     return {
@@ -130,6 +142,8 @@ function createUniversityItems() {
       schoolTypes: university.schoolType,
       is985: university.is985,
       is211: university.is211,
+      hasMajorKnowledge: university.hasMajorKnowledge,
+      majorDataStatus: university.majorDataStatus,
       content,
       modes: ["school", "source"],
       keywords: university.searchKeywords ?? [],
@@ -143,6 +157,7 @@ function createUniversityItems() {
         ...(university.schoolType ?? []),
         university.supervisingDepartment,
         ...(university.relatedFields ?? []),
+        ...(university.candidateMajorAreas ?? []).map((candidate) => candidate.area),
         ...(university.searchKeywords ?? []),
         university.notes,
       ].join(" "),
@@ -161,8 +176,10 @@ function createSchoolItems() {
       .map((subject) => subject.subjectName)
       .join("、");
     const status = school.dataStatus ?? "pending";
+    const professionalDataLevel = school.professionalDataLevel ?? status;
     const content = [
       `数据状态：${status}（${statusLabel(status)}）`,
+      `专业数据完整度：${professionalDataLevel}（${statusLabel(professionalDataLevel)}）；关联院校索引：${school.universityId}`,
       `样例方向：${school.major} / ${school.researchDirection}`,
       `地区：${school.region}；学位类型：${school.degreeType}；数学要求：${school.mathRequired}`,
       `考试科目：${subjectNames || "待核验"}`,
@@ -174,6 +191,11 @@ function createSchoolItems() {
     return {
       source: "school",
       title: `${school.school} · ${school.major}`,
+      school: school.school,
+      major: school.major,
+      universityId: school.universityId,
+      universityTags: school.universityTags ?? [],
+      professionalDataLevel,
       content,
       modes: ["school", "source"],
       keywords: school.keywords ?? [],
@@ -186,6 +208,8 @@ function createSchoolItems() {
         school.majorCode,
         school.degreeType,
         school.mathRequired,
+        school.universityId,
+        ...(school.universityTags ?? []),
         subjectNames,
         ...(school.keywords ?? []),
         school.notes,
@@ -267,18 +291,45 @@ function createIndex() {
   ];
 }
 
+function findNamedUniversity(query) {
+  const normalizedQuery = normalizeText(query);
+
+  return universitiesData.universities.find((university) =>
+    normalizedQuery.includes(normalizeText(university.school)),
+  );
+}
+
+function keepEntryForProfessionalLookup(entry, query, namedUniversity) {
+  if (!professionalFactPattern.test(query)) {
+    return true;
+  }
+
+  if (entry.source === "university") {
+    return normalizeText(query).includes(normalizeText(entry.school));
+  }
+
+  if (entry.source === "school" && namedUniversity) {
+    return (
+      entry.universityId === namedUniversity.id ||
+      entry.school === namedUniversity.school
+    );
+  }
+
+  return true;
+}
+
 export function retrieveKnowledge(message, mode = "school") {
   const query = String(message ?? "").trim();
   const serverMode = toServerMode(normalizeChatMode(mode));
+  const namedUniversity = findNamedUniversity(query);
 
   if (!query) {
     return [];
   }
 
   return createIndex()
-    .filter(
-      (entry) =>
-        !(professionalFactPattern.test(query) && entry.source === "university"),
+    .filter((entry) =>
+      keepEntryForProfessionalLookup(entry, query, namedUniversity),
     )
     .map((entry) => ({
       ...entry,
@@ -307,6 +358,12 @@ export function retrieveKnowledge(message, mode = "school") {
         city,
         is985,
         is211,
+        hasMajorKnowledge,
+        majorDataStatus,
+        major,
+        universityId,
+        universityTags,
+        professionalDataLevel,
       }) => ({
         source,
         title,
@@ -321,6 +378,12 @@ export function retrieveKnowledge(message, mode = "school") {
         city,
         is985,
         is211,
+        hasMajorKnowledge,
+        majorDataStatus,
+        major,
+        universityId,
+        universityTags,
+        professionalDataLevel,
       }),
     );
 }

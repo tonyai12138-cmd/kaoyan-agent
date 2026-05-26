@@ -1,4 +1,4 @@
-import { mkdirSync, writeFileSync } from "node:fs";
+import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -7,8 +7,18 @@ const source211 =
 const source985 =
   "https://www.moe.gov.cn/srcsite/A22/s7065/200612/t20061206_128833.html";
 const disclaimer = "正式信息以研招网和目标院校研究生招生官网为准。";
+const majorDataDisclaimer =
+  "当前院校基础索引不包含完整专业目录、招生人数、复试线或参考书，具体信息以研招网和目标院校研究生招生官网为准。";
 const notes =
   "基础索引用于择校初筛；具体招生专业、考试科目、招生人数、复试线以研招网和目标院校研究生招生官网为准。";
+const coreCandidateMajorAreas = [
+  "工商管理",
+  "应用经济学",
+  "管理科学与工程",
+];
+const projectRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
+const schoolKnowledgePath = resolve(projectRoot, "src/data/schools.json");
+const schoolKnowledge = JSON.parse(readFileSync(schoolKnowledgePath, "utf8")).schools ?? [];
 
 // Name membership is aligned with the Ministry of Education's historical
 // 211/985 project lists. Locations and category tags are navigation metadata
@@ -180,11 +190,49 @@ function relatedFieldsFor(school, type) {
   return ["经管类招生设置待核验"];
 }
 
+function findRelatedMajors(universityId, school) {
+  return schoolKnowledge.filter(
+    (major) => major.universityId === universityId || major.school === school,
+  );
+}
+
+function candidateMajorAreaNamesFor(school, type) {
+  const extraAreas =
+    type === "财经类"
+      ? ["会计", "金融", "市场营销", "数字营销", "公共管理", "国际商务"]
+      : school === "中国传媒大学"
+        ? ["新闻传播", "数字营销", "市场营销"]
+        : [];
+
+  return [...new Set([...coreCandidateMajorAreas, ...extraAreas])];
+}
+
+function buildCandidateMajorAreas(school, type, relatedMajors) {
+  return candidateMajorAreaNamesFor(school, type).map((area) => {
+    const relatedSchoolMajorIds = relatedMajors
+      .filter(
+        (major) =>
+          major.major?.includes(area) || major.researchDirection?.includes(area),
+      )
+      .map((major) => major.id);
+
+    return {
+      area,
+      status: relatedSchoolMajorIds.length ? "linked" : "candidate",
+      note: "仅表示可作为后续核验方向，不代表该校当年招生。",
+      relatedSchoolMajorIds,
+    };
+  });
+}
+
 const universities = official211Index.map(
   ([school, province, city, type, additionalKeywords = []], index) => {
+    const id = `univ_${String(index + 1).padStart(3, "0")}`;
     const is985 = official985Names.has(school);
+    const relatedMajors = findRelatedMajors(id, school);
+    const linkedSchoolMajorIds = relatedMajors.map((major) => major.id);
     return {
-      id: `univ_${String(index + 1).padStart(3, "0")}`,
+      id,
       school,
       province,
       city,
@@ -197,6 +245,11 @@ const universities = official211Index.map(
       graduateAdmissionWebsite: "待核验",
       graduateSchoolWebsite: "待核验",
       relatedFields: relatedFieldsFor(school, type),
+      hasMajorKnowledge: linkedSchoolMajorIds.length > 0,
+      linkedSchoolMajorIds,
+      candidateMajorAreas: buildCandidateMajorAreas(school, type, relatedMajors),
+      majorDataStatus: linkedSchoolMajorIds.length ? "linked" : "none",
+      majorDataDisclaimer,
       searchKeywords: [
         school,
         province,
@@ -238,9 +291,9 @@ if (universities.filter((item) => item.is985).length !== 39) {
 const data = {
   knowledgeBase: {
     name: "985 / 211 院校基础索引库",
-    version: "0.1.0",
+    version: "0.2.0",
     scope:
-      "仅用于学校层级初筛与工程名单身份查询，不包含专业目录、考试科目、招生人数、复试线或参考书。",
+      "用于学校层级初筛、工程名单身份查询及与专业知识记录的关联状态展示；不自行提供专业目录、考试科目、招生人数、复试线或参考书结论。",
     checkedAt: "2026-05-26",
     coverage: {
       uniqueUniversities: universities.length,
@@ -263,16 +316,14 @@ const data = {
       },
     ],
     fieldPolicy:
-      "学校名称及 985/211 身份已按教育部名单核对；城市、类型、官网、主管部门、双一流状态与研究生招生信息仍需逐校人工复核。",
+      "学校名称及 985/211 身份已按教育部名单核对；candidateMajorAreas 仅为后续核验候选，不表示当年招生；城市、类型、官网、主管部门、双一流状态与研究生招生信息仍需逐校人工复核。",
   },
   disclaimer,
+  majorDataDisclaimer,
   universities,
 };
 
-const outputPath = resolve(
-  dirname(fileURLToPath(import.meta.url)),
-  "../src/data/universities.json",
-);
+const outputPath = resolve(projectRoot, "src/data/universities.json");
 mkdirSync(dirname(outputPath), { recursive: true });
 writeFileSync(outputPath, `${JSON.stringify(data, null, 2)}\n`, "utf8");
 console.log(

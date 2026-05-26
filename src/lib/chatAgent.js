@@ -9,6 +9,9 @@ import {
   normalizeChatMode,
   officialVerificationAdvice,
   universityIndexBoundary,
+  universityOnlyMajorNotice,
+  universityProfessionalMissingNotice,
+  professionalVerificationPath,
 } from "../data/prompts";
 import {
   createPositioningReport,
@@ -21,7 +24,7 @@ const urgentTerms = ["自杀", "自伤", "不想活", "结束生命"];
 const factQuestionPattern =
   /某校|院校|学校|大学|高校|985|211|双一流|层次|专业|考试科目|招生人数|招生名额|复试线|分数线|参考书|录取比例/;
 const professionalFactPattern =
-  /专业|考试科目|招生人数|招生名额|复试线|分数线|参考书|录取比例/;
+  /专业|专业数据|专业目录|招生专业|考试科目|招生人数|招生名额|复试线|分数线|参考书|录取比例/;
 const universityLevelPattern =
   /985|211|双一流|层次|财经类|哪些.*大学|哪些.*学校|高校/;
 const chatModeLabels = Object.fromEntries(
@@ -60,6 +63,41 @@ function formatRetrievedBasis(snippets) {
 }
 
 function factBasisForQuestion(message, snippets) {
+  if (professionalFactPattern.test(message)) {
+    const usableProfessionalFacts = snippets.filter(
+      (snippet) =>
+        snippet.source === "school" &&
+        ["verified", "partial"].includes(
+          snippet.professionalDataLevel ?? snippet.dataStatus,
+        ) &&
+        ["official", "school_official"].includes(snippet.sourceType),
+    );
+    const unverifiedProfessionalItems = snippets.filter(
+      (snippet) =>
+        snippet.source === "school" &&
+        ["demo", "pending"].includes(
+          snippet.professionalDataLevel ?? snippet.dataStatus,
+        ),
+    );
+    const baseIndexItem = snippets.find(
+      (snippet) => snippet.source === "university",
+    );
+
+    if (usableProfessionalFacts.length) {
+      return `${formatRetrievedBasis(usableProfessionalFacts)}\n\n仅可引用以上已标示字段；未列出的招生事实仍需核验。${factDisclaimer} ${professionalVerificationPath}`;
+    }
+
+    if (baseIndexItem) {
+      return `${universityProfessionalMissingNotice}\n\n- 已识别院校基础索引：**${baseIndexItem.title}**（${baseIndexItem.dataStatus} / ${baseIndexItem.sourceType}）。${universityOnlyMajorNotice}\n\n${professionalVerificationPath}`;
+    }
+
+    if (unverifiedProfessionalItems.length) {
+      return `${formatRetrievedBasis(unverifiedProfessionalItems)}\n\n检索到的专业片段为演示或待核验数据，不能转述为官方招生事实。${knowledgeMissingNotice} ${professionalVerificationPath}`;
+    }
+
+    return `${knowledgeMissingNotice}\n\n${professionalVerificationPath}`;
+  }
+
   if (
     universityLevelPattern.test(message) &&
     !professionalFactPattern.test(message)

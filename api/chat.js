@@ -6,17 +6,23 @@ const emotionDisclaimer =
   "情绪陪伴仅提供学习支持和一般压力缓解建议，不替代专业心理咨询或医疗建议。";
 const knowledgeMissingNotice =
   "当前知识库暂未收录该信息，建议以研招网和目标院校研究生招生官网为准。";
+const universityOnlyMajorNotice =
+  "当前仅收录院校基础信息，专业招生信息需进一步核验。";
+const universityProfessionalMissingNotice =
+  "当前知识库仅收录该校基础索引，暂未收录该专业层面的官方数据，建议以研招网和目标院校研究生招生官网为准。";
+const professionalVerificationPath =
+  "下一步请核验研招网硕士专业目录、目标院校研究生招生官网，以及目标学院招生目录、复试细则或考试大纲。";
 const commonDisclaimer = `${factDisclaimer} ${prototypeDisclaimer}`;
 const defaultModel = "deepseek-v4-flash";
 const deepseekEndpoint = "https://api.deepseek.com/chat/completions";
 const factQuestionPattern =
   /某校|院校|学校|大学|高校|985|211|双一流|层次|专业|考试科目|招生人数|招生名额|复试线|分数线|参考书|录取比例/;
 const professionalFactPattern =
-  /专业|考试科目|招生人数|招生名额|推免|复试线|分数线|参考书|录取比例/;
+  /专业|专业数据|专业目录|招生专业|考试科目|招生人数|招生名额|推免|复试线|分数线|参考书|录取比例/;
 const universityLevelPattern =
   /985|211|双一流|层次|财经类|哪些.*大学|哪些.*学校|高校/;
 const knowledgeStatusRules =
-  "verified 表示已由官方来源核验；partial 表示仅部分字段核验；pending 表示待核验；demo 表示演示数据。院校专业事实仅可依据 dataStatus 为 verified 且 sourceType 为 official 的专业片段；source 为 university 且 sourceType 为 official_index 的片段仅可用于其中明确展示的 985 / 211 基础层级身份，不得外推专业招生事实。";
+  "verified 表示已由官方来源核验；partial 表示仅部分字段核验；pending 表示待核验；demo 表示演示数据。universities.json 片段仅可回答院校基础层级信息；schools.json 专业片段仅在 professionalDataLevel 或 dataStatus 为 verified / partial 且来源为 official / school_official 时引用明确字段。source 为 university 的片段不得外推专业招生事实。";
 
 // Keep these aliases and system rules synchronized with src/data/prompts.js.
 // The Vercel function maintains its own copy so its server-only deployment stays isolated.
@@ -43,14 +49,16 @@ const systemPrompt = `你是“研途智伴 Agent”，面向中国考研学生�
 
 回答边界：
 1. 不编造院校、专业、考试科目、招生人数、复试线、参考书、录取比例等事实信息；
-2. 涉及院校事实信息时，必须优先依据用户提供的信息或知识库 context；专业与招生事实仅当 context 明确给出该事实值、官方来源且 dataStatus 为 verified、sourceType 为 official 时才可转述；sourceType 为 official_index 的 university 片段仅可转述其中明确展示的 985 / 211 基础层级身份，不得用于回答专业、科目、分数线、人数或参考书；
-3. 如果 context 没有收录用户询问的事实信息，必须原样说明：“当前知识库暂未收录该信息，建议以研招网和目标院校研究生招生官网为准。”；
-4. 不承诺上岸，不提供录取保证；
-5. 不传播盗版资料，不鼓励购买来源不明的资料；
-6. 情绪陪伴只提供学习支持和一般压力缓解建议，不替代专业心理咨询或医疗建议；
-7. 用户提到严重焦虑、失眠或自伤想法时，建议其联系可信任的人、学校心理中心或专业机构；存在紧急危险时建议及时寻求紧急援助；
-8. 当前项目为课程展示原型，涉及演示数据时必须明确说明，不构成正式报考建议；
-9. 回答要具体、可执行、结构化，优先使用 Markdown 小标题、列表或表格，避免过长段落。
+2. 涉及院校事实信息时，必须优先依据用户提供的信息或知识库 context；universities.json 只用于学校层级身份、城市和类型初筛；schools.json 才能用于专业层级回答；专业与招生事实仅当 context 明确给出该字段、来源为 official / school_official 且状态为 verified / partial 时才可转述；
+3. 如果用户询问专业数据，而 context 只有 university 类型基础索引，必须原样说明：“当前知识库仅收录该校基础索引，暂未收录该专业层面的官方数据，建议以研招网和目标院校研究生招生官网为准。”，不得根据学校层次推断专业难度、复试线、招生人数、科目或参考书；
+4. 如果 context 没有收录用户询问的事实信息，必须原样说明：“当前知识库暂未收录该信息，建议以研招网和目标院校研究生招生官网为准。”；
+5. 专业事实不足时，可给出核验路径：研招网硕士专业目录、目标院校研究生招生官网、目标学院招生目录/复试细则/考试大纲；
+6. 不承诺上岸，不提供录取保证；
+7. 不传播盗版资料，不鼓励购买来源不明的资料；
+8. 情绪陪伴只提供学习支持和一般压力缓解建议，不替代专业心理咨询或医疗建议；
+9. 用户提到严重焦虑、失眠或自伤想法时，建议其联系可信任的人、学校心理中心或专业机构；存在紧急危险时建议及时寻求紧急援助；
+10. 当前项目为课程展示原型，涉及演示数据时必须明确说明，不构成正式报考建议；
+11. 回答要具体、可执行、结构化，优先使用 Markdown 小标题、列表或表格，避免过长段落。
 
 知识库状态规则：
 ${knowledgeStatusRules}
@@ -146,6 +154,17 @@ function hasVerifiedOfficialFact(context) {
   );
 }
 
+function hasUsableProfessionalFact(context) {
+  return contextSnippets(context).some(
+    (snippet) =>
+      snippet.source === "school" &&
+      ["verified", "partial"].includes(
+        snippet.professionalDataLevel ?? snippet.dataStatus,
+      ) &&
+      ["official", "school_official"].includes(snippet.sourceType),
+  );
+}
+
 function hasOfficialUniversityIndex(context) {
   return contextSnippets(context).some(
     (snippet) =>
@@ -157,9 +176,11 @@ function hasOfficialUniversityIndex(context) {
 
 function buildContextMessage({ message, profile, context, mode }) {
   const factsGuard = professionalFactPattern.test(message)
-    ? hasVerifiedOfficialFact(context)
-      ? `用户正在询问专业或招生事实。仅可引用 verified / official 的专业片段中明确提供且与问题对应的事实，并保留官方核验提醒。${knowledgeStatusRules}`
-      : `用户正在询问专业或招生事实。基础院校索引不能回答该问题；当前 context 不含 verified / official 的专业事实片段，不得输出具体数字或具体考试结论，必须回复：${knowledgeMissingNotice}`
+    ? hasUsableProfessionalFact(context)
+      ? `用户正在询问专业或招生事实。仅可引用 schools 专业片段中已明确标示为 verified / partial 且来源为官方的具体字段，并保留官方核验提醒。${knowledgeStatusRules}`
+      : hasOfficialUniversityIndex(context)
+        ? `用户正在询问专业或招生事实，但 context 只有该校的 university 基础索引，不能回答专业事实。必须回复：${universityProfessionalMissingNotice} ${professionalVerificationPath}`
+        : `用户正在询问专业或招生事实。当前 context 不含可用的官方专业片段，不得输出具体数字或具体考试结论，必须回复：${knowledgeMissingNotice} ${professionalVerificationPath}`
     : universityLevelPattern.test(message)
       ? hasOfficialUniversityIndex(context)
         ? `用户正在询问学校基础层级。可引用 official_index university 片段中明确展示的 985 / 211 身份；不得由此推断专业、考试、招生或录取信息。${knowledgeStatusRules}`
@@ -187,11 +208,15 @@ function formatAnswerSections(sections) {
 }
 
 function buildMockAnswer(message, mode, context) {
+  const asksProfessionalFacts = professionalFactPattern.test(message);
   const hasLevelIndex =
     universityLevelPattern.test(message) &&
-    !professionalFactPattern.test(message) &&
+    !asksProfessionalFacts &&
     hasOfficialUniversityIndex(context);
-  const basis = hasLevelIndex
+  const hasBaseIndexOnly = asksProfessionalFacts && hasOfficialUniversityIndex(context);
+  const basis = hasBaseIndexOnly
+    ? `${universityProfessionalMissingNotice}\n\n${universityOnlyMajorNotice} ${professionalVerificationPath}`
+    : hasLevelIndex
     ? `${formatSnippetBasis(context)}\n\n985 / 211 基础索引仅用于院校层级初筛，不提供专业目录、考试科目、招生人数、复试线或参考书。${factDisclaimer}`
     : factQuestionPattern.test(message)
       ? knowledgeMissingNotice
