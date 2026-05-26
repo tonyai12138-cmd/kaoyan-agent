@@ -60,8 +60,8 @@ jobs:
           const fs = require('node:fs');
           const schools = JSON.parse(fs.readFileSync('src/data/schools.json', 'utf8'));
           const universities = JSON.parse(fs.readFileSync('src/data/universities.json', 'utf8'));
-          const records = schools.items || schools.records || schools.data || [];
-          const institutionRecords = universities.items || universities.records || universities.data || [];
+          const records = schools.schools || [];
+          const institutionRecords = universities.universities || [];
           const officialSamples = records.filter((record) => record.id.startsWith('official_major_'));
           if (officialSamples.length !== 9) throw new Error(`expected 9 official samples, found ${officialSamples.length}`);
           if (officialSamples.some((record) => record.professionalDataLevel !== 'partial' || record.dataStatus !== 'partial' || record.source?.sourceType !== 'school_official' || !record.source?.sourceUrl || !record.source?.checkedAt || !record.source?.reliability)) throw new Error('official professional sample status/source validation failed');
