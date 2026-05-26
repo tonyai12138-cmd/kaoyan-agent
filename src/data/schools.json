@@ -1,9 +1,10 @@
 {
   "knowledgeBase": {
     "name": "院校专业知识库结构样例",
-    "version": "0.3.0",
+    "version": "0.4.0",
     "checkedAt": "2026-05",
-    "description": "用于演示院校专业信息的来源追踪、基础索引关联与核验状态管理，不包含可直接用于报考决策的真实招生结论。"
+    "description": "用于院校专业信息的来源追踪、基础索引关联与核验状态管理；包含演示记录与重点院校官方材料核验样例，不构成直接报考结论。",
+    "officialSamplePolicy": "professionalDataLevel 为 partial 的记录仅可引用条目中已标记 verified 且附官方来源的字段；pending 字段不得输出具体结论。"
   },
   "isDemo": true,
   "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。",
@@ -456,6 +457,889 @@
       },
       "keywords": ["工商管理", "品牌管理", "消费者行为", "西部", "经管类", "择校"],
       "notes": "课堂展示用知识库结构样例，招生信息尚未接入官方数据源；当前示例院校未与 985 / 211 基础索引关联。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "official_major_zuel_enterprise_2026",
+      "isDemo": false,
+      "dataStatus": "partial",
+      "universityId": "univ_079",
+      "universityTags": ["211", "财经类", "武汉"],
+      "professionalDataLevel": "partial",
+      "linkedUniversitySource": "universities.json#univ_079",
+      "school": "中南财经政法大学",
+      "region": "湖北",
+      "city": "武汉市",
+      "college": "工商管理学院（MBA教育中心）",
+      "major": "企业管理",
+      "majorCode": "120202",
+      "degreeType": "学硕",
+      "studyMode": "全日制",
+      "researchDirection": "01 公司管理理论与实务；02 人力资源管理",
+      "relatedAreas": ["工商管理", "企业管理", "市场营销"],
+      "mathRequired": "是",
+      "examSubjects": [
+        {
+          "subjectName": "思想政治理论",
+          "subjectCode": "101",
+          "status": "verified",
+          "sourceUrl": "https://yzb.zuel.edu.cn/_upload/article/files/5d/fe/b1504aed49c5b361f318ac7b5d84/001c7113-1f28-4e9b-b8bb-1a2ecd9043a0.pdf",
+          "note": "来源于中南财经政法大学2026年硕士研究生招生专业目录"
+        },
+        {
+          "subjectName": "英语（一）",
+          "subjectCode": "201",
+          "status": "verified",
+          "sourceUrl": "https://yzb.zuel.edu.cn/_upload/article/files/5d/fe/b1504aed49c5b361f318ac7b5d84/001c7113-1f28-4e9b-b8bb-1a2ecd9043a0.pdf",
+          "note": "来源于中南财经政法大学2026年硕士研究生招生专业目录"
+        },
+        {
+          "subjectName": "数学（三）",
+          "subjectCode": "303",
+          "status": "verified",
+          "sourceUrl": "https://yzb.zuel.edu.cn/_upload/article/files/5d/fe/b1504aed49c5b361f318ac7b5d84/001c7113-1f28-4e9b-b8bb-1a2ecd9043a0.pdf",
+          "note": "来源于中南财经政法大学2026年硕士研究生招生专业目录"
+        },
+        {
+          "subjectName": "管理学",
+          "subjectCode": "823",
+          "status": "verified",
+          "sourceUrl": "https://yzb.zuel.edu.cn/_upload/article/files/5d/fe/b1504aed49c5b361f318ac7b5d84/001c7113-1f28-4e9b-b8bb-1a2ecd9043a0.pdf",
+          "note": "来源于中南财经政法大学2026年硕士研究生招生专业目录"
+        }
+      ],
+      "plannedEnrollment": {
+        "value": "10",
+        "status": "verified",
+        "sourceUrl": "https://yzb.zuel.edu.cn/_upload/article/files/5d/fe/b1504aed49c5b361f318ac7b5d84/001c7113-1f28-4e9b-b8bb-1a2ecd9043a0.pdf",
+        "note": "2026年目录中的拟招生人数，最终计划以学校正式通知为准"
+      },
+      "recommendedExemption": {
+        "value": "4",
+        "status": "verified",
+        "sourceUrl": "https://yzb.zuel.edu.cn/_upload/article/files/5d/fe/b1504aed49c5b361f318ac7b5d84/001c7113-1f28-4e9b-b8bb-1a2ecd9043a0.pdf",
+        "note": "2026年目录中的拟接收推免生人数"
+      },
+      "scoreLines": [
+        {
+          "year": "2025",
+          "value": "暂未收录",
+          "status": "pending",
+          "sourceUrl": "",
+          "note": "以学院官方复试分数线或复试细则为准"
+        }
+      ],
+      "referenceBooks": [
+        {
+          "name": "《管理学通论》（第3版），张中华、田晓明主编，北京大学出版社，2024年版",
+          "status": "verified",
+          "sourceUrl": "https://yzb.zuel.edu.cn/_upload/article/files/5d/fe/b1504aed49c5b361f318ac7b5d84/7e810bb6-1165-4f11-acb5-8293cf702f14.pdf",
+          "note": "官方复试参考书目，适用于复试科目1080企业管理"
+        },
+        {
+          "name": "《人力资源开发与管理》，赵曼主编，中国劳动社会保障出版社，2023年版",
+          "status": "verified",
+          "sourceUrl": "https://yzb.zuel.edu.cn/_upload/article/files/5d/fe/b1504aed49c5b361f318ac7b5d84/7e810bb6-1165-4f11-acb5-8293cf702f14.pdf",
+          "note": "官方复试参考书目，适用于复试科目1080企业管理"
+        }
+      ],
+      "examOutline": {
+        "value": "暂未收录",
+        "status": "pending",
+        "sourceUrl": "",
+        "note": "以院校官网考试大纲为准"
+      },
+      "reExamSubjects": [
+        {
+          "name": "1080 企业管理",
+          "status": "verified",
+          "sourceUrl": "https://yzb.zuel.edu.cn/_upload/article/files/5d/fe/b1504aed49c5b361f318ac7b5d84/001c7113-1f28-4e9b-b8bb-1a2ecd9043a0.pdf",
+          "note": "来源于官方招生专业目录"
+        }
+      ],
+      "source": {
+        "sourceName": "中南财经政法大学2026年硕士研究生招生专业目录及复试参考书目",
+        "sourceType": "school_official",
+        "sourceUrl": "https://yzb.zuel.edu.cn/_upload/article/files/5d/fe/b1504aed49c5b361f318ac7b5d84/001c7113-1f28-4e9b-b8bb-1a2ecd9043a0.pdf",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "additionalSources": [
+        "https://yzb.zuel.edu.cn/_upload/article/files/5d/fe/b1504aed49c5b361f318ac7b5d84/7e810bb6-1165-4f11-acb5-8293cf702f14.pdf"
+      ],
+      "keywords": ["中南财经政法大学", "企业管理", "120202", "武汉", "工商管理", "市场营销", "经管类", "考研"],
+      "notes": "已核验2026年专业目录中的专业代码、方向、初试科目、拟招生数与推免数，以及官方复试参考书目；复试线与考试大纲尚未收录。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "official_major_zuel_marketing_2026",
+      "isDemo": false,
+      "dataStatus": "partial",
+      "universityId": "univ_079",
+      "universityTags": ["211", "财经类", "武汉"],
+      "professionalDataLevel": "partial",
+      "linkedUniversitySource": "universities.json#univ_079",
+      "school": "中南财经政法大学",
+      "region": "湖北",
+      "city": "武汉市",
+      "college": "工商管理学院（MBA教育中心）",
+      "major": "营销管理",
+      "majorCode": "1202Z1",
+      "degreeType": "学硕",
+      "studyMode": "全日制",
+      "researchDirection": "01 营销管理；02 服务营销；03 营销渠道管理",
+      "relatedAreas": ["市场营销", "数字营销", "工商管理"],
+      "mathRequired": "是",
+      "examSubjects": [
+        {
+          "subjectName": "思想政治理论",
+          "subjectCode": "101",
+          "status": "verified",
+          "sourceUrl": "https://yzb.zuel.edu.cn/_upload/article/files/5d/fe/b1504aed49c5b361f318ac7b5d84/001c7113-1f28-4e9b-b8bb-1a2ecd9043a0.pdf",
+          "note": "来源于官方招生专业目录"
+        },
+        {
+          "subjectName": "英语（一）",
+          "subjectCode": "201",
+          "status": "verified",
+          "sourceUrl": "https://yzb.zuel.edu.cn/_upload/article/files/5d/fe/b1504aed49c5b361f318ac7b5d84/001c7113-1f28-4e9b-b8bb-1a2ecd9043a0.pdf",
+          "note": "来源于官方招生专业目录"
+        },
+        {
+          "subjectName": "数学（三）",
+          "subjectCode": "303",
+          "status": "verified",
+          "sourceUrl": "https://yzb.zuel.edu.cn/_upload/article/files/5d/fe/b1504aed49c5b361f318ac7b5d84/001c7113-1f28-4e9b-b8bb-1a2ecd9043a0.pdf",
+          "note": "来源于官方招生专业目录"
+        },
+        {
+          "subjectName": "管理学",
+          "subjectCode": "823",
+          "status": "verified",
+          "sourceUrl": "https://yzb.zuel.edu.cn/_upload/article/files/5d/fe/b1504aed49c5b361f318ac7b5d84/001c7113-1f28-4e9b-b8bb-1a2ecd9043a0.pdf",
+          "note": "来源于官方招生专业目录"
+        }
+      ],
+      "plannedEnrollment": {
+        "value": "8",
+        "status": "verified",
+        "sourceUrl": "https://yzb.zuel.edu.cn/_upload/article/files/5d/fe/b1504aed49c5b361f318ac7b5d84/001c7113-1f28-4e9b-b8bb-1a2ecd9043a0.pdf",
+        "note": "2026年目录中的拟招生人数，最终计划以学校正式通知为准"
+      },
+      "recommendedExemption": {
+        "value": "4",
+        "status": "verified",
+        "sourceUrl": "https://yzb.zuel.edu.cn/_upload/article/files/5d/fe/b1504aed49c5b361f318ac7b5d84/001c7113-1f28-4e9b-b8bb-1a2ecd9043a0.pdf",
+        "note": "2026年目录中的拟接收推免生人数"
+      },
+      "scoreLines": [
+        {
+          "year": "2025",
+          "value": "暂未收录",
+          "status": "pending",
+          "sourceUrl": "",
+          "note": "以学院官方复试分数线或复试细则为准"
+        }
+      ],
+      "referenceBooks": [
+        {
+          "name": "《营销管理：原理与应用》（第3版），王永贵主编，中国人民大学出版社，2023年版",
+          "status": "verified",
+          "sourceUrl": "https://yzb.zuel.edu.cn/_upload/article/files/5d/fe/b1504aed49c5b361f318ac7b5d84/7e810bb6-1165-4f11-acb5-8293cf702f14.pdf",
+          "note": "官方复试参考书目，适用于复试科目1081营销管理"
+        },
+        {
+          "name": "《消费者行为学》（第四版），符国群主编，高等教育出版社，2021年版",
+          "status": "verified",
+          "sourceUrl": "https://yzb.zuel.edu.cn/_upload/article/files/5d/fe/b1504aed49c5b361f318ac7b5d84/7e810bb6-1165-4f11-acb5-8293cf702f14.pdf",
+          "note": "官方复试参考书目，适用于复试科目1081营销管理"
+        }
+      ],
+      "examOutline": {
+        "value": "暂未收录",
+        "status": "pending",
+        "sourceUrl": "",
+        "note": "以院校官网考试大纲为准"
+      },
+      "reExamSubjects": [
+        {
+          "name": "1081 营销管理",
+          "status": "verified",
+          "sourceUrl": "https://yzb.zuel.edu.cn/_upload/article/files/5d/fe/b1504aed49c5b361f318ac7b5d84/001c7113-1f28-4e9b-b8bb-1a2ecd9043a0.pdf",
+          "note": "来源于官方招生专业目录"
+        }
+      ],
+      "source": {
+        "sourceName": "中南财经政法大学2026年硕士研究生招生专业目录及复试参考书目",
+        "sourceType": "school_official",
+        "sourceUrl": "https://yzb.zuel.edu.cn/_upload/article/files/5d/fe/b1504aed49c5b361f318ac7b5d84/001c7113-1f28-4e9b-b8bb-1a2ecd9043a0.pdf",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "additionalSources": [
+        "https://yzb.zuel.edu.cn/_upload/article/files/5d/fe/b1504aed49c5b361f318ac7b5d84/7e810bb6-1165-4f11-acb5-8293cf702f14.pdf"
+      ],
+      "keywords": ["中南财经政法大学", "营销管理", "1202Z1", "市场营销", "数字营销", "武汉", "经管类", "考研"],
+      "notes": "官方专业名称为“营销管理”，不将“数字营销”虚构为专业名称；数字营销仅作为课程项目中的关联检索词。已核验初试科目、拟招生/推免数和复试参考书，复试线仍待核验。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "official_major_whu_digital_economy_2026",
+      "isDemo": false,
+      "dataStatus": "partial",
+      "universityId": "univ_073",
+      "universityTags": ["985", "211", "综合类", "武汉"],
+      "professionalDataLevel": "partial",
+      "linkedUniversitySource": "universities.json#univ_073",
+      "school": "武汉大学",
+      "region": "湖北",
+      "city": "武汉市",
+      "college": "经济与管理学院",
+      "major": "数字经济",
+      "majorCode": "0258",
+      "degreeType": "专硕",
+      "studyMode": "非全日制",
+      "researchDirection": "数字产业化；产业数字化；数字化治理",
+      "relatedAreas": ["应用经济学", "数字营销"],
+      "mathRequired": "否",
+      "examSubjects": [
+        {
+          "subjectName": "思想政治理论",
+          "subjectCode": "101",
+          "status": "verified",
+          "sourceUrl": "https://ems.whu.edu.cn/info/2023/270621.htm",
+          "note": "学院官方项目介绍列示，并提示具体科目以正式招生简章为准"
+        },
+        {
+          "subjectName": "英语（二）",
+          "subjectCode": "204",
+          "status": "verified",
+          "sourceUrl": "https://ems.whu.edu.cn/info/2023/270621.htm",
+          "note": "学院官方项目介绍列示，并提示具体科目以正式招生简章为准"
+        },
+        {
+          "subjectName": "经济类综合能力",
+          "subjectCode": "396",
+          "status": "verified",
+          "sourceUrl": "https://ems.whu.edu.cn/info/2023/270621.htm",
+          "note": "学院官方项目介绍列示，并提示具体科目以正式招生简章为准"
+        },
+        {
+          "subjectName": "宏微观经济学",
+          "subjectCode": "806",
+          "status": "verified",
+          "sourceUrl": "https://ems.whu.edu.cn/info/2023/270621.htm",
+          "note": "学院官方项目介绍列示，并提示具体科目以正式招生简章为准"
+        }
+      ],
+      "plannedEnrollment": {
+        "value": "暂未收录",
+        "status": "pending",
+        "note": "以当年招生目录或院校研究生招生官网为准"
+      },
+      "recommendedExemption": {
+        "value": "暂未收录",
+        "status": "pending",
+        "note": "以当年招生目录为准"
+      },
+      "scoreLines": [
+        {
+          "year": "2025",
+          "value": "暂未收录",
+          "status": "pending",
+          "sourceUrl": "",
+          "note": "以院校官方复试分数线为准"
+        }
+      ],
+      "referenceBooks": [
+        {
+          "name": "官方暂未指定 / 暂未收录",
+          "status": "pending",
+          "note": "以院校研究生招生官网或考试大纲为准"
+        }
+      ],
+      "examOutline": {
+        "value": "暂未收录",
+        "status": "pending",
+        "sourceUrl": "",
+        "note": "以院校官网考试大纲为准"
+      },
+      "reExamSubjects": [
+        {
+          "name": "暂未收录",
+          "status": "pending",
+          "note": "以学院复试细则为准"
+        }
+      ],
+      "source": {
+        "sourceName": "武汉大学经济与管理学院数字经济专业硕士项目介绍",
+        "sourceType": "school_official",
+        "sourceUrl": "https://ems.whu.edu.cn/info/2023/270621.htm",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "keywords": ["武汉大学", "数字经济", "0258", "武汉", "应用经济学", "数字营销", "经管类", "考研"],
+      "notes": "学院官网项目介绍核验了专业代码、培养方向、学习方式和列示考试科目；页面同时明确具体科目以正式招生简章为准，招生人数、复试线与参考书仍待核验。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "official_major_whu_marketing_track_2026",
+      "isDemo": false,
+      "dataStatus": "partial",
+      "universityId": "univ_073",
+      "universityTags": ["985", "211", "综合类", "武汉"],
+      "professionalDataLevel": "partial",
+      "linkedUniversitySource": "universities.json#univ_073",
+      "school": "武汉大学",
+      "region": "湖北",
+      "city": "武汉市",
+      "college": "经济与管理学院",
+      "major": "工商管理学（市场营销方向）",
+      "majorCode": "待核验",
+      "degreeType": "学硕",
+      "studyMode": "全日制",
+      "researchDirection": "市场营销",
+      "relatedAreas": ["工商管理", "市场营销", "数字营销"],
+      "mathRequired": "待核验",
+      "examSubjects": [
+        {
+          "subjectName": "初试科目待核验",
+          "subjectCode": "待核验",
+          "status": "pending",
+          "sourceUrl": "",
+          "note": "该来源为推免通知，不能用于推断统考初试科目"
+        }
+      ],
+      "plannedEnrollment": {
+        "value": "暂未收录",
+        "status": "pending",
+        "note": "官方推免通知确认方向存在，但本知识库不将推免计划数转换为统考招生结论"
+      },
+      "recommendedExemption": {
+        "value": "暂未收录",
+        "status": "pending",
+        "note": "需要在适用年度招生文件中进一步核验"
+      },
+      "scoreLines": [
+        {
+          "year": "2025",
+          "value": "暂未收录",
+          "status": "pending",
+          "sourceUrl": "",
+          "note": "以学院官方复试分数线为准"
+        }
+      ],
+      "referenceBooks": [
+        {
+          "name": "暂未收录",
+          "status": "pending",
+          "note": "以考试大纲或学院通知为准"
+        }
+      ],
+      "examOutline": {
+        "value": "暂未收录",
+        "status": "pending",
+        "sourceUrl": "",
+        "note": "以院校官网考试大纲为准"
+      },
+      "reExamSubjects": [
+        {
+          "name": "暂未收录",
+          "status": "pending",
+          "note": "以学院复试细则为准"
+        }
+      ],
+      "source": {
+        "sourceName": "武汉大学经济与管理学院2026年接收推荐免试研究生工作实施细则",
+        "sourceType": "school_official",
+        "sourceUrl": "https://ems.whu.edu.cn/info/1589/264601.htm",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "keywords": ["武汉大学", "工商管理学", "市场营销", "武汉", "经管类", "数字营销", "考研"],
+      "notes": "官方推免通知可核验“工商管理学—市场营销”方向存在；不能据此推断统考专业代码、考试科目、招生人数或复试线，相关字段均保持 pending。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "official_major_cqu_applied_economics_2026",
+      "isDemo": false,
+      "dataStatus": "partial",
+      "universityId": "univ_095",
+      "universityTags": ["985", "211", "综合类", "重庆"],
+      "professionalDataLevel": "partial",
+      "linkedUniversitySource": "universities.json#univ_095",
+      "school": "重庆大学",
+      "region": "重庆",
+      "city": "重庆市",
+      "college": "经济与工商管理学院",
+      "major": "应用经济学",
+      "majorCode": "020200",
+      "degreeType": "学硕",
+      "studyMode": "全日制",
+      "researchDirection": "产业经济与政策；金融经济与管理；区域经济与可持续发展；国际贸易理论与政策",
+      "relatedAreas": ["应用经济学", "金融", "国际商务"],
+      "mathRequired": "是",
+      "examSubjects": [
+        {
+          "subjectName": "思想政治理论",
+          "subjectCode": "101",
+          "status": "verified",
+          "sourceUrl": "https://yz.cqu.edu.cn/sszyml/2026/2.html",
+          "note": "来源于重庆大学2026年硕士招生专业目录"
+        },
+        {
+          "subjectName": "英语（一）",
+          "subjectCode": "201",
+          "status": "verified",
+          "sourceUrl": "https://yz.cqu.edu.cn/sszyml/2026/2.html",
+          "note": "来源于重庆大学2026年硕士招生专业目录"
+        },
+        {
+          "subjectName": "数学（三）",
+          "subjectCode": "303",
+          "status": "verified",
+          "sourceUrl": "https://yz.cqu.edu.cn/sszyml/2026/2.html",
+          "note": "来源于重庆大学2026年硕士招生专业目录"
+        },
+        {
+          "subjectName": "微观经济学（含宏观经济学）",
+          "subjectCode": "804",
+          "status": "verified",
+          "sourceUrl": "https://yz.cqu.edu.cn/sszyml/2026/2.html",
+          "note": "来源于重庆大学2026年硕士招生专业目录"
+        }
+      ],
+      "plannedEnrollment": {
+        "value": "38（其中公招18、推免20）",
+        "status": "verified",
+        "sourceUrl": "https://yz.cqu.edu.cn/sszyml/2026/2.html",
+        "note": "官方目录计划数，最终招生计划以学校公布为准"
+      },
+      "recommendedExemption": {
+        "value": "20",
+        "status": "verified",
+        "sourceUrl": "https://yz.cqu.edu.cn/sszyml/2026/2.html",
+        "note": "官方目录列示推免计划"
+      },
+      "scoreLines": [
+        {
+          "year": "2025",
+          "value": "暂未收录",
+          "status": "pending",
+          "sourceUrl": "",
+          "note": "以学院官方复试分数线为准"
+        }
+      ],
+      "referenceBooks": [
+        {
+          "name": "官方暂未指定 / 暂未收录",
+          "status": "pending",
+          "note": "以院校考试大纲或官方通知为准"
+        }
+      ],
+      "examOutline": {
+        "value": "暂未收录",
+        "status": "pending",
+        "sourceUrl": "",
+        "note": "以院校官网考试大纲为准"
+      },
+      "reExamSubjects": [
+        {
+          "name": "外语听力、口语；经济管理综合笔试、面试",
+          "status": "verified",
+          "sourceUrl": "https://yz.cqu.edu.cn/sszyml/2026/2.html",
+          "note": "来源于官方专业目录页面"
+        }
+      ],
+      "source": {
+        "sourceName": "重庆大学2026年硕士招生专业目录（经济与工商管理学院）",
+        "sourceType": "school_official",
+        "sourceUrl": "https://yz.cqu.edu.cn/sszyml/2026/2.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "keywords": ["重庆大学", "应用经济学", "020200", "重庆", "金融", "国际商务", "经管类", "考研"],
+      "notes": "已核验官方目录中的专业、方向、初试科目、计划数及复试信息；复试线、指定参考书与考试大纲尚未收录。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "official_major_cqu_business_admin_2026",
+      "isDemo": false,
+      "dataStatus": "partial",
+      "universityId": "univ_095",
+      "universityTags": ["985", "211", "综合类", "重庆"],
+      "professionalDataLevel": "partial",
+      "linkedUniversitySource": "universities.json#univ_095",
+      "school": "重庆大学",
+      "region": "重庆",
+      "city": "重庆市",
+      "college": "经济与工商管理学院",
+      "major": "工商管理学",
+      "majorCode": "120200",
+      "degreeType": "学硕",
+      "studyMode": "全日制",
+      "researchDirection": "以官方专业目录页面列示方向为准",
+      "relatedAreas": ["工商管理", "市场营销"],
+      "mathRequired": "是",
+      "examSubjects": [
+        {
+          "subjectName": "思想政治理论",
+          "subjectCode": "101",
+          "status": "verified",
+          "sourceUrl": "https://yz.cqu.edu.cn/sszyml/2026/2.html",
+          "note": "来源于重庆大学2026年硕士招生专业目录"
+        },
+        {
+          "subjectName": "英语（一）",
+          "subjectCode": "201",
+          "status": "verified",
+          "sourceUrl": "https://yz.cqu.edu.cn/sszyml/2026/2.html",
+          "note": "来源于重庆大学2026年硕士招生专业目录"
+        },
+        {
+          "subjectName": "数学（三）",
+          "subjectCode": "303",
+          "status": "verified",
+          "sourceUrl": "https://yz.cqu.edu.cn/sszyml/2026/2.html",
+          "note": "来源于重庆大学2026年硕士招生专业目录"
+        },
+        {
+          "subjectName": "企业管理",
+          "subjectCode": "808",
+          "status": "verified",
+          "sourceUrl": "https://yz.cqu.edu.cn/sszyml/2026/2.html",
+          "note": "来源于重庆大学2026年硕士招生专业目录"
+        }
+      ],
+      "plannedEnrollment": {
+        "value": "50（其中公招25、推免25）",
+        "status": "verified",
+        "sourceUrl": "https://yz.cqu.edu.cn/sszyml/2026/2.html",
+        "note": "官方目录计划数，最终招生计划以学校公布为准"
+      },
+      "recommendedExemption": {
+        "value": "25",
+        "status": "verified",
+        "sourceUrl": "https://yz.cqu.edu.cn/sszyml/2026/2.html",
+        "note": "官方目录列示推免计划"
+      },
+      "scoreLines": [
+        {
+          "year": "2025",
+          "value": "暂未收录",
+          "status": "pending",
+          "sourceUrl": "",
+          "note": "以学院官方复试分数线为准"
+        }
+      ],
+      "referenceBooks": [
+        {
+          "name": "官方暂未指定 / 暂未收录",
+          "status": "pending",
+          "note": "以院校考试大纲或官方通知为准"
+        }
+      ],
+      "examOutline": {
+        "value": "暂未收录",
+        "status": "pending",
+        "sourceUrl": "",
+        "note": "以院校官网考试大纲为准"
+      },
+      "reExamSubjects": [
+        {
+          "name": "外语听力、口语；经济管理综合笔试、面试",
+          "status": "verified",
+          "sourceUrl": "https://yz.cqu.edu.cn/sszyml/2026/2.html",
+          "note": "来源于官方专业目录页面"
+        }
+      ],
+      "source": {
+        "sourceName": "重庆大学2026年硕士招生专业目录（经济与工商管理学院）",
+        "sourceType": "school_official",
+        "sourceUrl": "https://yz.cqu.edu.cn/sszyml/2026/2.html",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "keywords": ["重庆大学", "工商管理学", "120200", "企业管理", "市场营销", "重庆", "经管类", "考研"],
+      "notes": "已核验官方目录中的专业、初试科目、计划数及复试信息；方向表述、复试线、指定参考书与考试大纲需继续按官方页面核验。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "official_major_jnu_mjc_digital_marketing_2026",
+      "isDemo": false,
+      "dataStatus": "partial",
+      "universityId": "univ_085",
+      "universityTags": ["211", "综合类", "广州"],
+      "professionalDataLevel": "partial",
+      "linkedUniversitySource": "universities.json#univ_085",
+      "school": "暨南大学",
+      "region": "广东",
+      "city": "广州市",
+      "college": "新闻与传播学院",
+      "major": "新闻与传播",
+      "majorCode": "055200",
+      "degreeType": "专硕",
+      "studyMode": "待核验",
+      "researchDirection": "02 数字营销传播",
+      "relatedAreas": ["新闻传播", "数字营销", "市场营销"],
+      "mathRequired": "否",
+      "examSubjects": [
+        {
+          "subjectName": "思想政治理论",
+          "subjectCode": "101",
+          "status": "verified",
+          "sourceUrl": "https://yz.jnu.edu.cn/2026nssyjszszyml/list.htm",
+          "note": "来源于暨南大学2026年硕士生招生专业目录"
+        },
+        {
+          "subjectName": "英语（二）",
+          "subjectCode": "204",
+          "status": "verified",
+          "sourceUrl": "https://yz.jnu.edu.cn/2026nssyjszszyml/list.htm",
+          "note": "来源于暨南大学2026年硕士生招生专业目录"
+        },
+        {
+          "subjectName": "新闻与传播专业综合能力",
+          "subjectCode": "334",
+          "status": "verified",
+          "sourceUrl": "https://yz.jnu.edu.cn/2026nssyjszszyml/list.htm",
+          "note": "来源于暨南大学2026年硕士生招生专业目录"
+        },
+        {
+          "subjectName": "新闻与传播专业基础",
+          "subjectCode": "440",
+          "status": "verified",
+          "sourceUrl": "https://yz.jnu.edu.cn/2026nssyjszszyml/list.htm",
+          "note": "来源于暨南大学2026年硕士生招生专业目录"
+        }
+      ],
+      "plannedEnrollment": {
+        "value": "暂未收录",
+        "status": "pending",
+        "note": "目录页面展示的专业总体计划不在本条方向记录中直接转写，需按最终招生文件核验"
+      },
+      "recommendedExemption": {
+        "value": "暂未收录",
+        "status": "pending",
+        "note": "以当年招生目录为准"
+      },
+      "scoreLines": [
+        {
+          "year": "2025",
+          "value": "暂未收录",
+          "status": "pending",
+          "sourceUrl": "",
+          "note": "以院校官方复试分数线为准"
+        }
+      ],
+      "referenceBooks": [
+        {
+          "name": "官方暂未指定 / 暂未收录",
+          "status": "pending",
+          "note": "以考试大纲或学院官方通知为准"
+        }
+      ],
+      "examOutline": {
+        "value": "暂未收录",
+        "status": "pending",
+        "sourceUrl": "",
+        "note": "以院校官网考试大纲为准"
+      },
+      "reExamSubjects": [
+        {
+          "name": "新闻传播学实务综合",
+          "status": "verified",
+          "sourceUrl": "https://yz.jnu.edu.cn/2026nssyjszszyml/list.htm",
+          "note": "来源于官方专业目录中的复试科目"
+        }
+      ],
+      "source": {
+        "sourceName": "暨南大学2026年硕士生招生专业目录（新闻与传播学院）",
+        "sourceType": "school_official",
+        "sourceUrl": "https://yz.jnu.edu.cn/2026nssyjszszyml/list.htm",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "keywords": ["暨南大学", "新闻与传播", "055200", "数字营销传播", "数字营销", "广州", "考研"],
+      "notes": "官方目录明确列出数字营销传播方向与考试科目；未将目录中的专业总体计划拆解为本方向招生人数，复试线与参考书保持 pending。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "official_major_jnu_communication_smart_marketing_2026",
+      "isDemo": false,
+      "dataStatus": "partial",
+      "universityId": "univ_085",
+      "universityTags": ["211", "综合类", "广州"],
+      "professionalDataLevel": "partial",
+      "linkedUniversitySource": "universities.json#univ_085",
+      "school": "暨南大学",
+      "region": "广东",
+      "city": "广州市",
+      "college": "新闻与传播学院",
+      "major": "传播学",
+      "majorCode": "050302",
+      "degreeType": "学硕",
+      "studyMode": "待核验",
+      "researchDirection": "07 智能营销传播",
+      "relatedAreas": ["新闻传播", "市场营销", "数字营销"],
+      "mathRequired": "否",
+      "examSubjects": [
+        {
+          "subjectName": "思想政治理论",
+          "subjectCode": "101",
+          "status": "verified",
+          "sourceUrl": "https://yz.jnu.edu.cn/2026nssyjszszyml/list.htm",
+          "note": "来源于暨南大学2026年硕士生招生专业目录"
+        },
+        {
+          "subjectName": "英语（一）",
+          "subjectCode": "201",
+          "status": "verified",
+          "sourceUrl": "https://yz.jnu.edu.cn/2026nssyjszszyml/list.htm",
+          "note": "来源于暨南大学2026年硕士生招生专业目录"
+        },
+        {
+          "subjectName": "新闻传播史论",
+          "subjectCode": "707",
+          "status": "verified",
+          "sourceUrl": "https://yz.jnu.edu.cn/2026nssyjszszyml/list.htm",
+          "note": "来源于暨南大学2026年硕士生招生专业目录"
+        },
+        {
+          "subjectName": "新闻传播业务",
+          "subjectCode": "809",
+          "status": "verified",
+          "sourceUrl": "https://yz.jnu.edu.cn/2026nssyjszszyml/list.htm",
+          "note": "来源于暨南大学2026年硕士生招生专业目录"
+        }
+      ],
+      "plannedEnrollment": {
+        "value": "暂未收录",
+        "status": "pending",
+        "note": "以当年招生目录或院校研究生招生官网为准"
+      },
+      "recommendedExemption": {
+        "value": "暂未收录",
+        "status": "pending",
+        "note": "以当年招生目录为准"
+      },
+      "scoreLines": [
+        {
+          "year": "2025",
+          "value": "暂未收录",
+          "status": "pending",
+          "sourceUrl": "",
+          "note": "以院校官方复试分数线为准"
+        }
+      ],
+      "referenceBooks": [
+        {
+          "name": "官方暂未指定 / 暂未收录",
+          "status": "pending",
+          "note": "以考试大纲或学院官方通知为准"
+        }
+      ],
+      "examOutline": {
+        "value": "暂未收录",
+        "status": "pending",
+        "sourceUrl": "",
+        "note": "以院校官网考试大纲为准"
+      },
+      "reExamSubjects": [
+        {
+          "name": "新闻传播学综合（笔试+面试）",
+          "status": "verified",
+          "sourceUrl": "https://yz.jnu.edu.cn/2026nssyjszszyml/list.htm",
+          "note": "来源于官方专业目录中的复试科目"
+        }
+      ],
+      "source": {
+        "sourceName": "暨南大学2026年硕士生招生专业目录（新闻与传播学院）",
+        "sourceType": "school_official",
+        "sourceUrl": "https://yz.jnu.edu.cn/2026nssyjszszyml/list.htm",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "keywords": ["暨南大学", "传播学", "050302", "智能营销传播", "数字营销", "市场营销", "广州", "考研"],
+      "notes": "官方目录明确列出智能营销传播方向与考试科目；招生人数、复试线、参考书仍待官方文件进一步核验。",
+      "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
+    },
+    {
+      "id": "official_major_sufe_applied_economics_2026",
+      "isDemo": false,
+      "dataStatus": "partial",
+      "universityId": "univ_048",
+      "universityTags": ["211", "财经类", "上海"],
+      "professionalDataLevel": "partial",
+      "linkedUniversitySource": "universities.json#univ_048",
+      "school": "上海财经大学",
+      "region": "上海",
+      "city": "上海市",
+      "college": "招生单位待按年度专业目录进一步核验",
+      "major": "应用经济学",
+      "majorCode": "0202",
+      "degreeType": "学硕",
+      "studyMode": "待核验",
+      "researchDirection": "国民经济学、财政学、金融学、产业经济学、国际贸易学、劳动经济学、统计学、数量经济学",
+      "relatedAreas": ["应用经济学", "金融", "国际商务"],
+      "mathRequired": "待核验",
+      "examSubjects": [
+        {
+          "subjectName": "初试科目待核验",
+          "subjectCode": "待核验",
+          "status": "pending",
+          "sourceUrl": "",
+          "note": "培养专业目录不等同于当年招生目录，不据此推断考试科目"
+        }
+      ],
+      "plannedEnrollment": {
+        "value": "暂未收录",
+        "status": "pending",
+        "note": "以当年招生目录或院校研究生招生官网为准"
+      },
+      "recommendedExemption": {
+        "value": "暂未收录",
+        "status": "pending",
+        "note": "以当年招生目录为准"
+      },
+      "scoreLines": [
+        {
+          "year": "2025",
+          "value": "暂未收录",
+          "status": "pending",
+          "sourceUrl": "",
+          "note": "以院校官方复试分数线为准"
+        }
+      ],
+      "referenceBooks": [
+        {
+          "name": "暂未收录",
+          "status": "pending",
+          "note": "以官方考试大纲或学院通知为准"
+        }
+      ],
+      "examOutline": {
+        "value": "暂未收录",
+        "status": "pending",
+        "sourceUrl": "",
+        "note": "以年度招生专业目录或考试大纲为准"
+      },
+      "reExamSubjects": [
+        {
+          "name": "暂未收录",
+          "status": "pending",
+          "note": "以学院复试通知为准"
+        }
+      ],
+      "source": {
+        "sourceName": "上海财经大学2026年招收培养研究生学科专业目录",
+        "sourceType": "school_official",
+        "sourceUrl": "https://gs.sufe.edu.cn/Home/List/61",
+        "checkedAt": "2026-05-26",
+        "reliability": "high"
+      },
+      "keywords": ["上海财经大学", "应用经济学", "0202", "上海", "金融", "国际商务", "财经类", "经管类", "考研"],
+      "notes": "官方培养专业目录核验了应用经济学学科代码及所含专业方向；该页面不是年度招生专业目录，考试科目、招生人数、复试线和参考书均保持 pending。",
       "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
     }
   ]

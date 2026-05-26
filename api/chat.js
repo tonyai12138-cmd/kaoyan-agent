@@ -16,13 +16,13 @@ const commonDisclaimer = `${factDisclaimer} ${prototypeDisclaimer}`;
 const defaultModel = "deepseek-v4-flash";
 const deepseekEndpoint = "https://api.deepseek.com/chat/completions";
 const factQuestionPattern =
-  /某校|院校|学校|大学|高校|985|211|双一流|层次|专业|考试科目|招生人数|招生名额|复试线|分数线|参考书|录取比例/;
+  /某校|院校|学校|大学|高校|985|211|双一流|层次|专业|考什么|初试|复试|考试科目|招生人数|招生名额|复试线|分数线|参考书|录取比例/;
 const professionalFactPattern =
-  /专业|专业数据|专业目录|招生专业|考试科目|招生人数|招生名额|推免|复试线|分数线|参考书|录取比例/;
+  /专业|专业数据|专业目录|招生专业|考什么|初试|复试|考试科目|招生人数|招生名额|推免|复试线|分数线|参考书|录取比例/;
 const universityLevelPattern =
   /985|211|双一流|层次|财经类|哪些.*大学|哪些.*学校|高校/;
 const knowledgeStatusRules =
-  "verified 表示已由官方来源核验；partial 表示仅部分字段核验；pending 表示待核验；demo 表示演示数据。universities.json 片段仅可回答院校基础层级信息；schools.json 专业片段仅在 professionalDataLevel 或 dataStatus 为 verified / partial 且来源为 official / school_official 时引用明确字段。source 为 university 的片段不得外推专业招生事实。";
+  "verified 表示已由官方来源核验；partial 表示仅部分字段核验；pending 表示待核验；demo 表示演示数据。universities.json 片段仅可回答院校基础层级信息；schools.json 专业片段仅在 professionalDataLevel 或 dataStatus 为 verified / partial 且来源为 official / school_official 时使用，并且只能引用片段中明确写为“已核验”且不为“暂未收录 / 待核验”的字段。source 为 university 的片段不得外推专业招生事实。";
 
 // Keep these aliases and system rules synchronized with src/data/prompts.js.
 // The Vercel function maintains its own copy so its server-only deployment stays isolated.
@@ -177,7 +177,7 @@ function hasOfficialUniversityIndex(context) {
 function buildContextMessage({ message, profile, context, mode }) {
   const factsGuard = professionalFactPattern.test(message)
     ? hasUsableProfessionalFact(context)
-      ? `用户正在询问专业或招生事实。仅可引用 schools 专业片段中已明确标示为 verified / partial 且来源为官方的具体字段，并保留官方核验提醒。${knowledgeStatusRules}`
+      ? `用户正在询问专业或招生事实。仅可引用 schools 专业片段中来源为官方、并明确写为“已核验”且不为“暂未收录 / 待核验”的具体字段，并保留官方核验提醒。${knowledgeStatusRules}`
       : hasOfficialUniversityIndex(context)
         ? `用户正在询问专业或招生事实，但 context 只有该校的 university 基础索引，不能回答专业事实。必须回复：${universityProfessionalMissingNotice} ${professionalVerificationPath}`
         : `用户正在询问专业或招生事实。当前 context 不含可用的官方专业片段，不得输出具体数字或具体考试结论，必须回复：${knowledgeMissingNotice} ${professionalVerificationPath}`

@@ -22,9 +22,9 @@ import {
 
 const urgentTerms = ["自杀", "自伤", "不想活", "结束生命"];
 const factQuestionPattern =
-  /某校|院校|学校|大学|高校|985|211|双一流|层次|专业|考试科目|招生人数|招生名额|复试线|分数线|参考书|录取比例/;
+  /某校|院校|学校|大学|高校|985|211|双一流|层次|专业|考什么|初试|复试|考试科目|招生人数|招生名额|复试线|分数线|参考书|录取比例/;
 const professionalFactPattern =
-  /专业|专业数据|专业目录|招生专业|考试科目|招生人数|招生名额|复试线|分数线|参考书|录取比例/;
+  /专业|专业数据|专业目录|招生专业|考什么|初试|复试|考试科目|招生人数|招生名额|复试线|分数线|参考书|录取比例/;
 const universityLevelPattern =
   /985|211|双一流|层次|财经类|哪些.*大学|哪些.*学校|高校/;
 const chatModeLabels = Object.fromEntries(
@@ -84,7 +84,7 @@ function factBasisForQuestion(message, snippets) {
     );
 
     if (usableProfessionalFacts.length) {
-      return `${formatRetrievedBasis(usableProfessionalFacts)}\n\n仅可引用以上已标示字段；未列出的招生事实仍需核验。${factDisclaimer} ${professionalVerificationPath}`;
+      return `${formatRetrievedBasis(usableProfessionalFacts)}\n\n仅可引用以上片段中明确写为“已核验”且不为“暂未收录 / 待核验”的字段；未核验的招生人数、复试线、参考书或考试科目不得生成具体结论。${factDisclaimer} ${professionalVerificationPath}`;
     }
 
     if (baseIndexItem) {
