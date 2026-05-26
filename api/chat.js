@@ -21,8 +21,16 @@ const professionalFactPattern =
   /专业|专业数据|专业目录|招生专业|考什么|初试|复试|考试科目|招生人数|招生名额|推免|复试线|分数线|参考书|录取比例/;
 const universityLevelPattern =
   /985|211|双一流|层次|财经类|哪些.*大学|哪些.*学校|高校/;
+const knownQueryIntents = new Set([
+  "university_level",
+  "major_level",
+  "method_faq",
+  "question_analysis",
+  "source_verification",
+  "emotional_support",
+]);
 const knowledgeStatusRules =
-  "verified 表示已由官方来源核验；partial 表示仅部分字段核验；pending 表示待核验；demo 表示演示数据。universities.json 片段仅可回答院校基础层级信息；schools.json 专业片段仅在 professionalDataLevel 或 dataStatus 为 verified / partial 且来源为 official / school_official 时使用，并且只能引用片段中明确写为“已核验”且不为“暂未收录 / 待核验”的字段。source 为 university 的片段不得外推专业招生事实。";
+  "verified 表示已由官方来源核验；partial 表示仅部分字段核验；pending 表示待核验；demo 表示演示数据。university 来源片段仅可回答院校基础层级信息；school 来源专业片段仅在 professionalDataLevel 或 dataStatus 为 verified / partial 且来源为 official / school_official 时使用，并且只能引用片段中明确写为“已核验”且不为“暂未收录 / 待核验”的字段。requestedFieldStatus 为 pending 时必须说明该字段暂未收录，不得以其他字段推断。";
 
 // Keep these aliases and system rules synchronized with src/data/prompts.js.
 // The Vercel function maintains its own copy so its server-only deployment stays isolated.
@@ -59,6 +67,7 @@ const systemPrompt = `你是“研途智伴 Agent”，面向中国考研学生�
 9. 用户提到严重焦虑、失眠或自伤想法时，建议其联系可信任的人、学校心理中心或专业机构；存在紧急危险时建议及时寻求紧急援助；
 10. 当前项目为课程展示原型，涉及演示数据时必须明确说明，不构成正式报考建议；
 11. 回答要具体、可执行、结构化，优先使用 Markdown 小标题、列表或表格，避免过长段落。
+12. context 中的 queryIntent 用于说明本轮检索类型；回答不得越过该意图引用无关片段形成事实结论。
 
 知识库状态规则：
 ${knowledgeStatusRules}
@@ -129,6 +138,29 @@ function contextSnippets(context) {
     : [];
 }
 
+function queryIntentFor(message, context, mode) {
+  if (knownQueryIntents.has(context?.queryIntent)) {
+    return context.queryIntent;
+  }
+
+  if (professionalFactPattern.test(message)) {
+    return "major_level";
+  }
+  if (universityLevelPattern.test(message)) {
+    return "university_level";
+  }
+  if (mode === "question") {
+    return "question_analysis";
+  }
+  if (mode === "source") {
+    return "source_verification";
+  }
+  if (mode === "emotion") {
+    return "emotional_support";
+  }
+  return "method_faq";
+}
+
 function formatSnippetBasis(context) {
   const snippets = contextSnippets(context);
 
@@ -165,6 +197,18 @@ function hasUsableProfessionalFact(context) {
   );
 }
 
+function hasUsableRequestedProfessionalFact(context) {
+  return contextSnippets(context).some(
+    (snippet) =>
+      snippet.source === "school" &&
+      ["verified", "partial"].includes(
+        snippet.professionalDataLevel ?? snippet.dataStatus,
+      ) &&
+      ["official", "school_official"].includes(snippet.sourceType) &&
+      (!snippet.requestedField || snippet.requestedFieldStatus === "available"),
+  );
+}
+
 function hasOfficialUniversityIndex(context) {
   return contextSnippets(context).some(
     (snippet) =>
@@ -175,16 +219,34 @@ function hasOfficialUniversityIndex(context) {
 }
 
 function buildContextMessage({ message, profile, context, mode }) {
-  const factsGuard = professionalFactPattern.test(message)
-    ? hasUsableProfessionalFact(context)
+  const queryIntent = queryIntentFor(message, context, mode);
+  const snippets = contextSnippets(context).map((snippet) => ({
+    queryIntent: snippet.queryIntent,
+    source: snippet.source,
+    title: snippet.title,
+    dataStatus: snippet.dataStatus,
+    sourceType: snippet.sourceType,
+    professionalDataLevel: snippet.professionalDataLevel,
+    requestedField: snippet.requestedField,
+    requestedFieldStatus: snippet.requestedFieldStatus,
+    content: snippet.content,
+    disclaimer: snippet.disclaimer,
+    sourceUrl: snippet.sourceUrl,
+  }));
+  const factsGuard = queryIntent === "major_level"
+    ? hasUsableRequestedProfessionalFact(context)
       ? `用户正在询问专业或招生事实。仅可引用 schools 专业片段中来源为官方、并明确写为“已核验”且不为“暂未收录 / 待核验”的具体字段，并保留官方核验提醒。${knowledgeStatusRules}`
+      : hasUsableProfessionalFact(context)
+        ? `已检索到该校专业记录，但用户询问的具体字段在片段中标记为 pending。必须说明该字段暂未收录，不得输出具体值或由其他字段推断。${professionalVerificationPath}`
       : hasOfficialUniversityIndex(context)
         ? `用户正在询问专业或招生事实，但 context 只有该校的 university 基础索引，不能回答专业事实。必须回复：${universityProfessionalMissingNotice} ${professionalVerificationPath}`
         : `用户正在询问专业或招生事实。当前 context 不含可用的官方专业片段，不得输出具体数字或具体考试结论，必须回复：${knowledgeMissingNotice} ${professionalVerificationPath}`
-    : universityLevelPattern.test(message)
+    : queryIntent === "university_level"
       ? hasOfficialUniversityIndex(context)
         ? `用户正在询问学校基础层级。可引用 official_index university 片段中明确展示的 985 / 211 身份；不得由此推断专业、考试、招生或录取信息。${knowledgeStatusRules}`
         : `用户正在询问学校基础层级，但当前 context 未检索到可用基础索引，必须回复：${knowledgeMissingNotice}`
+      : queryIntent === "source_verification"
+        ? `用户正在核验资料来源。可依据 FAQ 与 prompt 给出核验路径；school 片段只用于展示其官方来源和已核验字段，不得补写未收录的事实。${professionalVerificationPath}`
       : factQuestionPattern.test(message)
         ? hasVerifiedOfficialFact(context)
           ? `用户正在询问事实类信息。仅可引用 verified / official 片段中明确提供且与问题对应的事实，并保留官方核验提醒。${knowledgeStatusRules}`
@@ -193,9 +255,11 @@ function buildContextMessage({ message, profile, context, mode }) {
 
   return [
     `当前 mode：${mode}`,
+    `检索意图 queryIntent：${queryIntent}`,
     `用户画像与当前计划状态：${safeContext(profile, 2400)}`,
-    `知识库与任务 context：${safeContext(context)}`,
-    `知识库片段数量：${contextSnippets(context).length}`,
+    `当前任务状态：${safeContext({ selectedSchoolId: context?.selectedSchoolId, strategySelectionSource: context?.strategySelectionSource, tasks: context?.tasks }, 2400)}`,
+    `知识库片段（最多 5 条）：${safeContext(snippets)}`,
+    `知识库片段数量：${snippets.length}`,
     `知识库状态解释：${knowledgeStatusRules}`,
     factsGuard,
   ].join("\n");
@@ -208,16 +272,25 @@ function formatAnswerSections(sections) {
 }
 
 function buildMockAnswer(message, mode, context) {
-  const asksProfessionalFacts = professionalFactPattern.test(message);
+  const queryIntent = queryIntentFor(message, context, mode);
+  const asksProfessionalFacts = queryIntent === "major_level";
   const hasLevelIndex =
     universityLevelPattern.test(message) &&
     !asksProfessionalFacts &&
     hasOfficialUniversityIndex(context);
   const hasBaseIndexOnly = asksProfessionalFacts && hasOfficialUniversityIndex(context);
-  const basis = hasBaseIndexOnly
+  const hasMatchedPendingField =
+    asksProfessionalFacts &&
+    hasUsableProfessionalFact(context) &&
+    !hasUsableRequestedProfessionalFact(context);
+  const basis = hasMatchedPendingField
+    ? `${formatSnippetBasis(context)}\n\n已匹配到专业记录，但本次询问字段仍为待核验，不能输出具体值。${professionalVerificationPath}`
+    : hasBaseIndexOnly
     ? `${universityProfessionalMissingNotice}\n\n${universityOnlyMajorNotice} ${professionalVerificationPath}`
     : hasLevelIndex
     ? `${formatSnippetBasis(context)}\n\n985 / 211 基础索引仅用于院校层级初筛，不提供专业目录、考试科目、招生人数、复试线或参考书。${factDisclaimer}`
+    : queryIntent === "source_verification"
+      ? formatSnippetBasis(context)
     : factQuestionPattern.test(message)
       ? knowledgeMissingNotice
       : formatSnippetBasis(context);
