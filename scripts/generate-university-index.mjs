@@ -196,7 +196,7 @@ function findRelatedMajors(universityId, school) {
   );
 }
 
-function candidateMajorAreaNamesFor(school, type) {
+function candidateMajorAreaNamesFor(school, type, relatedMajors) {
   const extraAreas =
     type === "财经类"
       ? ["会计", "金融", "市场营销", "数字营销", "公共管理", "国际商务"]
@@ -204,15 +204,19 @@ function candidateMajorAreaNamesFor(school, type) {
         ? ["新闻传播", "数字营销", "市场营销"]
         : [];
 
-  return [...new Set([...coreCandidateMajorAreas, ...extraAreas])];
+  const linkedAreas = relatedMajors.flatMap((major) => major.relatedAreas ?? []);
+
+  return [...new Set([...coreCandidateMajorAreas, ...extraAreas, ...linkedAreas])];
 }
 
 function buildCandidateMajorAreas(school, type, relatedMajors) {
-  return candidateMajorAreaNamesFor(school, type).map((area) => {
+  return candidateMajorAreaNamesFor(school, type, relatedMajors).map((area) => {
     const relatedSchoolMajorIds = relatedMajors
       .filter(
         (major) =>
-          major.major?.includes(area) || major.researchDirection?.includes(area),
+          major.major?.includes(area) ||
+          major.researchDirection?.includes(area) ||
+          major.relatedAreas?.includes(area),
       )
       .map((major) => major.id);
 
@@ -223,6 +227,16 @@ function buildCandidateMajorAreas(school, type, relatedMajors) {
       relatedSchoolMajorIds,
     };
   });
+}
+
+function majorDataStatusFor(relatedMajors) {
+  if (!relatedMajors.length) {
+    return "none";
+  }
+
+  return relatedMajors.some((major) => major.professionalDataLevel === "verified")
+    ? "linked"
+    : "partial";
 }
 
 const universities = official211Index.map(
@@ -248,7 +262,7 @@ const universities = official211Index.map(
       hasMajorKnowledge: linkedSchoolMajorIds.length > 0,
       linkedSchoolMajorIds,
       candidateMajorAreas: buildCandidateMajorAreas(school, type, relatedMajors),
-      majorDataStatus: linkedSchoolMajorIds.length ? "linked" : "none",
+      majorDataStatus: majorDataStatusFor(relatedMajors),
       majorDataDisclaimer,
       searchKeywords: [
         school,
@@ -291,7 +305,7 @@ if (universities.filter((item) => item.is985).length !== 39) {
 const data = {
   knowledgeBase: {
     name: "985 / 211 院校基础索引库",
-    version: "0.2.0",
+    version: "0.3.0",
     scope:
       "用于学校层级初筛、工程名单身份查询及与专业知识记录的关联状态展示；不自行提供专业目录、考试科目、招生人数、复试线或参考书结论。",
     checkedAt: "2026-05-26",

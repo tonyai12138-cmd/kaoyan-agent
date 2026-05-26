@@ -22,6 +22,8 @@ export const universityMajorDataDisclaimer =
   "当前院校基础索引不包含完整专业目录、招生人数、复试线或参考书，具体信息以研招网和目标院校研究生招生官网为准。";
 export const professionalVerificationPath =
   "下一步请核验研招网硕士专业目录、目标院校研究生招生官网，以及目标学院招生目录、复试细则或考试大纲。";
+export const partialProfessionalFieldRule =
+  "专业记录标记为 partial 时，仅可引用其中明确标为已核验且附官方来源的字段；招生人数、复试线、参考书或考试科目为待核验时，不得生成具体结论。";
 
 export const knowledgeStatusDefinitions = {
   verified: {
@@ -43,7 +45,7 @@ export const knowledgeStatusDefinitions = {
 };
 
 export const knowledgeBasePresentationCopy =
-  "知识库将 985 / 211 院校基础索引与院校专业记录分层管理，通过 universityId / linkedSchoolMajorIds 建立关联；基础索引不替代具体专业招生核验。";
+  "知识库将 985 / 211 院校基础索引与重点院校专业记录分层管理，通过 universityId / linkedSchoolMajorIds 建立关联；当前已接入一批官方材料支撑的 partial 专业样例，且只引用逐字段核验结果。";
 
 const clientModeAliases = {
   school: "school",
@@ -86,6 +88,7 @@ export const agentBoundaries = [
   "知识库中标为演示或待核验的条目不作为院校事实依据。",
   universityIndexBoundary,
   universityOnlyMajorNotice,
+  partialProfessionalFieldRule,
   emotionDisclaimer,
   prototypeDisclaimer,
 ];

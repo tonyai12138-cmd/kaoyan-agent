@@ -1,7 +1,7 @@
 {
   "knowledgeBase": {
     "name": "985 / 211 院校基础索引库",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "scope": "用于学校层级初筛、工程名单身份查询及与专业知识记录的关联状态展示；不自行提供专业目录、考试科目、招生人数、复试线或参考书结论。",
     "checkedAt": "2026-05-26",
     "coverage": {
@@ -3444,8 +3444,10 @@
         "工商管理待核验",
         "数字营销方向待核验"
       ],
-      "hasMajorKnowledge": false,
-      "linkedSchoolMajorIds": [],
+      "hasMajorKnowledge": true,
+      "linkedSchoolMajorIds": [
+        "official_major_sufe_applied_economics_2026"
+      ],
       "candidateMajorAreas": [
         {
           "area": "工商管理",
@@ -3455,9 +3457,11 @@
         },
         {
           "area": "应用经济学",
-          "status": "candidate",
+          "status": "linked",
           "note": "仅表示可作为后续核验方向，不代表该校当年招生。",
-          "relatedSchoolMajorIds": []
+          "relatedSchoolMajorIds": [
+            "official_major_sufe_applied_economics_2026"
+          ]
         },
         {
           "area": "管理科学与工程",
@@ -3473,9 +3477,11 @@
         },
         {
           "area": "金融",
-          "status": "candidate",
+          "status": "linked",
           "note": "仅表示可作为后续核验方向，不代表该校当年招生。",
-          "relatedSchoolMajorIds": []
+          "relatedSchoolMajorIds": [
+            "official_major_sufe_applied_economics_2026"
+          ]
         },
         {
           "area": "市场营销",
@@ -3497,12 +3503,14 @@
         },
         {
           "area": "国际商务",
-          "status": "candidate",
+          "status": "linked",
           "note": "仅表示可作为后续核验方向，不代表该校当年招生。",
-          "relatedSchoolMajorIds": []
+          "relatedSchoolMajorIds": [
+            "official_major_sufe_applied_economics_2026"
+          ]
         }
       ],
-      "majorDataStatus": "none",
+      "majorDataStatus": "partial",
       "majorDataDisclaimer": "当前院校基础索引不包含完整专业目录、招生人数、复试线或参考书，具体信息以研招网和目标院校研究生招生官网为准。",
       "searchKeywords": [
         "上海财经大学",
@@ -5239,29 +5247,53 @@
       "relatedFields": [
         "经管类招生设置待核验"
       ],
-      "hasMajorKnowledge": false,
-      "linkedSchoolMajorIds": [],
+      "hasMajorKnowledge": true,
+      "linkedSchoolMajorIds": [
+        "official_major_whu_digital_economy_2026",
+        "official_major_whu_marketing_track_2026"
+      ],
       "candidateMajorAreas": [
         {
           "area": "工商管理",
-          "status": "candidate",
+          "status": "linked",
           "note": "仅表示可作为后续核验方向，不代表该校当年招生。",
-          "relatedSchoolMajorIds": []
+          "relatedSchoolMajorIds": [
+            "official_major_whu_marketing_track_2026"
+          ]
         },
         {
           "area": "应用经济学",
-          "status": "candidate",
+          "status": "linked",
           "note": "仅表示可作为后续核验方向，不代表该校当年招生。",
-          "relatedSchoolMajorIds": []
+          "relatedSchoolMajorIds": [
+            "official_major_whu_digital_economy_2026"
+          ]
         },
         {
           "area": "管理科学与工程",
           "status": "candidate",
           "note": "仅表示可作为后续核验方向，不代表该校当年招生。",
           "relatedSchoolMajorIds": []
+        },
+        {
+          "area": "数字营销",
+          "status": "linked",
+          "note": "仅表示可作为后续核验方向，不代表该校当年招生。",
+          "relatedSchoolMajorIds": [
+            "official_major_whu_digital_economy_2026",
+            "official_major_whu_marketing_track_2026"
+          ]
+        },
+        {
+          "area": "市场营销",
+          "status": "linked",
+          "note": "仅表示可作为后续核验方向，不代表该校当年招生。",
+          "relatedSchoolMajorIds": [
+            "official_major_whu_marketing_track_2026"
+          ]
         }
       ],
-      "majorDataStatus": "none",
+      "majorDataStatus": "partial",
       "majorDataDisclaimer": "当前院校基础索引不包含完整专业目录、招生人数、复试线或参考书，具体信息以研招网和目标院校研究生招生官网为准。",
       "searchKeywords": [
         "武汉大学",
@@ -5665,14 +5697,20 @@
         "工商管理待核验",
         "数字营销方向待核验"
       ],
-      "hasMajorKnowledge": false,
-      "linkedSchoolMajorIds": [],
+      "hasMajorKnowledge": true,
+      "linkedSchoolMajorIds": [
+        "official_major_zuel_enterprise_2026",
+        "official_major_zuel_marketing_2026"
+      ],
       "candidateMajorAreas": [
         {
           "area": "工商管理",
-          "status": "candidate",
+          "status": "linked",
           "note": "仅表示可作为后续核验方向，不代表该校当年招生。",
-          "relatedSchoolMajorIds": []
+          "relatedSchoolMajorIds": [
+            "official_major_zuel_enterprise_2026",
+            "official_major_zuel_marketing_2026"
+          ]
         },
         {
           "area": "应用经济学",
@@ -5700,15 +5738,20 @@
         },
         {
           "area": "市场营销",
-          "status": "candidate",
+          "status": "linked",
           "note": "仅表示可作为后续核验方向，不代表该校当年招生。",
-          "relatedSchoolMajorIds": []
+          "relatedSchoolMajorIds": [
+            "official_major_zuel_enterprise_2026",
+            "official_major_zuel_marketing_2026"
+          ]
         },
         {
           "area": "数字营销",
-          "status": "candidate",
+          "status": "linked",
           "note": "仅表示可作为后续核验方向，不代表该校当年招生。",
-          "relatedSchoolMajorIds": []
+          "relatedSchoolMajorIds": [
+            "official_major_zuel_marketing_2026"
+          ]
         },
         {
           "area": "公共管理",
@@ -5721,9 +5764,17 @@
           "status": "candidate",
           "note": "仅表示可作为后续核验方向，不代表该校当年招生。",
           "relatedSchoolMajorIds": []
+        },
+        {
+          "area": "企业管理",
+          "status": "linked",
+          "note": "仅表示可作为后续核验方向，不代表该校当年招生。",
+          "relatedSchoolMajorIds": [
+            "official_major_zuel_enterprise_2026"
+          ]
         }
       ],
-      "majorDataStatus": "none",
+      "majorDataStatus": "partial",
       "majorDataDisclaimer": "当前院校基础索引不包含完整专业目录、招生人数、复试线或参考书，具体信息以研招网和目标院校研究生招生官网为准。",
       "searchKeywords": [
         "中南财经政法大学",
@@ -6124,8 +6175,11 @@
       "relatedFields": [
         "经管类招生设置待核验"
       ],
-      "hasMajorKnowledge": false,
-      "linkedSchoolMajorIds": [],
+      "hasMajorKnowledge": true,
+      "linkedSchoolMajorIds": [
+        "official_major_jnu_mjc_digital_marketing_2026",
+        "official_major_jnu_communication_smart_marketing_2026"
+      ],
       "candidateMajorAreas": [
         {
           "area": "工商管理",
@@ -6144,9 +6198,36 @@
           "status": "candidate",
           "note": "仅表示可作为后续核验方向，不代表该校当年招生。",
           "relatedSchoolMajorIds": []
+        },
+        {
+          "area": "新闻传播",
+          "status": "linked",
+          "note": "仅表示可作为后续核验方向，不代表该校当年招生。",
+          "relatedSchoolMajorIds": [
+            "official_major_jnu_mjc_digital_marketing_2026",
+            "official_major_jnu_communication_smart_marketing_2026"
+          ]
+        },
+        {
+          "area": "数字营销",
+          "status": "linked",
+          "note": "仅表示可作为后续核验方向，不代表该校当年招生。",
+          "relatedSchoolMajorIds": [
+            "official_major_jnu_mjc_digital_marketing_2026",
+            "official_major_jnu_communication_smart_marketing_2026"
+          ]
+        },
+        {
+          "area": "市场营销",
+          "status": "linked",
+          "note": "仅表示可作为后续核验方向，不代表该校当年招生。",
+          "relatedSchoolMajorIds": [
+            "official_major_jnu_mjc_digital_marketing_2026",
+            "official_major_jnu_communication_smart_marketing_2026"
+          ]
         }
       ],
-      "majorDataStatus": "none",
+      "majorDataStatus": "partial",
       "majorDataDisclaimer": "当前院校基础索引不包含完整专业目录、招生人数、复试线或参考书，具体信息以研招网和目标院校研究生招生官网为准。",
       "searchKeywords": [
         "暨南大学",
@@ -6866,29 +6947,60 @@
       "relatedFields": [
         "经管类招生设置待核验"
       ],
-      "hasMajorKnowledge": false,
-      "linkedSchoolMajorIds": [],
+      "hasMajorKnowledge": true,
+      "linkedSchoolMajorIds": [
+        "official_major_cqu_applied_economics_2026",
+        "official_major_cqu_business_admin_2026"
+      ],
       "candidateMajorAreas": [
         {
           "area": "工商管理",
-          "status": "candidate",
+          "status": "linked",
           "note": "仅表示可作为后续核验方向，不代表该校当年招生。",
-          "relatedSchoolMajorIds": []
+          "relatedSchoolMajorIds": [
+            "official_major_cqu_business_admin_2026"
+          ]
         },
         {
           "area": "应用经济学",
-          "status": "candidate",
+          "status": "linked",
           "note": "仅表示可作为后续核验方向，不代表该校当年招生。",
-          "relatedSchoolMajorIds": []
+          "relatedSchoolMajorIds": [
+            "official_major_cqu_applied_economics_2026"
+          ]
         },
         {
           "area": "管理科学与工程",
           "status": "candidate",
           "note": "仅表示可作为后续核验方向，不代表该校当年招生。",
           "relatedSchoolMajorIds": []
+        },
+        {
+          "area": "金融",
+          "status": "linked",
+          "note": "仅表示可作为后续核验方向，不代表该校当年招生。",
+          "relatedSchoolMajorIds": [
+            "official_major_cqu_applied_economics_2026"
+          ]
+        },
+        {
+          "area": "国际商务",
+          "status": "linked",
+          "note": "仅表示可作为后续核验方向，不代表该校当年招生。",
+          "relatedSchoolMajorIds": [
+            "official_major_cqu_applied_economics_2026"
+          ]
+        },
+        {
+          "area": "市场营销",
+          "status": "linked",
+          "note": "仅表示可作为后续核验方向，不代表该校当年招生。",
+          "relatedSchoolMajorIds": [
+            "official_major_cqu_business_admin_2026"
+          ]
         }
       ],
-      "majorDataStatus": "none",
+      "majorDataStatus": "partial",
       "majorDataDisclaimer": "当前院校基础索引不包含完整专业目录、招生人数、复试线或参考书，具体信息以研招网和目标院校研究生招生官网为准。",
       "searchKeywords": [
         "重庆大学",

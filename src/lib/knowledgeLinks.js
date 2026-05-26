@@ -29,10 +29,13 @@ export function getUniversityMajorStatus(university) {
   const relatedMajors = findMajorKnowledgeByUniversity(university?.id);
 
   if (relatedMajors.length) {
+    const partialCount = relatedMajors.filter(
+      (major) => major.professionalDataLevel === "partial",
+    ).length;
     return {
-      key: "linked",
-      label: "已有关联专业数据",
-      message: `已关联 ${relatedMajors.length} 条专业知识记录，仍需按各条记录的核验状态使用。`,
+      key: university?.majorDataStatus ?? "partial",
+      label: "已有关联专业记录",
+      message: `已关联 ${relatedMajors.length} 条专业知识记录，其中 ${partialCount} 条为部分官方核验；仅可引用各记录中明确核验的字段。`,
       relatedMajors,
     };
   }
@@ -48,8 +51,8 @@ export function getUniversityMajorStatus(university) {
 export function buildUniversityMajorSummary(university, relatedMajors = []) {
   const status = relatedMajors.length
     ? {
-        label: "已有关联专业数据",
-        message: `已关联 ${relatedMajors.length} 条专业记录，引用前需检查其专业数据状态。`,
+        label: "已有关联专业记录",
+        message: `已关联 ${relatedMajors.length} 条专业记录，引用前需检查字段核验状态与官方来源。`,
       }
     : {
         label: "当前仅有院校基础信息",

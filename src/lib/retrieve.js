@@ -16,9 +16,9 @@ import {
 } from "./knowledgeLinks";
 
 const factSearchPattern =
-  /学校|院校|某校|高校|大学|985|211|双一流|层次|专业|考试科目|招生人数|推免|分数线|复试线|参考书|录取比例/;
+  /学校|院校|某校|高校|大学|985|211|双一流|层次|专业|考什么|初试|复试|考试科目|招生人数|推免|分数线|复试线|参考书|录取比例/;
 const professionalFactPattern =
-  /专业|专业数据|专业目录|招生专业|考试科目|招生人数|招生名额|推免|分数线|复试线|参考书|录取比例/;
+  /专业|专业数据|专业目录|招生专业|考什么|初试|复试|考试科目|招生人数|招生名额|推免|分数线|复试线|参考书|录取比例/;
 const universityIndexPattern =
   /985|211|双一流|层次|财经类|哪些学校|哪些大学|高校|大学/;
 const sourceLabels = {
@@ -37,13 +37,36 @@ function statusLabel(status) {
   return knowledgeStatusDefinitions[status]?.label ?? "待核验";
 }
 
+function isCitableProfessionalField(field) {
+  return (
+    field &&
+    ["verified", "partial"].includes(field.status) &&
+    Boolean(field.sourceUrl) &&
+    !["暂未收录", "待核验", "官方暂未指定 / 暂未收录"].includes(field.value ?? field.name)
+  );
+}
+
+function citableList(items, formatter) {
+  return (items ?? [])
+    .filter(isCitableProfessionalField)
+    .map(formatter)
+    .join("、");
+}
+
 function modeBonus(entry, mode) {
   return entry.modes.includes(mode) ? 2 : 0;
 }
 
 function sourceBonus(entry, query, mode) {
   if (
+    professionalFactPattern.test(query) &&
+    entry.source === "school"
+  ) {
+    return 8;
+  }
+  if (
     mode === "school" &&
+    !professionalFactPattern.test(query) &&
     universityIndexPattern.test(query) &&
     entry.source === "university"
   ) {
@@ -104,6 +127,16 @@ function scoreEntry(entry, query, mode) {
     ) {
       hits += 5;
     }
+  }
+
+  if (entry.source === "school") {
+    [entry.school, entry.major]
+      .filter(Boolean)
+      .forEach((field) => {
+        if (normalizedQuery.includes(normalizeText(field))) {
+          hits += 5;
+        }
+      });
   }
 
   if (!hits) {
@@ -175,17 +208,33 @@ function createSchoolItems() {
     const subjectNames = school.examSubjects
       .map((subject) => subject.subjectName)
       .join("、");
+    const confirmedSubjects = citableList(
+      school.examSubjects,
+      (subject) => `${subject.subjectCode} ${subject.subjectName}`,
+    );
+    const confirmedScoreLines = citableList(
+      school.scoreLines,
+      (line) => `${line.year}年 ${line.value}`,
+    );
+    const confirmedBooks = citableList(
+      school.referenceBooks,
+      (book) => book.name,
+    );
+    const enrollment = isCitableProfessionalField(school.plannedEnrollment)
+      ? school.plannedEnrollment.value
+      : "暂未收录 / 待核验";
     const status = school.dataStatus ?? "pending";
     const professionalDataLevel = school.professionalDataLevel ?? status;
     const content = [
-      `数据状态：${status}（${statusLabel(status)}）`,
-      `专业数据完整度：${professionalDataLevel}（${statusLabel(professionalDataLevel)}）；关联院校索引：${school.universityId}`,
-      `样例方向：${school.major} / ${school.researchDirection}`,
-      `地区：${school.region}；学位类型：${school.degreeType}；数学要求：${school.mathRequired}`,
-      `考试科目：${subjectNames || "待核验"}`,
-      status === "verified"
-        ? "引用前仍应核对来源日期与适用年份。"
-        : "该条目仅作演示或待核验记录，不可作为报考事实结论。",
+      `学校与专业：${school.school} / ${school.major}（${school.majorCode}）`,
+      `数据状态：${status}（${statusLabel(status)}）；专业数据完整度：${professionalDataLevel}（${statusLabel(professionalDataLevel)}）`,
+      `方向：${school.researchDirection}；学位类型：${school.degreeType}；数学要求：${school.mathRequired}`,
+      `已核验初试科目：${confirmedSubjects || "暂未收录 / 待核验"}`,
+      `已核验招生计划：${enrollment}；已核验复试线：${confirmedScoreLines || "暂未收录 / 待核验"}`,
+      `已核验参考书：${confirmedBooks || "暂未收录 / 待核验"}`,
+      professionalDataLevel === "partial"
+        ? "该记录仅能引用以上已明确核验的字段；其余字段仍需到官方来源核验。"
+        : "该条目为演示或待核验记录，不可作为报考事实结论。",
     ].join("；");
 
     return {
@@ -218,6 +267,13 @@ function createSchoolItems() {
       dataStatus: status,
       sourceLabel: school.source?.sourceName,
       sourceUrl: school.source?.sourceUrl,
+      additionalSources: school.additionalSources ?? [],
+      confirmedFields: {
+        examSubjects: confirmedSubjects,
+        plannedEnrollment: enrollment,
+        scoreLines: confirmedScoreLines,
+        referenceBooks: confirmedBooks,
+      },
       disclaimer: school.disclaimer ?? factDisclaimer,
     };
   });
@@ -364,6 +420,8 @@ export function retrieveKnowledge(message, mode = "school") {
         universityId,
         universityTags,
         professionalDataLevel,
+        confirmedFields,
+        additionalSources,
       }) => ({
         source,
         title,
@@ -384,6 +442,8 @@ export function retrieveKnowledge(message, mode = "school") {
         universityId,
         universityTags,
         professionalDataLevel,
+        confirmedFields,
+        additionalSources,
       }),
     );
 }

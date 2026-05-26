@@ -221,6 +221,27 @@ export default function ChatBox({
                               {snippet.sourceLabel}
                             </p>
                           )}
+                          {snippet.sourceUrl && (
+                            <a
+                              className="mt-2 inline-flex text-[11px] font-medium text-indigo-600 hover:text-indigo-800"
+                              href={snippet.sourceUrl}
+                              rel="noreferrer"
+                              target="_blank"
+                            >
+                              查看官方来源
+                            </a>
+                          )}
+                          {snippet.additionalSources?.map((sourceUrl, index) => (
+                            <a
+                              className="ml-3 mt-2 inline-flex text-[11px] font-medium text-indigo-600 hover:text-indigo-800"
+                              href={sourceUrl}
+                              key={sourceUrl}
+                              rel="noreferrer"
+                              target="_blank"
+                            >
+                              查看补充官方来源 {index + 1}
+                            </a>
+                          ))}
                           {snippet.disclaimer && (
                             <p className="mt-2 border-t border-slate-100 pt-2 text-[11px] leading-5 text-slate-400">
                               {snippet.disclaimer}
