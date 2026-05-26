@@ -1,16 +1,34 @@
 import schoolsData from "../data/schools.json";
 import universitiesData from "../data/universities.json";
 import {
+  schoolAliasMap,
   universityMajorDataDisclaimer,
   universityOnlyMajorNotice,
 } from "../data/prompts";
 
+export function expandSchoolAliases(value) {
+  let normalizedValue = String(value ?? "").trim();
+
+  Object.entries(schoolAliasMap)
+    .flatMap(([school, aliases]) =>
+      aliases.map((alias) => ({ alias, school })),
+    )
+    .sort((left, right) => right.alias.length - left.alias.length)
+    .forEach(({ alias, school }) => {
+      if (!normalizedValue.includes(school)) {
+        normalizedValue = normalizedValue.replaceAll(alias, school);
+      }
+    });
+
+  return normalizedValue;
+}
+
 export function findUniversityBySchoolName(schoolName) {
-  const normalizedName = String(schoolName ?? "").trim();
+  const normalizedName = expandSchoolAliases(schoolName);
 
   return (
     universitiesData.universities.find(
-      (university) => university.school === normalizedName,
+      (university) => normalizedName.includes(university.school),
     ) ?? null
   );
 }
