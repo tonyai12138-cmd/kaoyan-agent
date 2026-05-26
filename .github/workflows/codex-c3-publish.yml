@@ -41,7 +41,9 @@ jobs:
             'src/lib/knowledgeLinks.js',
             'src/lib/retrieve.js',
           ]);
-          const encoded = Array.from({ length: 8 }, (_, i) => fs.readFileSync(`.codex-transfer/c3.part${i + 1}`, 'utf8').trim()).join('');
+          const transferred = Array.from({ length: 8 }, (_, i) => fs.readFileSync(`.codex-transfer/c3.part${i + 1}`, 'utf8').trim()).join('');
+          // The upload clipped two characters at the recorded part boundary; checksum still guards the restored source.
+          const encoded = `${transferred.slice(0, 6158)}qP${transferred.slice(6158)}`;
           const digest = crypto.createHash('sha256').update(encoded).digest('hex');
           if (digest !== '1ee394c4b33ed5e4626ca63aad909476f9c425d2fd95f7345f00543d63e8c8b5') throw new Error(`payload checksum mismatch: ${digest}`);
           const payload = JSON.parse(zlib.brotliDecompressSync(Buffer.from(encoded, 'base64')).toString('utf8'));
