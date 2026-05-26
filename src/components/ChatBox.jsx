@@ -17,6 +17,13 @@ const dataStatusLabels = {
   demo: "演示",
 };
 
+const majorDataStatusLabels = {
+  none: "无专业记录",
+  pending: "专业信息待核验",
+  partial: "部分专业数据",
+  linked: "已关联专业记录",
+};
+
 const sourceTypeLabels = {
   official: "官方来源",
   official_index: "官方基础名单",
@@ -151,23 +158,47 @@ export default function ChatBox({
                             </span>
                           </div>
                           {snippet.source === "university" && (
+                            <>
+                              <div className="mt-2 flex flex-wrap items-center gap-1.5 text-[10px] font-semibold">
+                                <span className="rounded-full bg-slate-100 px-2 py-1 text-slate-700">
+                                  {snippet.school}
+                                </span>
+                                <span className="rounded-full bg-slate-100 px-2 py-1 text-slate-600">
+                                  {snippet.city}
+                                </span>
+                                {snippet.is985 && (
+                                  <span className="rounded-full bg-indigo-50 px-2 py-1 text-indigo-700">
+                                    985
+                                  </span>
+                                )}
+                                {snippet.is211 && (
+                                  <span className="rounded-full bg-blue-50 px-2 py-1 text-blue-700">
+                                    211
+                                  </span>
+                                )}
+                                <span className="rounded-full bg-amber-50 px-2 py-1 text-amber-700">
+                                  {snippet.hasMajorKnowledge ? "已有专业知识条目" : "仅基础索引"}
+                                </span>
+                                <span className="rounded-full bg-slate-100 px-2 py-1 text-slate-600">
+                                  {majorDataStatusLabels[snippet.majorDataStatus] ?? snippet.majorDataStatus}
+                                </span>
+                              </div>
+                              <p className="mt-2 text-[11px] leading-5 text-amber-700">
+                                基础索引不代表该校存在具体专业招生数据。
+                              </p>
+                            </>
+                          )}
+                          {snippet.source === "school" && (
                             <div className="mt-2 flex flex-wrap items-center gap-1.5 text-[10px] font-semibold">
                               <span className="rounded-full bg-slate-100 px-2 py-1 text-slate-700">
                                 {snippet.school}
                               </span>
                               <span className="rounded-full bg-slate-100 px-2 py-1 text-slate-600">
-                                {snippet.city}
+                                {snippet.major}
                               </span>
-                              {snippet.is985 && (
-                                <span className="rounded-full bg-indigo-50 px-2 py-1 text-indigo-700">
-                                  985
-                                </span>
-                              )}
-                              {snippet.is211 && (
-                                <span className="rounded-full bg-blue-50 px-2 py-1 text-blue-700">
-                                  211
-                                </span>
-                              )}
+                              <span className="rounded-full bg-amber-50 px-2 py-1 text-amber-700">
+                                专业数据：{dataStatusLabels[snippet.professionalDataLevel] ?? snippet.professionalDataLevel}
+                              </span>
                             </div>
                           )}
                           <div className="mt-2 flex flex-wrap gap-1.5">

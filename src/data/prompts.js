@@ -14,6 +14,14 @@ export const officialVerificationAdvice =
   "涉及专业目录、考试科目、招生人数、复试线、参考书或调剂规则时，请记录官方链接、发布年份与核验日期，再用于报考判断。";
 export const universityIndexBoundary =
   "985 / 211 基础索引仅用于院校层级初筛；它不提供专业目录、考试科目、招生人数、复试线或参考书结论。";
+export const universityOnlyMajorNotice =
+  "当前仅收录院校基础信息，专业招生信息需进一步核验。";
+export const universityProfessionalMissingNotice =
+  "当前知识库仅收录该校基础索引，暂未收录该专业层面的官方数据，建议以研招网和目标院校研究生招生官网为准。";
+export const universityMajorDataDisclaimer =
+  "当前院校基础索引不包含完整专业目录、招生人数、复试线或参考书，具体信息以研招网和目标院校研究生招生官网为准。";
+export const professionalVerificationPath =
+  "下一步请核验研招网硕士专业目录、目标院校研究生招生官网，以及目标学院招生目录、复试细则或考试大纲。";
 
 export const knowledgeStatusDefinitions = {
   verified: {
@@ -35,7 +43,7 @@ export const knowledgeStatusDefinitions = {
 };
 
 export const knowledgeBasePresentationCopy =
-  "知识库将 985 / 211 院校基础索引、院校专业、方法问答与题型模板拆成可检索条目，并为事实记录来源、核验时间与状态；基础索引不替代具体专业招生核验。";
+  "知识库将 985 / 211 院校基础索引与院校专业记录分层管理，通过 universityId / linkedSchoolMajorIds 建立关联；基础索引不替代具体专业招生核验。";
 
 const clientModeAliases = {
   school: "school",
@@ -77,6 +85,7 @@ export const agentBoundaries = [
   "不传播盗版资料，也不鼓励购买来源不明的资料。",
   "知识库中标为演示或待核验的条目不作为院校事实依据。",
   universityIndexBoundary,
+  universityOnlyMajorNotice,
   emotionDisclaimer,
   prototypeDisclaimer,
 ];
@@ -147,6 +156,15 @@ export const promptKnowledge = [
     content: universityIndexBoundary,
     sourceType: "official_guidance",
     dataStatus: "partial",
+  },
+  {
+    id: "university-major-link-boundary",
+    mode: "school",
+    title: "基础索引与专业知识的关联边界",
+    keywords: ["专业数据", "专业招生", "考试科目", "复试线", "招生人数", "参考书"],
+    content: `${universityOnlyMajorNotice} ${universityProfessionalMissingNotice} ${professionalVerificationPath}`,
+    sourceType: "official_guidance",
+    dataStatus: "pending",
   },
   {
     id: "strategy-rule",

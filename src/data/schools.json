@@ -1,9 +1,9 @@
 {
   "knowledgeBase": {
     "name": "院校专业知识库结构样例",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "checkedAt": "2026-05",
-    "description": "用于演示院校专业信息的来源追踪与核验状态管理，不包含可直接用于报考决策的真实招生结论。"
+    "description": "用于演示院校专业信息的来源追踪、基础索引关联与核验状态管理，不包含可直接用于报考决策的真实招生结论。"
   },
   "isDemo": true,
   "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。",
@@ -12,6 +12,10 @@
       "id": "east-business",
       "isDemo": true,
       "dataStatus": "demo",
+      "universityId": "pending",
+      "universityTags": ["演示院校", "院校基础索引待关联"],
+      "professionalDataLevel": "demo",
+      "linkedUniversitySource": "pending",
       "school": "华东示例大学",
       "region": "华东",
       "city": "上海（演示）",
@@ -76,13 +80,17 @@
         "reliability": "demo"
       },
       "keywords": ["经管类", "市场营销", "品牌管理", "数字营销", "华东", "择校"],
-      "notes": "课堂展示用知识库结构样例，方向名称为演示文本，正式报考前必须再次核验。",
+      "notes": "课堂展示用知识库结构样例，方向名称为演示文本；当前示例院校未与 985 / 211 基础索引关联，universityId 待官方数据替换。",
       "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
     },
     {
       "id": "south-finance",
       "isDemo": true,
       "dataStatus": "demo",
+      "universityId": "pending",
+      "universityTags": ["演示院校", "院校基础索引待关联"],
+      "professionalDataLevel": "demo",
+      "linkedUniversitySource": "pending",
       "school": "南方示例财经大学",
       "region": "华南",
       "city": "广州（演示）",
@@ -147,13 +155,17 @@
         "reliability": "demo"
       },
       "keywords": ["经管类", "工商管理", "营销管理", "财经", "华南", "稳妥"],
-      "notes": "课堂展示用知识库结构样例，不代表真实院校专业目录或录取难度。",
+      "notes": "课堂展示用知识库结构样例，不代表真实院校专业目录或录取难度；当前示例院校未与 985 / 211 基础索引关联。",
       "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
     },
     {
       "id": "river-commerce",
       "isDemo": true,
       "dataStatus": "demo",
+      "universityId": "pending",
+      "universityTags": ["演示院校", "院校基础索引待关联"],
+      "professionalDataLevel": "demo",
+      "linkedUniversitySource": "pending",
       "school": "江城示例商学院",
       "region": "华中",
       "city": "武汉（演示）",
@@ -218,13 +230,17 @@
         "reliability": "demo"
       },
       "keywords": ["数字营销", "用户增长", "市场营销", "华中", "专硕", "案例分析"],
-      "notes": "课堂展示用知识库结构样例，仅用于展示检索和状态标记。",
+      "notes": "课堂展示用知识库结构样例，仅用于展示检索和状态标记；当前示例院校未与 985 / 211 基础索引关联。",
       "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
     },
     {
       "id": "school_major_004",
       "isDemo": true,
       "dataStatus": "demo",
+      "universityId": "pending",
+      "universityTags": ["演示院校", "院校基础索引待关联"],
+      "professionalDataLevel": "demo",
+      "linkedUniversitySource": "pending",
       "school": "北方示例经管大学",
       "region": "华北",
       "city": "北京（演示）",
@@ -289,13 +305,17 @@
         "reliability": "demo"
       },
       "keywords": ["应用经济", "产业经济", "市场分析", "经管类", "华北", "数学"],
-      "notes": "该条目演示如何记录经济类方向，考试科目及数学要求尚未核验。",
+      "notes": "该条目演示如何记录经济类方向，考试科目及数学要求尚未核验；当前示例院校未与 985 / 211 基础索引关联。",
       "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
     },
     {
       "id": "school_major_005",
       "isDemo": true,
       "dataStatus": "demo",
+      "universityId": "pending",
+      "universityTags": ["演示院校", "院校基础索引待关联"],
+      "professionalDataLevel": "demo",
+      "linkedUniversitySource": "pending",
       "school": "海滨示例传媒学院",
       "region": "华东",
       "city": "杭州（演示）",
@@ -360,13 +380,17 @@
         "reliability": "demo"
       },
       "keywords": ["新闻传播", "数字传播", "内容营销", "新媒体", "跨考", "华东"],
-      "notes": "课堂展示用跨学科方向结构样例，不代表真实专业设置。",
+      "notes": "课堂展示用跨学科方向结构样例，不代表真实专业设置；当前示例院校未与 985 / 211 基础索引关联。",
       "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
     },
     {
       "id": "school_major_006",
       "isDemo": true,
       "dataStatus": "demo",
+      "universityId": "pending",
+      "universityTags": ["演示院校", "院校基础索引待关联"],
+      "professionalDataLevel": "demo",
+      "linkedUniversitySource": "pending",
       "school": "西部示例管理学院",
       "region": "西部",
       "city": "成都（演示）",
@@ -431,7 +455,7 @@
         "reliability": "demo"
       },
       "keywords": ["工商管理", "品牌管理", "消费者行为", "西部", "经管类", "择校"],
-      "notes": "课堂展示用知识库结构样例，招生信息尚未接入官方数据源。",
+      "notes": "课堂展示用知识库结构样例，招生信息尚未接入官方数据源；当前示例院校未与 985 / 211 基础索引关联。",
       "disclaimer": "正式信息以研招网和目标院校研究生招生官网为准。"
     }
   ]
