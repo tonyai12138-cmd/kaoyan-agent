@@ -1,8 +1,8 @@
 name: Codex D publish source changes
 
 on:
-  push:
-    branches: [codex/rag-retrieval-quality-d]
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -82,7 +82,7 @@ jobs:
           npm run build
       - name: Commit published source files
         run: |
-          git rm --ignore-unmatch .github/workflows/codex-d-publish.yml .codex-transfer/d.part1 .codex-transfer/d.part2 .codex-transfer/d.part3 .codex-transfer/d.part4 .codex-transfer/d.part5 .codex-transfer/d.part6 .codex-transfer/d.part7 .codex-transfer/d.part8 .codex-transfer/d.part9
+          git rm --ignore-unmatch .github/workflows/codex-d-publish.yml .codex-transfer/d.trigger .codex-transfer/d.part1 .codex-transfer/d.part2 .codex-transfer/d.part3 .codex-transfer/d.part4 .codex-transfer/d.part5 .codex-transfer/d.part6 .codex-transfer/d.part7 .codex-transfer/d.part8 .codex-transfer/d.part9
           git add README.md api/chat.js src/components/ChatBox.jsx src/data/prompts.js src/lib/api.js src/lib/chatAgent.js src/lib/knowledgeLinks.js src/lib/retrieve.js
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
