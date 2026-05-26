@@ -1,0 +1,79 @@
+name: Sync university major links C2
+
+on:
+  push:
+    branches:
+      - codex/university-major-links-c2
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout feature branch
+        uses: actions/checkout@v4
+        with:
+          ref: codex/university-major-links-c2
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+      - name: Verify and apply C2 source files
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const path = require('node:path');
+          const crypto = require('node:crypto');
+          const { brotliDecompressSync } = require('node:zlib');
+          const expectedSha = '9537b31864be98331ce86b1dd06d2cd55ef36647e2850830104ff62bf1b3bbb4';
+          const allowedFiles = [
+            'README.md',
+            'api/chat.js',
+            'docs/university-index-guide.md',
+            'scripts/generate-university-index.mjs',
+            'src/components/ChatBox.jsx',
+            'src/data/prompts.js',
+            'src/data/schools.json',
+            'src/lib/chatAgent.js',
+            'src/lib/knowledgeLinks.js',
+            'src/lib/retrieve.js',
+          ];
+          const encoded = [1, 2, 3, 4, 5, 6]
+            .map((index) => fs.readFileSync(`.codex-transfer/c2.part${index}`, 'utf8').trim())
+            .join('');
+          const actualSha = crypto.createHash('sha256').update(encoded).digest('hex');
+          if (actualSha !== expectedSha) {
+            throw new Error(`Transfer checksum mismatch: ${actualSha}`);
+          }
+          const files = JSON.parse(brotliDecompressSync(Buffer.from(encoded, 'base64')).toString('utf8'));
+          if (JSON.stringify(Object.keys(files).sort()) !== JSON.stringify([...allowedFiles].sort())) {
+            throw new Error('Unexpected file set in transfer payload');
+          }
+          for (const filename of allowedFiles) {
+            fs.mkdirSync(path.dirname(filename), { recursive: true });
+            fs.writeFileSync(filename, files[filename], 'utf8');
+          }
+          NODE
+          node scripts/generate-university-index.mjs
+          node <<'NODE'
+          const fs = require('node:fs');
+          const universities = JSON.parse(fs.readFileSync('src/data/universities.json', 'utf8')).universities;
+          const schools = JSON.parse(fs.readFileSync('src/data/schools.json', 'utf8')).schools;
+          if (!universities.every((entry) => typeof entry.hasMajorKnowledge === 'boolean' && Array.isArray(entry.linkedSchoolMajorIds) && Array.isArray(entry.candidateMajorAreas) && entry.majorDataStatus)) {
+            throw new Error('University link fields validation failed');
+          }
+          if (!schools.every((entry) => entry.universityId && Array.isArray(entry.universityTags) && entry.professionalDataLevel)) {
+            throw new Error('Professional link fields validation failed');
+          }
+          NODE
+      - name: Commit clean source changes
+        run: |
+          git rm --ignore-unmatch .github/workflows/codex-c2-publish.yml .codex-transfer/c2.part1 .codex-transfer/c2.part2 .codex-transfer/c2.part3 .codex-transfer/c2.part4 .codex-transfer/c2.part5 .codex-transfer/c2.part6
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md api/chat.js docs/university-index-guide.md scripts/generate-university-index.mjs src/components/ChatBox.jsx src/data/prompts.js src/data/schools.json src/data/universities.json src/lib/chatAgent.js src/lib/knowledgeLinks.js src/lib/retrieve.js
+          git commit -m "Link university index with professional knowledge states"
+          git push origin HEAD:codex/university-major-links-c2
