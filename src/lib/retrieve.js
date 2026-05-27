@@ -41,7 +41,7 @@ const sourceBoostByIntent = {
   university_level: { university: 34, prompt: 6, faq: 4 },
   major_level: { school: 38, prompt: 6, university: 4 },
   method_faq: { faq: 30, prompt: 8 },
-  question_analysis: { template: 36, faq: 5, prompt: 6 },
+  question_analysis: { template: 48, faq: 3, prompt: 5 },
   source_verification: { faq: 30, prompt: 27, school: 7 },
   emotional_support: { faq: 30, prompt: 28 },
 };
@@ -205,7 +205,7 @@ export function detectQueryIntent(message, mode = "school") {
   if (
     activeMode === "question" ||
     (containsAny(query, ragLexicon.questionAnalysis) &&
-      /分析|论述|简答|案例|材料|框架|模型|如何影响|怎么写|拆解/u.test(query))
+      /请分析|如何看待|分析|论述|简述|简答|案例|材料|框架|模型|如何影响|如何用于|如何提升|如何实现|如何塑造|如何支持|如何改变|如何促进|如何通过|优势与风险|怎么写|怎么答|拆解/u.test(query))
   ) {
     return "question_analysis";
   }
@@ -469,7 +469,7 @@ function createTemplateItems() {
   return (questionData.templates ?? []).map((template) => ({
     source: "template",
     title: template.sampleQuestion,
-    content: `题型：${template.questionType}；主题：${template.subjectArea} / ${template.scenario}；答题结构：${template.answerStructure.join(" -> ")}；可用理论：${template.usefulTheories.join("、")}。`,
+    content: `题型：${template.questionType}；主题：${template.subjectArea} / ${template.scenario}；答题结构：${template.answerStructure.join(" -> ")}；可用理论：${template.usefulTheories.join("、")}；背诵结构：${(template.memorizationStructure ?? template.answerStructure).join(" -> ")}。`,
     modes: template.applicableModes ?? ["question"],
     weightedFields: {
       12: [template.sampleQuestion, template.scenario, ...(template.keywords ?? [])],
@@ -479,6 +479,15 @@ function createTemplateItems() {
     sourceType: template.sourceType ?? "methodology",
     dataStatus: template.dataStatus ?? "demo",
     sourceLabel: "经管类与数字营销题型模板库",
+    questionType: template.questionType,
+    subjectArea: template.subjectArea,
+    scenario: template.scenario,
+    answerStructure: template.answerStructure,
+    usefulTheories: template.usefulTheories,
+    caseDirections: template.caseDirections,
+    commonMistakes: template.commonMistakes,
+    sampleOpening: template.sampleOpening,
+    memorizationStructure: template.memorizationStructure ?? template.answerStructure,
     disclaimer: template.disclaimer ?? questionData.disclaimer,
   }));
 }
@@ -531,7 +540,19 @@ function selectIntentCandidates(entries, intent, namedUniversity) {
     const templateEntries = allowed.filter(
       (entry) => entry.source === "template" && entry.lexicalScore > 0,
     );
-    return templateEntries.length ? templateEntries : allowed;
+    if (templateEntries.length) {
+      return templateEntries;
+    }
+
+    const genericTemplate = allowed.find(
+      (entry) =>
+        entry.source === "template" &&
+        entry.title === "请拆解一道数字营销案例分析题。",
+    );
+
+    return genericTemplate
+      ? [{ ...genericTemplate, lexicalScore: 1, score: genericTemplate.score + 20 }]
+      : allowed.filter((entry) => entry.source === "template");
   }
 
   if (intent !== "major_level") {
@@ -633,5 +654,14 @@ export function retrieveKnowledge(message, mode = "school") {
       requestedFieldStatus: entry.requestedFieldStatus,
       additionalSources: entry.additionalSources,
       matchedAlias: entry.school ? namedAlias(rawQuery, entry.school) : undefined,
+      questionType: entry.questionType,
+      subjectArea: entry.subjectArea,
+      scenario: entry.scenario,
+      answerStructure: entry.answerStructure,
+      usefulTheories: entry.usefulTheories,
+      caseDirections: entry.caseDirections,
+      commonMistakes: entry.commonMistakes,
+      sampleOpening: entry.sampleOpening,
+      memorizationStructure: entry.memorizationStructure,
     }));
 }
