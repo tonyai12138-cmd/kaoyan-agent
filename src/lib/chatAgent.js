@@ -62,6 +62,93 @@ function formatRetrievedBasis(snippets) {
     .join("\n");
 }
 
+function formatBulletItems(items, fallback) {
+  if (!Array.isArray(items) || !items.length) {
+    return `- ${fallback}`;
+  }
+
+  return items.map((item) => `- ${item}`).join("\n");
+}
+
+function createQuestionAnalysisSections(message, snippets) {
+  const template = snippets.find((snippet) => snippet.source === "template");
+
+  if (template) {
+    return [
+      {
+        title: "题目考点",
+        content: `本题可按**${template.subjectArea} / ${template.scenario}**场景拆解，题型参考为**${template.questionType}**。核心是围绕题目关键词建立概念、机制与应用之间的连接。`,
+      },
+      {
+        title: "答题框架",
+        content: formatBulletItems(template.answerStructure, "概念界定 -> 机制分析 -> 应用评价"),
+      },
+      {
+        title: "可用理论",
+        content: formatBulletItems(template.usefulTheories, "消费者行为与数字营销基础理论"),
+      },
+      {
+        title: "案例方向",
+        content: `${formatBulletItems(template.caseDirections, "选择可核验的公开数字营销场景")}\n\n案例只用于说明机制，不虚构品牌效果数据。`,
+      },
+      {
+        title: "常见失分点",
+        content: formatBulletItems(template.commonMistakes, "只堆概念而没有回应题干"),
+      },
+      {
+        title: "示范开头",
+        content: `> ${template.sampleOpening}`,
+      },
+      {
+        title: "建议背诵结构",
+        content: formatBulletItems(
+          template.memorizationStructure,
+          "界定概念 -> 解释机制 -> 联系案例 -> 总结边界",
+        ),
+      },
+      {
+        title: "下一步行动",
+        content: `用上述结构完成一版 300 至 500 字作答，并逐项圈出题干关键词是否已回应。\n\n模板仅用于学习参考，具体考试要求以目标院校专业课要求为准。`,
+      },
+    ];
+  }
+
+  return [
+    {
+      title: "题目考点",
+      content: `围绕“${message}”识别核心概念、作用机制和需要评价的营销结果。`,
+    },
+    {
+      title: "答题框架",
+      content: "- 概念界定\n- 机制分析\n- 场景应用\n- 风险或局限\n- 管理启示",
+    },
+    {
+      title: "可用理论",
+      content: "- STP 与消费者决策过程\n- 顾客旅程或关系营销\n- 整合营销传播",
+    },
+    {
+      title: "案例方向",
+      content: "- 选择能够说明来源的公开数字营销场景\n- 只用案例解释机制，不虚构数据结论",
+    },
+    {
+      title: "常见失分点",
+      content: "- 复述题干不展开机制\n- 策略与问题脱节\n- 缺少风险评价",
+    },
+    {
+      title: "示范开头",
+      content: "> 数字营销问题的分析，应从目标受众、互动机制与效果评价三个层次展开，并结合题干场景说明策略适用边界。",
+    },
+    {
+      title: "建议背诵结构",
+      content: "- 界定概念\n- 写出机制\n- 联系场景\n- 评价风险\n- 总结启示",
+    },
+    {
+      title: "下一步行动",
+      content: "补充完整题干后再生成更精确拆解。模板仅用于学习参考，具体考试要求以目标院校专业课要求为准。",
+    },
+  ];
+}
+
 function factBasisForQuestion(message, snippets, queryIntent) {
   if (queryIntent === "major_level" || professionalFactPattern.test(message)) {
     const usableProfessionalFacts = snippets.filter(
@@ -292,44 +379,7 @@ export function answerChatQuestion({
       },
     ]);
   } else if (activeMode === "exam") {
-    const hasQuestionSignal = /分析|论述|简答|案例|真题|如何作答|拆解/.test(message);
-    answer = formatAnswerSections([
-      {
-        title: "题目考点",
-        content: hasQuestionSignal
-          ? "识别核心概念、作用机制与可评价的营销结果，先回应题目要求再扩展论述。"
-          : "请补充具体题干；在此之前可先按概念、机制、案例与评价四层准备。",
-      },
-      {
-        title: "答题框架",
-        content: "概念界定 -> 机制分析 -> 情境或案例应用 -> 对策建议 -> 边界与结论。",
-      },
-      {
-        title: "可用理论",
-        content: "消费者参与、品牌社群价值共创、顾客关系与忠诚度形成路径等基础框架。",
-      },
-      {
-        title: "案例方向",
-        content: "只使用合法公开且能够准确说明来源的数字营销场景，避免编造品牌事实和数据。",
-      },
-      {
-        title: "常见失分点",
-        content: "只堆概念、不回应题干；案例没有机制连接；策略缺少适用条件与效果评价。",
-      },
-      {
-        title: "示范开头",
-        content:
-          "品牌社群并非单向传播渠道，而是消费者互动、身份认同与价值共创的关系场域，其对忠诚度的作用需要从参与机制与体验结果展开分析。",
-      },
-      {
-        title: "建议背诵结构",
-        content: "定义 1 句 + 机制 3 点 + 案例对应 2 点 + 策略与边界各 1 点。",
-      },
-      {
-        title: "下一步行动",
-        content: "用以上七段结构写一版 300 字答案，再对照题干删去没有回应题意的内容。",
-      },
-    ]);
+    answer = formatAnswerSections(createQuestionAnalysisSections(message, snippets));
   } else if (activeMode === "verify") {
     answer = formatAnswerSections([
       {
