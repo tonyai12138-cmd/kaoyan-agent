@@ -7,34 +7,109 @@ import {
   knowledgeStatusDefinitions,
   normalizeChatMode,
   promptKnowledge,
+  queryIntentDefinitions,
+  ragLexicon,
+  schoolAliasMap,
   toServerMode,
 } from "../data/prompts";
 import {
   buildUniversityMajorSummary,
+  expandSchoolAliases,
   findMajorKnowledgeByUniversity,
+  findUniversityBySchoolName,
   getUniversityMajorStatus,
 } from "./knowledgeLinks";
 
-const factSearchPattern =
-  /学校|院校|某校|高校|大学|985|211|双一流|层次|专业|考什么|初试|复试|考试科目|招生人数|推免|分数线|复试线|参考书|录取比例/;
-const professionalFactPattern =
-  /专业|专业数据|专业目录|招生专业|考什么|初试|复试|考试科目|招生人数|招生名额|推免|分数线|复试线|参考书|录取比例/;
-const universityIndexPattern =
-  /985|211|双一流|层次|财经类|哪些学校|哪些大学|高校|大学/;
 const sourceLabels = {
   university: "院校基础索引",
-  faq: "FAQ",
-  school: "院校专业",
-  template: "题型模板",
+  faq: "方法 FAQ",
+  school: "专业层级数据",
+  template: "答题模板",
   prompt: "规则提示",
 };
 
+const allowedSourcesByIntent = {
+  university_level: ["university", "prompt", "faq"],
+  major_level: ["school", "university", "prompt"],
+  method_faq: ["faq", "prompt"],
+  question_analysis: ["template", "faq", "prompt"],
+  source_verification: ["faq", "prompt", "school"],
+  emotional_support: ["faq", "prompt"],
+};
+
+const sourceBoostByIntent = {
+  university_level: { university: 34, prompt: 6, faq: 4 },
+  major_level: { school: 38, prompt: 6, university: 4 },
+  method_faq: { faq: 30, prompt: 8 },
+  question_analysis: { template: 36, faq: 5, prompt: 6 },
+  source_verification: { faq: 30, prompt: 27, school: 7 },
+  emotional_support: { faq: 30, prompt: 28 },
+};
+
+const modeSourceBoost = {
+  school: { university: 5, school: 5, faq: 2 },
+  plan: { faq: 5, prompt: 5 },
+  question: { template: 14, prompt: 4 },
+  source: { faq: 12, prompt: 12, school: 2 },
+  emotion: { faq: 12, prompt: 12 },
+};
+
+const statusBoost = {
+  verified: 5,
+  partial: 4,
+  pending: 1,
+  demo: 0,
+};
+
+const relevantPromptIdsByIntent = {
+  university_level: ["university-index-boundary"],
+  major_level: ["university-major-link-boundary", "source-boundary"],
+  method_faq: ["planning-rule"],
+  question_analysis: ["exam-framework"],
+  source_verification: ["source-boundary", "university-major-link-boundary"],
+  emotional_support: ["support-boundary"],
+};
+
+const fieldPatterns = {
+  examSubjects: /考什么|初试|考试科目|科目/u,
+  plannedEnrollment: /招生人数|招生名额|招生计划|计划数/u,
+  recommendedExemption: /推免|推荐免试/u,
+  scoreLines: /复试线|分数线|历年线/u,
+  referenceBooks: /参考书|书目|教材/u,
+  examOutline: /考试大纲|大纲/u,
+  reExamSubjects: /复试科目|复试考什么/u,
+  mathRequired: /是否考数学|考数学|数学/u,
+};
+
 function normalizeText(value) {
-  return String(value ?? "").toLowerCase();
+  return String(value ?? "").toLowerCase().replace(/\s+/gu, "");
 }
 
 function statusLabel(status) {
   return knowledgeStatusDefinitions[status]?.label ?? "待核验";
+}
+
+function containsAny(query, terms) {
+  const normalizedQuery = normalizeText(query);
+  return terms.some((term) => normalizedQuery.includes(normalizeText(term)));
+}
+
+function countMatches(query, terms) {
+  const normalizedQuery = normalizeText(query);
+  return terms.reduce(
+    (score, term) => score + (normalizedQuery.includes(normalizeText(term)) ? 1 : 0),
+    0,
+  );
+}
+
+function namedAlias(message, schoolName) {
+  if (String(message ?? "").includes(schoolName)) {
+    return undefined;
+  }
+
+  return (schoolAliasMap[schoolName] ?? []).find((alias) =>
+    String(message ?? "").includes(alias),
+  );
 }
 
 function isCitableProfessionalField(field) {
@@ -53,97 +128,191 @@ function citableList(items, formatter) {
     .join("、");
 }
 
-function modeBonus(entry, mode) {
-  return entry.modes.includes(mode) ? 2 : 0;
+function detectRequestedField(query) {
+  return (
+    Object.entries(fieldPatterns).find(([, pattern]) => pattern.test(query))?.[0] ??
+    null
+  );
 }
 
-function sourceBonus(entry, query, mode) {
-  if (
-    professionalFactPattern.test(query) &&
-    entry.source === "school"
-  ) {
-    return 8;
+function requestedFieldDetails(school, requestedField) {
+  if (!requestedField) {
+    return null;
   }
-  if (
-    mode === "school" &&
-    !professionalFactPattern.test(query) &&
-    universityIndexPattern.test(query) &&
-    entry.source === "university"
-  ) {
-    return 6;
+
+  const labels = {
+    examSubjects: "初试科目",
+    plannedEnrollment: "招生人数",
+    recommendedExemption: "推免人数",
+    scoreLines: "复试线",
+    referenceBooks: "参考书",
+    examOutline: "考试大纲",
+    reExamSubjects: "复试科目",
+    mathRequired: "数学要求",
+  };
+  let fields = [];
+
+  if (requestedField === "mathRequired") {
+    const confirmedSubjects = (school.examSubjects ?? []).filter(
+      isCitableProfessionalField,
+    );
+    return {
+      requestedField,
+      requestedFieldLabel: labels[requestedField],
+      requestedFieldStatus:
+        confirmedSubjects.length && school.mathRequired !== "待核验"
+          ? "available"
+          : "pending",
+    };
   }
-  if (mode === "question" && entry.source === "template") {
-    return 4;
+
+  if (["examSubjects", "scoreLines", "referenceBooks", "reExamSubjects"].includes(requestedField)) {
+    fields = school[requestedField] ?? [];
+  } else {
+    fields = [school[requestedField]];
   }
-  if (mode === "source" && ["faq", "prompt"].includes(entry.source)) {
-    return 3;
-  }
-  if (mode === "school" && entry.source === "school") {
-    return 3;
-  }
-  if (factSearchPattern.test(query) && entry.source === "school") {
-    return 2;
-  }
-  if (
-    factSearchPattern.test(query) &&
-    !professionalFactPattern.test(query) &&
-    entry.source === "university"
-  ) {
-    return 3;
-  }
-  if (/分数线|复试线|招生人数|参考书|录取比例/.test(query) && entry.source === "faq") {
-    return 4;
-  }
-  return 0;
+
+  return {
+    requestedField,
+    requestedFieldLabel: labels[requestedField],
+    requestedFieldStatus: fields.some(isCitableProfessionalField)
+      ? "available"
+      : "pending",
+  };
 }
 
-function scoreEntry(entry, query, mode) {
-  const searchable = normalizeText(entry.searchable);
-  const normalizedQuery = normalizeText(query);
-  let hits = 0;
+export function detectQueryIntent(message, mode = "school") {
+  const query = expandSchoolAliases(message);
+  const activeMode = toServerMode(normalizeChatMode(mode));
+  const namedUniversity = findUniversityBySchoolName(query);
+  const hasMajorCode = /\b(?:02|05|12)\w*\d\w*\b/iu.test(query);
+  const directMajorFact =
+    hasMajorCode ||
+    (containsAny(query, ragLexicon.majorLevel) &&
+      (Boolean(namedUniversity) ||
+        /某校|某专业/u.test(query) ||
+        containsAny(query, ragLexicon.managementMajors)));
+  const verificationQuestion =
+    containsAny(query, ragLexicon.sourceVerification) &&
+    /以哪里为准|哪里看|哪里查|在哪里|如何判断|靠不靠谱|能不能信|核验|来源|官网|研招网/u.test(
+      query,
+    );
 
-  if (searchable.includes(normalizedQuery)) {
-    hits += 4;
+  if (containsAny(query, ragLexicon.emotionalSupport)) {
+    return "emotional_support";
   }
 
-  entry.keywords.forEach((keyword) => {
-    const normalizedKeyword = normalizeText(keyword);
-    if (normalizedQuery.includes(normalizedKeyword)) {
-      hits += 2;
+  if (
+    activeMode === "question" ||
+    (containsAny(query, ragLexicon.questionAnalysis) &&
+      /分析|论述|简答|案例|材料|框架|模型|如何影响|怎么写|拆解/u.test(query))
+  ) {
+    return "question_analysis";
+  }
+
+  if (
+    directMajorFact &&
+    !(/以哪里为准|哪里看|哪里查|在哪里查|靠不靠谱|能不能信/u.test(query))
+  ) {
+    return "major_level";
+  }
+
+  if (
+    /985|211|双一流|院校层次|学校层次|属于什么层次/u.test(query) ||
+    (Boolean(namedUniversity) && /是不是|层次/u.test(query)) ||
+    (containsAny(query, ragLexicon.universityLevel) &&
+      /哪些|有哪些|候选池|初筛/u.test(query))
+  ) {
+    return "university_level";
+  }
+
+  if (verificationQuestion || activeMode === "source") {
+    return "source_verification";
+  }
+
+  if (containsAny(query, ragLexicon.methodFaq) || activeMode === "plan") {
+    return "method_faq";
+  }
+
+  if (activeMode === "emotion") {
+    return "emotional_support";
+  }
+
+  return "method_faq";
+}
+
+function queryTerms(query) {
+  const dictionaries = Object.values(ragLexicon).flat();
+  const terms = dictionaries.filter((term) =>
+    normalizeText(query).includes(normalizeText(term)),
+  );
+  const codes = String(query).match(/[A-Za-z]*\d[A-Za-z0-9]*/gu) ?? [];
+  const names = universitiesData.universities
+    .map((university) => university.school)
+    .filter((school) => String(query).includes(school));
+
+  return [...new Set([...terms, ...codes, ...names])];
+}
+
+function fieldScore(values, query, terms, weight) {
+  return (values ?? []).reduce((score, value) => {
+    const normalizedValue = normalizeText(value);
+
+    if (!normalizedValue) {
+      return score;
     }
+
+    let nextScore = score;
+    if (normalizeText(query).includes(normalizedValue)) {
+      nextScore += weight * 2;
+    }
+    terms.forEach((term) => {
+      if (normalizedValue.includes(normalizeText(term))) {
+        nextScore += weight;
+      }
+    });
+    return nextScore;
+  }, 0);
+}
+
+function scoreEntry(entry, query, terms, intent, mode, namedUniversity) {
+  let lexicalScore = 0;
+
+  Object.entries(entry.weightedFields).forEach(([weight, values]) => {
+    lexicalScore += fieldScore(values, query, terms, Number(weight));
   });
+  let score = lexicalScore;
+  score += sourceBoostByIntent[intent]?.[entry.source] ?? 0;
+  score += modeSourceBoost[mode]?.[entry.source] ?? 0;
+  score += statusBoost[entry.dataStatus] ?? 0;
 
-  if (entry.source === "university") {
-    [entry.school, entry.city?.replace(/市$/u, ""), entry.province?.replace(/省$/u, "")]
-      .filter(Boolean)
-      .forEach((field) => {
-        if (normalizedQuery.includes(normalizeText(field))) {
-          hits += 5;
-        }
-      });
+  if (entry.modes.includes(mode)) {
+    score += 4;
+  }
+
+  if (
+    entry.source === "school" &&
+    namedUniversity &&
+    entry.universityId === namedUniversity.id
+  ) {
+    score += 22;
     if (
-      normalizedQuery.includes("财经类") &&
-      entry.schoolTypes?.includes("财经类")
+      containsAny(query, entry.relatedAreas ?? []) ||
+      normalizeText(query).includes(normalizeText(entry.major))
     ) {
-      hits += 5;
+      score += 18;
     }
   }
 
-  if (entry.source === "school") {
-    [entry.school, entry.major]
-      .filter(Boolean)
-      .forEach((field) => {
-        if (normalizedQuery.includes(normalizeText(field))) {
-          hits += 5;
-        }
-      });
+  if (
+    entry.source === "university" &&
+    namedUniversity &&
+    entry.school === namedUniversity.school
+  ) {
+    score += 22;
   }
 
-  if (!hits) {
-    return 0;
-  }
-
-  return hits + modeBonus(entry, mode) + sourceBonus(entry, query, mode);
+  return { lexicalScore, score };
 }
 
 function createUniversityItems() {
@@ -180,20 +349,19 @@ function createUniversityItems() {
       content,
       modes: ["school", "source"],
       keywords: university.searchKeywords ?? [],
-      searchable: [
-        university.school,
-        university.province,
-        university.city,
-        university.is985 ? "985" : "非985",
-        university.is211 ? "211" : "非211",
-        university.isDoubleFirstClass,
-        ...(university.schoolType ?? []),
-        university.supervisingDepartment,
-        ...(university.relatedFields ?? []),
-        ...(university.candidateMajorAreas ?? []).map((candidate) => candidate.area),
-        ...(university.searchKeywords ?? []),
-        university.notes,
-      ].join(" "),
+      weightedFields: {
+        12: [university.school],
+        8: [university.city, university.province],
+        7: [
+          university.is985 ? "985" : "非985",
+          university.is211 ? "211" : "非211",
+          university.isDoubleFirstClass,
+          ...(university.schoolType ?? []),
+          ...(university.relatedFields ?? []),
+          ...(university.searchKeywords ?? []),
+        ],
+        2: [university.supervisingDepartment, university.notes],
+      },
       sourceType: university.source?.sourceType ?? "pending",
       dataStatus: status,
       sourceLabel: university.source?.sourceName,
@@ -203,9 +371,11 @@ function createUniversityItems() {
   });
 }
 
-function createSchoolItems() {
+function createSchoolItems(query) {
+  const requestedField = detectRequestedField(query);
+
   return schoolsData.schools.map((school) => {
-    const subjectNames = school.examSubjects
+    const subjectNames = (school.examSubjects ?? [])
       .map((subject) => subject.subjectName)
       .join("、");
     const confirmedSubjects = citableList(
@@ -242,27 +412,24 @@ function createSchoolItems() {
       title: `${school.school} · ${school.major}`,
       school: school.school,
       major: school.major,
+      relatedAreas: school.relatedAreas ?? [],
       universityId: school.universityId,
       universityTags: school.universityTags ?? [],
       professionalDataLevel,
       content,
       modes: ["school", "source"],
       keywords: school.keywords ?? [],
-      searchable: [
-        school.school,
-        school.region,
-        school.city,
-        school.college,
-        school.major,
-        school.majorCode,
-        school.degreeType,
-        school.mathRequired,
-        school.universityId,
-        ...(school.universityTags ?? []),
-        subjectNames,
-        ...(school.keywords ?? []),
-        school.notes,
-      ].join(" "),
+      weightedFields: {
+        13: [school.school, school.major, school.majorCode],
+        9: [
+          school.college,
+          subjectNames,
+          ...(school.relatedAreas ?? []),
+          ...(school.keywords ?? []),
+        ],
+        5: [school.region, school.city, school.degreeType, school.mathRequired],
+        2: [school.source?.sourceName, school.notes],
+      },
       sourceType: school.source?.sourceType ?? "pending",
       dataStatus: status,
       sourceLabel: school.source?.sourceName,
@@ -274,6 +441,7 @@ function createSchoolItems() {
         scoreLines: confirmedScoreLines,
         referenceBooks: confirmedBooks,
       },
+      ...requestedFieldDetails(school, requestedField),
       disclaimer: school.disclaimer ?? factDisclaimer,
     };
   });
@@ -285,14 +453,11 @@ function createFaqItems() {
     title: item.question,
     content: item.answer,
     modes: item.applicableModes ?? [],
-    keywords: item.keywords ?? [],
-    searchable: [
-      item.question,
-      item.answer,
-      item.category,
-      ...(item.keywords ?? []),
-      ...(item.applicableModes ?? []),
-    ].join(" "),
+    weightedFields: {
+      12: [item.question],
+      8: [...(item.keywords ?? []), item.category, ...(item.applicableModes ?? [])],
+      3: [item.answer],
+    },
     sourceType: item.sourceType ?? "methodology",
     dataStatus: item.dataStatus ?? "demo",
     sourceLabel: item.category,
@@ -306,15 +471,11 @@ function createTemplateItems() {
     title: template.sampleQuestion,
     content: `题型：${template.questionType}；主题：${template.subjectArea} / ${template.scenario}；答题结构：${template.answerStructure.join(" -> ")}；可用理论：${template.usefulTheories.join("、")}。`,
     modes: template.applicableModes ?? ["question"],
-    keywords: template.keywords ?? [],
-    searchable: [
-      template.sampleQuestion,
-      template.questionType,
-      template.subjectArea,
-      template.scenario,
-      ...(template.usefulTheories ?? []),
-      ...(template.keywords ?? []),
-    ].join(" "),
+    weightedFields: {
+      12: [template.sampleQuestion, template.scenario, ...(template.keywords ?? [])],
+      8: [template.questionType, template.subjectArea, ...(template.usefulTheories ?? [])],
+      3: [...(template.commonMistakes ?? []), template.sampleOpening],
+    },
     sourceType: template.sourceType ?? "methodology",
     dataStatus: template.dataStatus ?? "demo",
     sourceLabel: "经管类与数字营销题型模板库",
@@ -324,12 +485,15 @@ function createTemplateItems() {
 
 function createPromptItems() {
   return promptKnowledge.map((item) => ({
+    id: item.id,
     source: "prompt",
     title: item.title,
     content: item.content,
     modes: [toServerMode(item.mode)],
-    keywords: item.keywords ?? [],
-    searchable: [item.title, item.content, ...(item.keywords ?? [])].join(" "),
+    weightedFields: {
+      10: [item.title, ...(item.keywords ?? [])],
+      4: [item.content],
+    },
     sourceType: item.sourceType ?? "methodology",
     dataStatus: item.dataStatus ?? "demo",
     sourceLabel: "研途智伴 Agent 回答规则",
@@ -337,61 +501,103 @@ function createPromptItems() {
   }));
 }
 
-function createIndex() {
+function createIndex(query) {
   return [
     ...createUniversityItems(),
-    ...createSchoolItems(),
+    ...createSchoolItems(query),
     ...createFaqItems(),
     ...createTemplateItems(),
     ...createPromptItems(),
   ];
 }
 
-function findNamedUniversity(query) {
-  const normalizedQuery = normalizeText(query);
-
-  return universitiesData.universities.find((university) =>
-    normalizedQuery.includes(normalizeText(university.school)),
+function selectIntentCandidates(entries, intent, namedUniversity) {
+  const allowedSources = allowedSourcesByIntent[intent] ?? Object.keys(sourceLabels);
+  const allowed = entries.filter(
+    (entry) =>
+      allowedSources.includes(entry.source) &&
+      (entry.source !== "prompt" ||
+        relevantPromptIdsByIntent[intent]?.includes(entry.id)),
   );
-}
 
-function keepEntryForProfessionalLookup(entry, query, namedUniversity) {
-  if (!professionalFactPattern.test(query)) {
-    return true;
+  if (intent === "university_level") {
+    const universityEntries = allowed.filter(
+      (entry) => entry.source === "university" && entry.lexicalScore > 0,
+    );
+    return universityEntries.length ? universityEntries : allowed;
   }
 
-  if (entry.source === "university") {
-    return normalizeText(query).includes(normalizeText(entry.school));
+  if (intent === "question_analysis") {
+    const templateEntries = allowed.filter(
+      (entry) => entry.source === "template" && entry.lexicalScore > 0,
+    );
+    return templateEntries.length ? templateEntries : allowed;
   }
 
-  if (entry.source === "school" && namedUniversity) {
-    return (
-      entry.universityId === namedUniversity.id ||
-      entry.school === namedUniversity.school
+  if (intent !== "major_level") {
+    return allowed;
+  }
+
+  const schoolEntries = allowed.filter(
+    (entry) =>
+      entry.source === "school" &&
+      (!namedUniversity || entry.universityId === namedUniversity.id) &&
+      entry.score > 0,
+  );
+
+  if (schoolEntries.length) {
+    if (namedUniversity) {
+      const topicalEntries = schoolEntries.filter((entry) =>
+        [entry.major, ...(entry.relatedAreas ?? [])].some((area) =>
+          normalizeText(entry.query).includes(normalizeText(area)),
+        ),
+      );
+      const relevantEntries = topicalEntries.length
+        ? topicalEntries
+        : schoolEntries;
+
+      return [
+        ...relevantEntries,
+        ...allowed.filter((entry) => entry.source === "prompt"),
+      ];
+    }
+
+    return allowed.filter(
+      (entry) => entry.source === "school" || entry.source === "prompt",
     );
   }
 
-  return true;
+  if (namedUniversity) {
+    return allowed.filter(
+      (entry) =>
+        entry.source === "prompt" ||
+        (entry.source === "university" && entry.school === namedUniversity.school),
+    );
+  }
+
+  return allowed;
 }
 
 export function retrieveKnowledge(message, mode = "school") {
-  const query = String(message ?? "").trim();
-  const serverMode = toServerMode(normalizeChatMode(mode));
-  const namedUniversity = findNamedUniversity(query);
+  const rawQuery = String(message ?? "").trim();
 
-  if (!query) {
+  if (!rawQuery) {
     return [];
   }
 
-  return createIndex()
-    .filter((entry) =>
-      keepEntryForProfessionalLookup(entry, query, namedUniversity),
-    )
-    .map((entry) => ({
-      ...entry,
-      score: scoreEntry(entry, query, serverMode),
-    }))
-    .filter((entry) => entry.score > 0)
+  const query = expandSchoolAliases(rawQuery);
+  const serverMode = toServerMode(normalizeChatMode(mode));
+  const queryIntent = detectQueryIntent(query, mode);
+  const namedUniversity = findUniversityBySchoolName(query);
+  const terms = queryTerms(query);
+  const scored = createIndex(query).map((entry) => ({
+    ...entry,
+    query,
+    ...scoreEntry(entry, query, terms, queryIntent, serverMode, namedUniversity),
+  }));
+
+  return selectIntentCandidates(scored, queryIntent, namedUniversity)
+    .filter((entry) => entry.score > 0 && entry.lexicalScore > 0)
     .sort(
       (left, right) =>
         right.score - left.score ||
@@ -399,51 +605,33 @@ export function retrieveKnowledge(message, mode = "school") {
         left.title.localeCompare(right.title, "zh-CN"),
     )
     .slice(0, 5)
-    .map(
-      ({
-        source,
-        title,
-        content,
-        score,
-        sourceType,
-        dataStatus,
-        disclaimer,
-        sourceLabel,
-        sourceUrl,
-        school,
-        city,
-        is985,
-        is211,
-        hasMajorKnowledge,
-        majorDataStatus,
-        major,
-        universityId,
-        universityTags,
-        professionalDataLevel,
-        confirmedFields,
-        additionalSources,
-      }) => ({
-        source,
-        title,
-        content,
-        score,
-        sourceType,
-        dataStatus,
-        disclaimer,
-        sourceLabel,
-        sourceUrl,
-        school,
-        city,
-        is985,
-        is211,
-        hasMajorKnowledge,
-        majorDataStatus,
-        major,
-        universityId,
-        universityTags,
-        professionalDataLevel,
-        confirmedFields,
-        additionalSources,
-      }),
-    );
+    .map((entry) => ({
+      source: entry.source,
+      title: entry.title,
+      content: entry.content,
+      score: entry.score,
+      queryIntent,
+      queryIntentLabel: queryIntentDefinitions[queryIntent]?.label,
+      sourceType: entry.sourceType,
+      dataStatus: entry.dataStatus,
+      disclaimer: entry.disclaimer,
+      sourceLabel: entry.sourceLabel,
+      sourceUrl: entry.sourceUrl,
+      school: entry.school,
+      city: entry.city,
+      is985: entry.is985,
+      is211: entry.is211,
+      hasMajorKnowledge: entry.hasMajorKnowledge,
+      majorDataStatus: entry.majorDataStatus,
+      major: entry.major,
+      universityId: entry.universityId,
+      universityTags: entry.universityTags,
+      professionalDataLevel: entry.professionalDataLevel,
+      confirmedFields: entry.confirmedFields,
+      requestedField: entry.requestedField,
+      requestedFieldLabel: entry.requestedFieldLabel,
+      requestedFieldStatus: entry.requestedFieldStatus,
+      additionalSources: entry.additionalSources,
+      matchedAlias: entry.school ? namedAlias(rawQuery, entry.school) : undefined,
+    }));
 }

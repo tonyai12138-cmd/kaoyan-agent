@@ -62,8 +62,8 @@ function formatRetrievedBasis(snippets) {
     .join("\n");
 }
 
-function factBasisForQuestion(message, snippets) {
-  if (professionalFactPattern.test(message)) {
+function factBasisForQuestion(message, snippets, queryIntent) {
+  if (queryIntent === "major_level" || professionalFactPattern.test(message)) {
     const usableProfessionalFacts = snippets.filter(
       (snippet) =>
         snippet.source === "school" &&
@@ -84,7 +84,13 @@ function factBasisForQuestion(message, snippets) {
     );
 
     if (usableProfessionalFacts.length) {
-      return `${formatRetrievedBasis(usableProfessionalFacts)}\n\n仅可引用以上片段中明确写为“已核验”且不为“暂未收录 / 待核验”的字段；未核验的招生人数、复试线、参考书或考试科目不得生成具体结论。${factDisclaimer} ${professionalVerificationPath}`;
+      const pendingRequestedField = usableProfessionalFacts.find(
+        (snippet) => snippet.requestedFieldStatus === "pending",
+      );
+      const fieldGuard = pendingRequestedField
+        ? `本次询问的${pendingRequestedField.requestedFieldLabel}在已匹配专业记录中仍为待核验，不能输出具体值。`
+        : "仅可引用以上片段中明确写为“已核验”且不为“暂未收录 / 待核验”的字段。";
+      return `${formatRetrievedBasis(usableProfessionalFacts)}\n\n${fieldGuard} 未核验的招生人数、复试线、参考书或考试科目不得生成具体结论。${factDisclaimer} ${professionalVerificationPath}`;
     }
 
     if (baseIndexItem) {
@@ -99,7 +105,7 @@ function factBasisForQuestion(message, snippets) {
   }
 
   if (
-    universityLevelPattern.test(message) &&
+    (queryIntent === "university_level" || universityLevelPattern.test(message)) &&
     !professionalFactPattern.test(message)
   ) {
     const universityIndexItems = snippets.filter(
@@ -171,6 +177,7 @@ export function answerChatQuestion({
 }) {
   const activeMode = normalizeChatMode(mode);
   const modeLabel = chatModeLabels[activeMode] ?? chatModeLabels.school;
+  const queryIntent = context.queryIntent;
 
   if (urgentTerms.some((term) => message.includes(term))) {
     return {
@@ -242,8 +249,8 @@ export function answerChatQuestion({
       {
         title: "主要依据",
         content: completed
-          ? `风险偏好为${normalized.normalizedRiskPreference}，当前最大困扰为${profile.biggestConcern}；阶段计划来源为${plan.strategySourceLabel}。\n\n${factBasisForQuestion(message, snippets)}`
-          : factBasisForQuestion(message, snippets),
+          ? `风险偏好为${normalized.normalizedRiskPreference}，当前最大困扰为${profile.biggestConcern}；阶段计划来源为${plan.strategySourceLabel}。\n\n${factBasisForQuestion(message, snippets, queryIntent)}`
+          : factBasisForQuestion(message, snippets, queryIntent),
       },
       {
         title: "风险提醒",
@@ -384,6 +391,7 @@ export function answerChatQuestion({
     modeLabel,
     snippets,
     citations: snippets.slice(0, 2).map((snippet) => snippet.title),
+    queryIntent,
     disclaimer: getChatDisclaimer(activeMode),
     isMock: true,
     identity: agentIdentity,

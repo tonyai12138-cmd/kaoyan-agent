@@ -1,6 +1,6 @@
 import { answerChatQuestion } from "./chatAgent";
 import { normalizeChatMode, toServerMode } from "../data/prompts";
-import { retrieveKnowledge } from "./retrieve";
+import { detectQueryIntent, retrieveKnowledge } from "./retrieve";
 
 /**
  * DeepSeek is called only through the server-side `/api/chat` proxy.
@@ -14,9 +14,11 @@ export async function sendChatMessage({
   mode = "school",
 }) {
   const clientMode = normalizeChatMode(mode);
+  const queryIntent = detectQueryIntent(message, clientMode);
   const snippets = retrieveKnowledge(message, clientMode);
   const requestContext = {
     ...context,
+    queryIntent,
     knowledgeSnippets: snippets,
   };
   let fallbackReason = "api_error";
@@ -54,6 +56,7 @@ export async function sendChatMessage({
     return {
       ...result,
       mode: clientMode,
+      queryIntent,
       snippets,
       citations: snippets.slice(0, 2).map((snippet) => snippet.title),
     };
@@ -63,7 +66,7 @@ export async function sendChatMessage({
       message,
       profile,
       history,
-      context,
+      context: requestContext,
       mode: clientMode,
       snippets,
     });
@@ -73,6 +76,7 @@ export async function sendChatMessage({
       source: "local-mock",
       model: undefined,
       fallbackReason,
+      queryIntent,
     };
   }
 }

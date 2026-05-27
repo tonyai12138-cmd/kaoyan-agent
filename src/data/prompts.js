@@ -24,6 +24,86 @@ export const professionalVerificationPath =
   "下一步请核验研招网硕士专业目录、目标院校研究生招生官网，以及目标学院招生目录、复试细则或考试大纲。";
 export const partialProfessionalFieldRule =
   "专业记录标记为 partial 时，仅可引用其中明确标为已核验且附官方来源的字段；招生人数、复试线、参考书或考试科目为待核验时，不得生成具体结论。";
+export const ragIntentBoundary =
+  "检索会先区分院校层级、专业层级、方法咨询、题目拆解、资料核验与情绪支持；回答只能使用与当前意图匹配的知识片段。";
+
+export const queryIntentDefinitions = {
+  university_level: {
+    label: "院校层级查询",
+    preferredSources: ["university"],
+  },
+  major_level: {
+    label: "专业层级查询",
+    preferredSources: ["school"],
+  },
+  method_faq: {
+    label: "备考方法咨询",
+    preferredSources: ["faq"],
+  },
+  question_analysis: {
+    label: "专业课题目拆解",
+    preferredSources: ["template"],
+  },
+  source_verification: {
+    label: "资料与来源核验",
+    preferredSources: ["faq", "prompt", "school"],
+  },
+  emotional_support: {
+    label: "学习压力支持",
+    preferredSources: ["faq", "prompt"],
+  },
+};
+
+export const ragLexicon = {
+  universityLevel: [
+    "985", "211", "双一流", "院校层次", "学校层次", "层次", "财经类",
+    "理工类", "综合类", "武汉", "上海", "北京", "广州", "重庆", "南京",
+  ],
+  majorLevel: [
+    "专业", "专业代码", "方向", "学院", "考试科目", "考什么", "初试",
+    "复试", "复试线", "分数线", "招生人数", "推免", "参考书", "考试大纲",
+    "是否考数学", "考数学",
+  ],
+  managementMajors: [
+    "工商管理", "企业管理", "市场营销", "营销管理", "应用经济学", "金融",
+    "国际商务", "管理科学与工程", "公共管理", "新闻与传播", "传播学",
+    "数字营销", "智能营销传播", "数字经济",
+  ],
+  questionAnalysis: [
+    "论述题", "简答题", "案例分析", "材料分析", "答题框架", "考点",
+    "理论", "失分点", "示范开头", "背诵结构", "品牌社群", "消费者忠诚",
+    "AARRR", "内容种草",
+  ],
+  sourceVerification: [
+    "资料", "参考书", "真题", "经验帖", "机构", "来源", "官网", "研招网",
+    "招生目录", "考试大纲", "复试细则", "核验", "哪里为准", "哪里看",
+    "哪里查", "靠不靠谱", "能不能信",
+  ],
+  emotionalSupport: [
+    "焦虑", "崩溃", "拖延", "学不进去", "压力", "失眠", "害怕",
+    "没完成", "计划又崩了", "考不上", "执行",
+  ],
+  methodFaq: [
+    "如何择校", "怎么择校", "跨考", "怎么准备", "学硕", "专硕",
+    "怎么选", "计划崩了", "复习方法", "第一周", "怎么安排",
+  ],
+};
+
+// Aliases improve retrieval recall only; rendered answers and snippets keep official school names.
+export const schoolAliasMap = {
+  中南财经政法大学: ["中南财大", "中南财经", "中南财"],
+  武汉大学: ["武大"],
+  华中科技大学: ["华科", "华中大"],
+  武汉理工大学: ["武理工"],
+  华中师范大学: ["华师", "华中师大"],
+  上海财经大学: ["上财", "上海财大"],
+  对外经济贸易大学: ["贸大", "对外经贸", "对外经贸大学"],
+  西南财经大学: ["西财", "西南财大"],
+  暨南大学: ["暨大"],
+  重庆大学: ["重大"],
+  中山大学: ["中大"],
+  南京大学: ["南大"],
+};
 
 export const knowledgeStatusDefinitions = {
   verified: {
@@ -89,6 +169,7 @@ export const agentBoundaries = [
   universityIndexBoundary,
   universityOnlyMajorNotice,
   partialProfessionalFieldRule,
+  ragIntentBoundary,
   emotionDisclaimer,
   prototypeDisclaimer,
 ];

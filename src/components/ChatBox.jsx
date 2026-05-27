@@ -4,9 +4,9 @@ import MarkdownMessage from "./MarkdownMessage";
 
 const sourceLabels = {
   university: "院校基础索引",
-  faq: "FAQ",
-  school: "院校专业",
-  template: "题型模板",
+  faq: "方法 FAQ",
+  school: "专业层级数据",
+  template: "答题模板",
   prompt: "规则提示",
 };
 
@@ -38,6 +38,14 @@ const answerSourceLabels = {
   deepseek: "DeepSeek 模型生成",
   "local-mock": "本地演示回答",
 };
+
+function dataStatusClass(status) {
+  if (status === "pending" || status === "demo") {
+    return "bg-amber-50 text-amber-700";
+  }
+
+  return "bg-slate-100 text-slate-600";
+}
 
 export default function ChatBox({
   activeMode,
@@ -154,7 +162,7 @@ export default function ChatBox({
                               {snippet.title}
                             </p>
                             <span className="rounded-full bg-indigo-50 px-2 py-1 text-[10px] font-bold text-indigo-700">
-                              {sourceLabels[snippet.source]} · 匹配 {snippet.score}
+                              {sourceLabels[snippet.source]} · {snippet.source} · 匹配 {snippet.score}
                             </span>
                           </div>
                           {snippet.source === "university" && (
@@ -189,21 +197,28 @@ export default function ChatBox({
                             </>
                           )}
                           {snippet.source === "school" && (
-                            <div className="mt-2 flex flex-wrap items-center gap-1.5 text-[10px] font-semibold">
-                              <span className="rounded-full bg-slate-100 px-2 py-1 text-slate-700">
-                                {snippet.school}
-                              </span>
-                              <span className="rounded-full bg-slate-100 px-2 py-1 text-slate-600">
-                                {snippet.major}
-                              </span>
-                              <span className="rounded-full bg-amber-50 px-2 py-1 text-amber-700">
-                                专业数据：{dataStatusLabels[snippet.professionalDataLevel] ?? snippet.professionalDataLevel}
-                              </span>
-                            </div>
+                            <>
+                              <div className="mt-2 flex flex-wrap items-center gap-1.5 text-[10px] font-semibold">
+                                <span className="rounded-full bg-slate-100 px-2 py-1 text-slate-700">
+                                  {snippet.school}
+                                </span>
+                                <span className="rounded-full bg-slate-100 px-2 py-1 text-slate-600">
+                                  {snippet.major}
+                                </span>
+                                <span className="rounded-full bg-amber-50 px-2 py-1 text-amber-700">
+                                  专业数据：{dataStatusLabels[snippet.professionalDataLevel] ?? snippet.professionalDataLevel}
+                                </span>
+                              </div>
+                              {snippet.requestedFieldStatus === "pending" && (
+                                <p className="mt-2 text-[11px] font-medium leading-5 text-amber-700">
+                                  本次查询字段：{snippet.requestedFieldLabel} · 待核验，不输出具体结论。
+                                </p>
+                              )}
+                            </>
                           )}
                           <div className="mt-2 flex flex-wrap gap-1.5">
                             {snippet.dataStatus && (
-                              <span className="rounded-full bg-slate-100 px-2 py-1 text-[10px] font-semibold text-slate-600">
+                              <span className={`rounded-full px-2 py-1 text-[10px] font-semibold ${dataStatusClass(snippet.dataStatus)}`}>
                                 {dataStatusLabels[snippet.dataStatus] ?? snippet.dataStatus}
                               </span>
                             )}
@@ -213,6 +228,11 @@ export default function ChatBox({
                               </span>
                             )}
                           </div>
+                          {snippet.matchedAlias && (
+                            <p className="mt-2 text-[11px] text-slate-500">
+                              已按简称“{snippet.matchedAlias}”匹配正式学校名称。
+                            </p>
+                          )}
                           <p className="mt-2 text-xs leading-6 text-slate-500">
                             {snippet.content}
                           </p>
