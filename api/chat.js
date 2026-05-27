@@ -12,6 +12,8 @@ const universityProfessionalMissingNotice =
   "当前知识库仅收录该校基础索引，暂未收录该专业层面的官方数据，建议以研招网和目标院校研究生招生官网为准。";
 const professionalVerificationPath =
   "下一步请核验研招网硕士专业目录、目标院校研究生招生官网，以及目标学院招生目录、复试细则或考试大纲。";
+const templateDisclaimer =
+  "模板仅用于学习参考，具体考试要求以目标院校专业课要求为准。";
 const commonDisclaimer = `${factDisclaimer} ${prototypeDisclaimer}`;
 const defaultModel = "deepseek-v4-flash";
 const deepseekEndpoint = "https://api.deepseek.com/chat/completions";
@@ -75,7 +77,7 @@ ${knowledgeStatusRules}
 根据 mode 使用固定输出结构：
 school：初步判断、主要依据、风险提醒、下一步核验动作；
 plan：当前任务重点、为什么这样安排、今天最优先的 3 件事、如何复盘，并在最后追加下一步行动；
-question：题目考点、答题框架、可用理论、案例方向、常见失分点、示范开头、建议背诵结构，并在最后追加下一步行动；
+question：必须使用 Markdown 小标题依次输出“### 题目考点”“### 答题框架”“### 可用理论”“### 案例方向”“### 常见失分点”“### 示范开头”“### 建议背诵结构”“### 下一步行动”；如 context 有 template 片段，优先依据其中的结构、理论、案例方向、失分点、示范开头与背诵结构；若无模板也保持相同结构；最后提醒“具体考试要求以目标院校专业课要求为准”；
 source：哪些信息必须核验、优先核验渠道、资料风险提醒、建议建立资料清单，并在最后追加下一步行动；
 emotion：先承认当前压力、将问题拆成可执行小任务、今日最低完成版本、复盘与调整建议、专业支持边界，并在最后追加下一步行动。
 
@@ -229,6 +231,15 @@ function buildContextMessage({ message, profile, context, mode }) {
     professionalDataLevel: snippet.professionalDataLevel,
     requestedField: snippet.requestedField,
     requestedFieldStatus: snippet.requestedFieldStatus,
+    questionType: snippet.questionType,
+    subjectArea: snippet.subjectArea,
+    scenario: snippet.scenario,
+    answerStructure: snippet.answerStructure,
+    usefulTheories: snippet.usefulTheories,
+    caseDirections: snippet.caseDirections,
+    commonMistakes: snippet.commonMistakes,
+    sampleOpening: snippet.sampleOpening,
+    memorizationStructure: snippet.memorizationStructure,
     content: snippet.content,
     disclaimer: snippet.disclaimer,
     sourceUrl: snippet.sourceUrl,
@@ -269,6 +280,47 @@ function formatAnswerSections(sections) {
   return sections
     .map((section) => `### ${section.title}\n${section.content}`)
     .join("\n\n");
+}
+
+function formatBulletItems(items, fallback) {
+  if (!Array.isArray(items) || !items.length) {
+    return `- ${fallback}`;
+  }
+
+  return items.map((item) => `- ${item}`).join("\n");
+}
+
+function questionSectionsFromContext(message, context) {
+  const template = contextSnippets(context).find(
+    (snippet) => snippet.source === "template",
+  );
+
+  if (!template) {
+    return [
+      { title: "题目考点", content: `围绕“${message}”识别核心概念、作用机制与可评价结果。` },
+      { title: "答题框架", content: "- 概念界定\n- 机制分析\n- 场景应用\n- 局限与启示" },
+      { title: "可用理论", content: "- 消费者决策过程\n- 顾客旅程\n- 整合营销传播" },
+      { title: "案例方向", content: "- 选用可说明来源的公开数字营销场景，不虚构效果数据。" },
+      { title: "常见失分点", content: "- 只罗列概念\n- 策略不回应题干\n- 缺少评价边界" },
+      { title: "示范开头", content: "> 数字营销问题的分析，应从目标用户、互动机制与效果评价三个层次展开。" },
+      { title: "建议背诵结构", content: "- 界定概念\n- 解释机制\n- 结合场景\n- 评价边界" },
+      { title: "下一步行动", content: `补充完整题干并用四层框架写一版答案。\n\n${templateDisclaimer}` },
+    ];
+  }
+
+  return [
+    {
+      title: "题目考点",
+      content: `本题对应**${template.subjectArea} / ${template.scenario}**的**${template.questionType}**，应围绕题目关键词说明机制与应用。`,
+    },
+    { title: "答题框架", content: formatBulletItems(template.answerStructure, "概念界定 -> 机制分析 -> 应用评价") },
+    { title: "可用理论", content: formatBulletItems(template.usefulTheories, "消费者行为与数字营销基础理论") },
+    { title: "案例方向", content: `${formatBulletItems(template.caseDirections, "选择公开可核验案例")}\n\n案例用于训练论证，不虚构事实或效果数据。` },
+    { title: "常见失分点", content: formatBulletItems(template.commonMistakes, "只写概念而不回应题意") },
+    { title: "示范开头", content: `> ${template.sampleOpening}` },
+    { title: "建议背诵结构", content: formatBulletItems(template.memorizationStructure, "界定概念 -> 说明机制 -> 结合案例 -> 提出启示") },
+    { title: "下一步行动", content: `按上述结构完成一版限时作答，再检查每段是否回应题干关键词。\n\n${templateDisclaimer}` },
+  ];
 }
 
 function buildMockAnswer(message, mode, context) {
@@ -336,16 +388,7 @@ function buildMockAnswer(message, mode, context) {
         content: "从第一项任务开始执行，并在结束时记录实际用时。",
       },
     ],
-    question: [
-      { title: "题目考点", content: "识别题目核心概念、作用机制和应用情境。" },
-      { title: "答题框架", content: "概念界定 -> 机制分析 -> 案例应用 -> 策略建议 -> 边界总结。" },
-      { title: "可用理论", content: "消费者行为、品牌关系或数字营销效果评估等基础框架。" },
-      { title: "案例方向", content: "使用能够准确说明来源的公开案例，不编造品牌事实或数据。" },
-      { title: "常见失分点", content: "只堆概念、未回应题干、案例与理论脱节。" },
-      { title: "示范开头", content: "数字营销问题的分析，应从目标受众、互动机制与结果评估三个层次展开。" },
-      { title: "建议背诵结构", content: "定义 1 句 + 机制 3 点 + 应用 2 点 + 边界 1 点。" },
-      { title: "下一步行动", content: "按以上结构写一版短答，再逐项检查是否回应题干。" },
-    ],
+    question: questionSectionsFromContext(message, context),
     source: [
       { title: "哪些信息必须核验", content: "院校、专业、考试科目、招生人数、复试线、参考书和录取比例。" },
       { title: "优先核验渠道", content: `${knowledgeMissingNotice}\n\n${formatSnippetBasis(context)}` },
