@@ -6,7 +6,7 @@
 
 ## 在线体验
 
-访问地址：[https://kaoyan-agent.vercel.app/#/]
+访问地址：[https://www.kaoyan-agent.cn/#/]
 
 推荐从首页开始体验完整备考流程，也可以直接进入智能问答页探索 Agent 能力。
 
