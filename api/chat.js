@@ -436,6 +436,10 @@ export default async function handler(request, response) {
   const message =
     typeof body.message === "string" ? body.message.trim() : "";
   const mode = normalizeMode(body.mode);
+  const isPetRequest =
+    body.context?.source === "ai-pet" &&
+    typeof body.context?.petSystemPrompt === "string" &&
+    body.context.petSystemPrompt.trim();
 
   if (!message) {
     return response.status(400).json(
@@ -463,17 +467,13 @@ export default async function handler(request, response) {
   }
 
   try {
-    const upstream = await fetch(deepseekEndpoint, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        model,
-        stream: false,
-        temperature: 0.3,
-        messages: [
+    const messages = isPetRequest
+      ? [
+          { role: "system", content: body.context.petSystemPrompt.trim() },
+          ...conversationHistory(body.history),
+          { role: "user", content: message },
+        ]
+      : [
           { role: "system", content: systemPrompt },
           {
             role: "system",
@@ -486,7 +486,19 @@ export default async function handler(request, response) {
           },
           ...conversationHistory(body.history),
           { role: "user", content: message },
-        ],
+        ];
+
+    const upstream = await fetch(deepseekEndpoint, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        model,
+        stream: false,
+        temperature: isPetRequest ? 0.5 : 0.3,
+        messages,
       }),
     });
 

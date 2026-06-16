@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Link, Route, Routes, useLocation } from "react-router-dom";
 import Footer from "./components/Footer";
+import AIPet from "./components/AIPet/AIPet";
 import Navbar from "./components/Navbar";
 import About from "./pages/About";
 import Chat from "./pages/Chat";
@@ -53,6 +54,7 @@ export default function App() {
         <Route element={<NotFound />} path="*" />
       </Routes>
       <Footer />
+      <AIPet />
     </div>
   );
 }
